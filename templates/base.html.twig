@@ -5,6 +5,9 @@
     <meta name="viewport"
           content="width=device-width">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% block stylesheets %}
+        {{ encore_entry_link_tags ( 'app' ) }}
+    {% endblock %}
     <title>{% block title %} Sortir.com {% endblock %}</title>
 </head>
 <body>
