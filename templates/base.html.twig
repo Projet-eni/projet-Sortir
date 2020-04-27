@@ -11,13 +11,36 @@
     <title>{% block title %} Sortir.com {% endblock %}</title>
 </head>
 <body>
+<div class="page">
+    <header class="site-header">
+        <div class="head">
+            <div class="logo">
+                <img src="{{ asset('img/logo-bird.png') }}" alt="logo Sortir">
+                <div class="titre-Head">Sortir.com</div>
+            </div>
+            <div class="navbar">
+                {% include 'main/navbar.html.twig' %}
+            </div>
+        </div>
+    </header>
 
-{% block main %}
+    <main class="site-content">
+        {% block main %}
 
-<h1>Test</h1>
 
-{% endblock %}
 
+        {% endblock %}
+    </main>
+
+    <footer class="site-footer">
+    <div class="line"></div>
+        <div class="logo-footer">
+            <img src="{{ asset('img/logoEni.jpg') }}" alt="logo Eni">
+            <div class="text-footer">©Eni Ecole-Informatique</div>
+        </div>
+
+    </footer>
+</div>
 </body>
 {% block javascripts %}
     {{ encore_entry_script_tags ( 'app' ) }}
