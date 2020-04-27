@@ -52,7 +52,7 @@ class Sortie
     private $site;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Participant", mappedBy="organisateur")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Participant",inversedBy="organisateur")
      */
     private $sorties_organisees;
 
