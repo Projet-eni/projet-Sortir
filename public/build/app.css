@@ -15,10 +15,10 @@ body {
     width: 80%;
 }
 
-.site-header {
+.site-header{
     margin-top: 10px;
     padding: 5px;
-    background-color: rgba(57, 83, 161, 0.4);
+    background-color: rgba(57,83,161,0.4);
     font-family: sans-serif;
     font-weight: bold;
     width: 80%;
@@ -28,26 +28,26 @@ body {
     position: relative;
 }
 
-.logo {
+.logo{
     float: left;
     position: absolute;
     height: 100%;
 }
 
-.logo img {
+.logo img{
     height: 100%;
 }
 
-.titre-Head {
+.titre-Head{
     float: right;
     font-size: 30px;;
 }
 
-nav ul {
+nav ul{
     margin: 0;
 }
 
-nav li {
+nav li{
     list-style: none;
     display: inline-block;
     float: right;
@@ -55,41 +55,32 @@ nav li {
     margin: 10px;
 }
 
-nav li a {
+nav li a{
     text-decoration: none;
     color: black;
     margin-left: 5px;
 }
 
-.line {
+.line{
     border-top: 1px solid gray;
 }
 
-.site-footer {
+.site-footer{
     width: 80%;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
 }
 
-.logo-footer {
+.logo-footer{
     margin-top: 10px;
 }
-
-@media (max-width: 1024px) {
-
-}
-
-
-/*------------------------------formulaires--------------------------------*/
-label {
+/*------------------------------Formulaire--------------------------------*/
+label{
     display: inline-block;
     width: 150px;
 }
-
-input {
-    margin: 10px;
+input{
     border-color: #8959A8;
+    margin: 10px;
 }
-
-
