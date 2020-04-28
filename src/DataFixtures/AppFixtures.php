@@ -10,11 +10,19 @@ use App\Entity\Sortie;
 use App\Entity\Ville;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AppFixtures extends Fixture
 {
+    private $encoder;
+
+    public function __construct(UserPasswordEncoderInterface $encoder)
+    {
+        $this->encoder = $encoder;
+    }
     public function load(ObjectManager $manager)
     {
+
 
         $etat = new Etat();
         $etat->setLibelle('Créée');
@@ -66,11 +74,14 @@ class AppFixtures extends Fixture
         $manager->persist($lieu);
 
         $participant = new Participant();
+
+        $password = $this->encoder->encodePassword($participant, 'test1234');
+        $participant->setMotDePasse($password);
+
         $participant->setNom('LOESEL');
         $participant->setPrenom('Pierre');
         $participant->setPseudo('Skullpie');
-        $participant->setMotDePasse('test1234');
-        $participant->setRole('USER_ROLE');
+        $participant->setRole(['ROLE_USER']);
         $participant->setMail('pierre@hotmail.fr');
         $participant->setTelephone(0102030405);
         $site=new Site();
@@ -91,8 +102,8 @@ class AppFixtures extends Fixture
         $participant->setNom('MARTIN');
         $participant->setPrenom('Gaetan');
         $participant->setPseudo('Schak');
-        $participant->setMotDePasse('test1234');
-        $participant->setRole('USER_ADMIN');
+        $participant->setMotDePasse($password);
+        $participant->setRole(['ROLE_USER']);
         $participant->setMail('gaetan@hotmail.fr');
         $participant->setTelephone(0203040506);
         $participant->setSite($site);
@@ -102,8 +113,8 @@ class AppFixtures extends Fixture
         $participant->setNom('GONCALVES DIAS');
         $participant->setPrenom('Daniel');
         $participant->setPseudo('Le brillant Dany');
-        $participant->setMotDePasse('test1234');
-        $participant->setRole('USER_USER');
+        $participant->setMotDePasse($password);
+        $participant->setRole(['ROLE_USER']);
         $participant->setMail('daniel@hotmail.fr');
         $participant->setTelephone(0304050607);
         $participant->setSite($site);
@@ -114,8 +125,8 @@ class AppFixtures extends Fixture
         $participant->setNom('COLLENOT');
         $participant->setPrenom('Charles');
         $participant->setPseudo('Gloxy');
-        $participant->setMotDePasse('test1234');
-        $participant->setRole('USER_ADMIN');
+        $participant->setMotDePasse($password);
+        $participant->setRole(['ROLE_USER']);
         $participant->setMail('charles@hotmail.fr');
         $participant->setSite($site);
         $manager->persist($participant);
@@ -126,7 +137,7 @@ class AppFixtures extends Fixture
         $sortie->setDuree(90);
         $sortie->setDateLimiteInscription(new \DateTime("2020-05-08 21:00:00"));
         $sortie->setDateHeureDebut(new \DateTime("2020-05-10 10:00:00"));
-        $sortie->setNbIncriptionsMax(10);
+        $sortie->setNbInscriptionsMax(10);
         $sortie->setSortiesOrganisees($participant);
         $sortie->setEtat($etat);
         $sortie->setInfosSortie('Journée de présentation de l\'école avec des anciens élèves');

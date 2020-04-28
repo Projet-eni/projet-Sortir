@@ -96,7 +96,7 @@ class Participant implements UserInterface
     private $mail;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="json")
      */
     private $role;
 
@@ -201,12 +201,12 @@ class Participant implements UserInterface
         return $this;
     }
 
-    public function getRole(): ?string
+    public function getRole(): ?array
     {
         return $this->role;
     }
 
-    public function setRole(string $role): self
+    public function setRole(array $role): self
     {
         $this->role = $role;
 
@@ -218,7 +218,7 @@ class Participant implements UserInterface
      */
     public function getRoles()
     {
-        // TODO: Implement getRoles() method.
+       return $this->getRole();
     }
 
     /**

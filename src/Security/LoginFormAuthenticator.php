@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 use Symfony\Component\Security\Core\Security;
@@ -27,12 +28,14 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     private $entityManager;
     private $urlGenerator;
     private $csrfTokenManager;
+    private $passwordEncoder;
 
-    public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager)
+    public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder)
     {
         $this->entityManager = $entityManager;
         $this->urlGenerator = $urlGenerator;
         $this->csrfTokenManager = $csrfTokenManager;
+        $this->passwordEncoder = $passwordEncoder;
     }
 
     public function supports(Request $request)
@@ -63,12 +66,14 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
             throw new InvalidCsrfTokenException();
         }
         //Check if 'username' is a pseudo or mail with Regex
-        if ( preg_match ( " ^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$" , $credentials['username'] ) ) {
+        /*if ( preg_match ( " ^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$" , $credentials['username'] ) ) {
             $user = $this->entityManager->getRepository(Participant::class)->findOneBy(['mail' => $credentials['username']]);
         }
         else {
             $user = $this->entityManager->getRepository(Participant::class)->findOneBy(['pseudo' => $credentials['username']]);
-        }
+        }*/
+        $user = $this->entityManager->getRepository(Participant::class)->findOneBy(['pseudo' => $credentials['username']]);
+
 
         if (!$user) {
             // fail authentication with a custom error
@@ -94,12 +99,12 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);
         }
-        return new RedirectResponse($this->urlGenerator->generate('liste-sortie'));
+        return new RedirectResponse($this->urlGenerator->generate('main'));
         // For example : return new RedirectResponse($this->urlGenerator->generate('some_route'));
     }
 
     protected function getLoginUrl()
     {
-        return $this->urlGenerator->generate('');
+        return $this->urlGenerator->generate(self::LOGIN_ROUTE);
     }
 }
