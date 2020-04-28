@@ -20,7 +20,6 @@ class SortieController extends AbstractController
         $sorties = $repository->findAll();
 
 
-
-        return $this->render('sortie/listeSortie.html.twig',['sorties'=>$sortie]);
+        return $this->render('sortie/listeSortie.html.twig',['sorties'=>$sorties]);
     }
 }
