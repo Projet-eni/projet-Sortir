@@ -39,7 +39,7 @@ class Sortie
     /**
      * @ORM\Column(type="integer")
      */
-    private $nbIncriptionsMax;
+    private $nbInscriptionsMax;
 
     /**
      * @ORM\Column(type="text")
@@ -156,16 +156,20 @@ class Sortie
         return $this;
     }
 
-    public function getNbIncriptionsMax(): ?int
+    /**
+     * @return mixed
+     */
+    public function getNbInscriptionsMax()
     {
-        return $this->nbIncriptionsMax;
+        return $this->nbInscriptionsMax;
     }
 
-    public function setNbIncriptionsMax(int $nbIncriptionsMax): self
+    /**
+     * @param mixed $nbInscriptionsMax
+     */
+    public function setNbInscriptionsMax($nbInscriptionsMax): void
     {
-        $this->nbIncriptionsMax = $nbIncriptionsMax;
-
-        return $this;
+        $this->nbInscriptionsMax = $nbInscriptionsMax;
     }
 
     public function getInfosSortie(): ?string
