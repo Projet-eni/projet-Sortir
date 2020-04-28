@@ -1,0 +1,15 @@
+{% extends'base.html.twig' %}
+
+{% block title %}
+Ajout sortie
+{% endblock %}
+
+{% block main %}
+
+    {{ form_start(sortieForm) }}
+    {{ form_widget(sortieForm) }}
+<button type="submit">Créer</button>
+{{ form_end(sortieForm) }}
+
+
+{% endblock %}
