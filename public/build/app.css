@@ -79,8 +79,10 @@ nav li a{
 label{
     display: inline-block;
     width: 150px;
+
 }
 input{
     border-color: #8959A8;
     margin: 10px;
+    background-color: #FFFFFF;
 }
