@@ -1,38 +1,54 @@
 {% extends 'base.html.twig' %}
 
+ {% block stylesheets %}
+     {{ encore_entry_link_tags ( 'app' ) }}
+     {{ encore_entry_link_tags ( 'connexion' ) }}
+ {% endblock %}
+
 {% block title %}Login success{% endblock %}
 
 {% block main %}
-<form method="post">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+    <form class="form-login" method="post">
+        {% if error %}
+            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
 
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+        {% if app.user %}
+            <div class="mb-3">
+                You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+            </div>
+        {% endif %}
+
+        <div class="block">
+            <h1 class="h3 mb-3 font-weight-normal">Connectez-vous</h1>
+            <table class="login">
+                <tr>
+                    <td><label for="inputPseudo">Pseudo ou Mail : </label></td>
+                    <td><input type="text" value="{{ last_username }}" name="_username" id="inputPseudo"
+                               class="form-control" required autofocus></td>
+                </tr>
+                <tr>
+                    <td><label for="inputPassword">Mot de Passe : </label></td>
+                    <td><input type="password" name="_password" id="inputPassword" class="form-control" required></td>
+                </tr>
+                <tr>
+                    <td>
+                        <button class="btn btn-lg btn-primary" type="submit">
+                            Sign in
+                        </button>
+                    </td>
+                    <td>
+                        <div class="checkbox mb-3">
+                            <label class="checkbox">
+                                <input type="checkbox" name="_remember_me"> Se Souvenir de Moi
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <input type="hidden" name="_csrf_token"
+                   value="{{ csrf_token('authenticate') }}">
         </div>
-    {% endif %}
+    </form>
 
-    <h1 class="h3 mb-3 font-weight-normal">Connectez-vous</h1>
-    <label for="inputPseudo">Pseudo ou Mail</label>
-    <input type="text" value="{{ last_username }}" name="_username" id="inputPseudo" class="form-control" required autofocus>
-    <label for="inputPassword">Mot de Passe</label>
-    <input type="password" name="_password" id="inputPassword" class="form-control" required>
-
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
-
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" name="_remember_me"> Se Souvenir de Moi
-            </label>
-        </div>
-
-
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
-</form>
 {% endblock %}
