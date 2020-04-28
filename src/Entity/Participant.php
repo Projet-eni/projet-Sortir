@@ -226,7 +226,7 @@ class Participant implements UserInterface
      */
     public function getPassword()
     {
-        $this->getMotDePasse();
+        return $this->getMotDePasse();
     }
 
     /**
@@ -242,8 +242,8 @@ class Participant implements UserInterface
      */
     public function getUsername()
     {
-        $this->getPseudo();
-        $this->getMail();
+        return $this->getPseudo();
+        //$this->getMail();
     }
 
     /**

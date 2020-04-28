@@ -10,7 +10,8 @@
 /.idea/
 /.env
 ###< symfony/framework-bundle ###
-
+/node_modules/
+/.env
 
 
 ###> symfony/phpunit-bridge ###
