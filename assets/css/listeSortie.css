@@ -1,0 +1,23 @@
+.block {
+
+}
+
+.title{
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: Large;
+    margin-top: 50px;
+}
+
+#search, #site, #date-after, #date-before {
+    border: 1px solid black;
+    margin-top: 10px;
+}
+
+.tableau{
+    margin-top: 70px;
+}
+
+.tableau td{
+    width: 15%;
+}

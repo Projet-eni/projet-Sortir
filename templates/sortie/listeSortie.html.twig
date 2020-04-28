@@ -1,7 +1,7 @@
 {% extends'base.html.twig' %}
 
 {% block title %}
-Liste sortie
+    Liste sortie
 {% endblock %}
 
  {% block stylesheets %}
@@ -11,53 +11,58 @@ Liste sortie
 
 {% block main %}
 
-    <div>Filtrer les sorties</div>
+    <div class="block">
 
-    <div>site : <select name="site" id="site"></select>
+        <div class="title">Filtrer les sorties</div>
+        <div>site : <select name="site" id="site"></select>
+        </div>
+        <div>Le nom de la sortie contient : <input type="search" id="search"></div>
+        <div>Entre : <input type="date" id="date-before"> et <input type="date" id="date-after"></div>
+
+        <table class="tableau">
+            <tr>
+                <td>
+                    Nom de la sortie
+                </td>
+                <td>
+                    Date de la sortie
+                </td>
+                <td>
+                    Clôture
+                </td>
+                <td>
+                    Inscrits/Places
+                </td>
+                <td>
+                    Etat
+                </td>
+                <td>
+                    Inscrit
+                </td>
+                <td>
+                    Organisateur
+                </td>
+                <td>
+                    Actions
+                </td>
+            </tr>
+            <tr>
+
+                {% for sortie in sorties %}
+
+                    <td>{{ sortie.nom }}</td>
+                    <td>{{ sortie.dateHeureDebut|date("d/m/Y") }}</td>
+                    <td>{{ sortie.dateHeureDebut|date_modify("+"~sortie.duree~" day")|date("d/m/Y" ) }}</td>
+                    <td>{{ sortie.sortieInscrits|length }}/{{ sortie.nbInscriptionsMax }}</td>
+                    <td>{{ sortie.etat.libelle }}</td>
+                    <td> faire la X</td>
+                    <td>{{ sortie.site.nom }}</td>
+                    <td>Actions</td>
+
+                {% endfor %}
+            </tr>
+        </table>
+
+
     </div>
-
-   <table>
-       <tr>
-           <td>
-               Nom de la sortie
-           </td>
-           <td>
-               Date de la sortie
-           </td>
-           <td>
-               Clôture
-           </td>
-           <td>
-               Inscrits/Places
-           </td>
-           <td>
-               Etat
-           </td>
-           <td>
-               Inscrit
-           </td>
-           <td>
-               Organisateur
-           </td>
-           <td>
-               Actions
-           </td>
-       </tr>
-       <tr>
-
-    {% for sortie in sorties %}
-
-        <td>{{ sortie.nom }}</td>
-        <td>{{ sortie.dateHeureDebut|date("d/m/Y") }}</td>
-        <td>{{ sortie.dateHeureDebut|date_modify("+"~sortie.duree~" day")|date("d/m/Y" ) }}</td>
-        <td>{{sortie.sortieInscrits|length}}/{{ sortie.nbInscriptionsMax }}</td>
-        <td>{{ sortie.etat.libelle }}</td>
-        <td> faire la X</td>
-        <td>{{ sortie.site.id }}</td>
-        <td>Actions</td>
-
-    {% endfor %}
-    </tr>
-   </table>
-
 {% endblock %}
