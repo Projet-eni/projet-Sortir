@@ -1,0 +1,26 @@
+{% extends'base.html.twig' %}
+
+{% block title %}
+Liste sortie
+{% endblock %}
+
+{% block main %}
+
+    <div>Filtrer les sorties</div>
+
+    <div>site : <select name="site" id="site"></select>
+    </div>
+
+    {% for sortie in sorties %}
+
+        {{ sortie.nom }}
+        {{ sortie.dateHeureDebut }}
+        calcul date de fin
+        nbPersoneInscrite/{{ sortie.dateLimite.Inscription }}
+        {{ sortie.etat.id }}
+        {{  }}
+
+    {% endfor %}
+
+
+{% endblock %}
