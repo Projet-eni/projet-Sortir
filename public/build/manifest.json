@@ -1,7 +1,5 @@
 {
   "build/app.css": "/build/app.css",
   "build/app.js": "/build/app.js",
-  "build/listeSortie.css": "/build/listeSortie.css",
-  "build/listeSortie.js": "/build/listeSortie.js",
   "build/runtime.js": "/build/runtime.js"
 }
