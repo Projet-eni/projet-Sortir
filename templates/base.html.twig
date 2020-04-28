@@ -24,6 +24,15 @@
         </div>
     </header>
 
+    {# Zone d'affichage du message flash #}
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="flash-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+
     <main class="site-content">
         {% block main %}
 
