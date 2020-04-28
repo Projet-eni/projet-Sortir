@@ -31,6 +31,8 @@
             //modification sile formulaire est valide et envoyé
             if ($ModifParticipantForm->isSubmitted() && $ModifParticipantForm->isValid()) {
                 //Traitement
+                dump($request);
+                //if ()
                 //nom
 
                 /* prénom,
