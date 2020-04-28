@@ -10,6 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class SortieController extends AbstractController
 {
     /**
+     * 
      * @Route("/liste-sortie", name="liste-sortie")
      */
     public function index()
