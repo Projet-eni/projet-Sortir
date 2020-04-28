@@ -13,12 +13,14 @@ Liste sortie
 
     {% for sortie in sorties %}
 
-        {{ sortie.nom }}
-        {{ sortie.dateHeureDebut }}
-        calcul date de fin
-        nbPersoneInscrite/{{ sortie.dateLimite.Inscription }}
-        {{ sortie.etat.id }}
-        {{  }}
+        {{ sortie.nom }}<br>
+        {{ sortie.dateHeureDebut|date("m/d/Y") }}<br>
+        calcul date de fin<br>
+        nbPersoneInscrite/{{ sortie.nbInscriptionsMax }}<br>
+        {{ sortie.etat.id }}<br>
+        croix si participant inscrit<br>
+        {{ sortie.site.id }}<br>
+        Actions
 
     {% endfor %}
 
