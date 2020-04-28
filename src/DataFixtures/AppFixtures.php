@@ -81,7 +81,7 @@ class AppFixtures extends Fixture
         $participant->setNom('LOESEL');
         $participant->setPrenom('Pierre');
         $participant->setPseudo('Skullpie');
-        $participant->setRole('USER_ROLE');
+        $participant->setRole(['ROLE_USER']);
         $participant->setMail('pierre@hotmail.fr');
         $participant->setTelephone(0102030405);
         $site=new Site();
@@ -103,7 +103,7 @@ class AppFixtures extends Fixture
         $participant->setPrenom('Gaetan');
         $participant->setPseudo('Schak');
         $participant->setMotDePasse($password);
-        $participant->setRole('USER_ADMIN');
+        $participant->setRole(['ROLE_USER']);
         $participant->setMail('gaetan@hotmail.fr');
         $participant->setTelephone(0203040506);
         $participant->setSite($site);
@@ -114,7 +114,7 @@ class AppFixtures extends Fixture
         $participant->setPrenom('Daniel');
         $participant->setPseudo('Le brillant Dany');
         $participant->setMotDePasse($password);
-        $participant->setRole('USER_USER');
+        $participant->setRole(['ROLE_USER']);
         $participant->setMail('daniel@hotmail.fr');
         $participant->setTelephone(0304050607);
         $participant->setSite($site);
@@ -126,7 +126,7 @@ class AppFixtures extends Fixture
         $participant->setPrenom('Charles');
         $participant->setPseudo('Gloxy');
         $participant->setMotDePasse($password);
-        $participant->setRole('USER_ADMIN');
+        $participant->setRole(['ROLE_USER']);
         $participant->setMail('charles@hotmail.fr');
         $participant->setSite($site);
         $manager->persist($participant);
