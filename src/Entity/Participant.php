@@ -59,6 +59,38 @@ class Participant implements UserInterface
     private $telephone;
 
     /**
+     * @return mixed
+     */
+    public function getOrganisateur()
+    {
+        return $this->organisateur;
+    }
+
+    /**
+     * @param mixed $organisateur
+     */
+    public function setOrganisateur($organisateur): void
+    {
+        $this->organisateur = $organisateur;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getInscrits()
+    {
+        return $this->inscrits;
+    }
+
+    /**
+     * @param mixed $inscrits
+     */
+    public function setInscrits($inscrits): void
+    {
+        $this->inscrits = $inscrits;
+    }
+
+    /**
      * @ORM\Column(type="string", length=255)
      */
     private $mail;
@@ -73,6 +105,22 @@ class Participant implements UserInterface
      *
      */
     private $site;
+
+    /**
+     * @return mixed
+     */
+    public function getSite()
+    {
+        return $this->site;
+    }
+
+    /**
+     * @param mixed $site
+     */
+    public function setSite($site): void
+    {
+        $this->site = $site;
+    }
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Sortie", mappedBy="sorties_organisees")
