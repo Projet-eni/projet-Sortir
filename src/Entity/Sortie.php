@@ -57,6 +57,22 @@ class Sortie
     private $sorties_organisees;
 
     /**
+     * @return mixed
+     */
+    public function getSortiesOrganisees()
+    {
+        return $this->sorties_organisees;
+    }
+
+    /**
+     * @param mixed $sorties_organisees
+     */
+    public function setSortiesOrganisees($sorties_organisees): void
+    {
+        $this->sorties_organisees = $sorties_organisees;
+    }
+
+    /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Participant", mappedBy="inscrits")
      */
     private $sortie_inscrits;
@@ -164,15 +180,51 @@ class Sortie
         return $this;
     }
 
-    public function getEtat(): ?string
+    /**
+     * @return mixed
+     */
+    public function getLieu()
+    {
+        return $this->lieu;
+    }
+
+    /**
+     * @param mixed $lieu
+     */
+    public function setLieu($lieu): void
+    {
+        $this->lieu = $lieu;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEtat()
     {
         return $this->etat;
     }
 
-    public function setEtat(string $etat): self
+    /**
+     * @param mixed $etat
+     */
+    public function setEtat($etat): void
     {
         $this->etat = $etat;
+    }
 
-        return $this;
+    /**
+     * @return mixed
+     */
+    public function getSortieInscrits()
+    {
+        return $this->sortie_inscrits;
+    }
+
+    /**
+     * @param mixed $sortie_inscrits
+     */
+    public function setSortieInscrits($sortie_inscrits): void
+    {
+        $this->sortie_inscrits = $sortie_inscrits;
     }
 }
