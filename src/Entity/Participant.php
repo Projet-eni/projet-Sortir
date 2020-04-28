@@ -218,7 +218,7 @@ class Participant implements UserInterface
      */
     public function getRoles()
     {
-        // TODO: Implement getRoles() method.
+       return $this->getRole();
     }
 
     /**
