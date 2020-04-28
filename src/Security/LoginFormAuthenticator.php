@@ -44,8 +44,8 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     public function getCredentials(Request $request)
     {
         $credentials = [
-            'username' => $request->request->get('username'),
-            'password' => $request->request->get('password'),
+            'username' => $request->request->get('_username'),
+            'password' => $request->request->get('_password'),
             'csrf_token' => $request->request->get('_csrf_token'),
         ];
         $request->getSession()->set(
@@ -80,19 +80,21 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
     public function checkCredentials($credentials, UserInterface $user)
     {
+
+        return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
         // Check the user's password or other credentials and return true or false
-        if($credentials['password'] != $user->getPassword()) {
-            return false;
-        }
-        return true;
+       // if($credentials['password'] != $user->getPassword()) {
+        //    return false;
+       // }
+       // return true;
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
-        //if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
-        //    return new RedirectResponse($targetPath);
-        //}
-        return new RedirectResponse($this->urlGenerator->generate('app_login'));
+        if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
+            return new RedirectResponse($targetPath);
+        }
+        return new RedirectResponse($this->urlGenerator->generate('liste-sortie'));
         // For example : return new RedirectResponse($this->urlGenerator->generate('some_route'));
     }
 
