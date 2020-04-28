@@ -8,6 +8,12 @@
       "css": [
         "/build/app.css"
       ]
+    },
+    "listeSortie": {
+      "js": [
+        "/build/runtime.js",
+        "/build/listeSortie.js"
+      ]
     }
   }
 }
