@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
-use App\Entity\Site;
+use App\Data\FiltreRechecheSortie;
 use App\Entity\Sortie;
+use App\Form\FiltreRecherche;
 use App\Form\SortieType;
+use App\Repository\SortieRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;

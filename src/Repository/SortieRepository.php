@@ -24,11 +24,13 @@ class SortieRepository extends ServiceEntityRepository
      */
     public function rechercheParSite($filtre)
     {
+
        $query = $this->createQueryBuilder('s');
-            if(!empty($filtre))
+            if($filtre->getFSite()!==null)
             {
                 $query = $query
                 ->andWhere('s.site = '.$filtre->getFSite()->getId());
+
             }
             return $query->getQuery()->getResult();
 
