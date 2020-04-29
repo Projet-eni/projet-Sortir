@@ -57,16 +57,23 @@ class SortieController extends AbstractController
     }
 
     /**
-     * @param
-     * @param
-     *@Route("/afficher-sortie", name="afficherSortie")
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     *@Route("/afficher-sortie/{id}", name="afficherSortie")
      */
-    public function afficherSortie(){
+    public function afficherSortie(Sortie $sortie){
 
-        $repository= $this->getDoctrine()->getRepository(Sortie::class);
-
-        $sorties = $repository->find('id');
-
-        return $this->render('afficherSortie.html.twig', ['sorties' =>$sorties]);
+        return $this->render('sortie/afficherSortie.html.twig', ['sorties' => $sortie]);
     }
+
+    public function inscription(){
+
+    }
+
+
+
+
+
+
+
 }

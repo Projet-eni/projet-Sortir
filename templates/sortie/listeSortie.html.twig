@@ -48,9 +48,6 @@
                 <td>
                     Organisateur
                 </td>
-                <td>
-                    <a href="{{ (path('afficherSortie')) }}">Afficher</a>
-                </td>
             </tr>
             <tr>
 
@@ -63,7 +60,9 @@
                     <td>{{ sortie.etat.libelle }}</td>
                     <td> faire la X</td>
                     <td>{{ sortie.site.nom }}</td>
-                    <td>Actions</td>
+                    <td>
+                        <a href="{{ (path('afficherSortie', {'id': sortie.id})) }}">Afficher</a>
+                    </td>
 
                 {% endfor %}
             </tr>
