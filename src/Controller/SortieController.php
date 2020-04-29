@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Site;
 use App\Entity\Sortie;
 use App\Form\SortieType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -19,11 +20,15 @@ class SortieController extends AbstractController
 
         $this->denyAccessUnlessGranted("ROLE_USER");
 
+        $repository= $this->getDoctrine()->getRepository(Site::class);
+
+        $sites = $repository->findAll();
+
         $repository= $this->getDoctrine()->getRepository(Sortie::class);
 
         $sorties = $repository->findAll();
 
-        return $this->render('sortie/listeSortie.html.twig',['sorties'=>$sorties]);
+        return $this->render('sortie/listeSortie.html.twig',['sorties'=>$sorties, 'sites'=>$sites]);
     }
 
     /**

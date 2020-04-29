@@ -49,7 +49,7 @@
                 }
                 $em->persist($participant);
                 $em->flush();
-                //affichage du message de succès de traitement
+                ///affichage du message de succès de traitement
                 $this->addFlash('success', "Vos données ont bien été mise à jour.");
 
 
