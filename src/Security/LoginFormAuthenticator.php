@@ -66,13 +66,13 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
             throw new InvalidCsrfTokenException();
         }
         //Check if 'username' is a pseudo or mail with Regex
-        /*if ( preg_match ( " ^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$" , $credentials['username'] ) ) {
+        if ( preg_match ( "#^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$#" , $credentials['username'] ) ) {
             $user = $this->entityManager->getRepository(Participant::class)->findOneBy(['mail' => $credentials['username']]);
         }
         else {
             $user = $this->entityManager->getRepository(Participant::class)->findOneBy(['pseudo' => $credentials['username']]);
-        }*/
-        $user = $this->entityManager->getRepository(Participant::class)->findOneBy(['pseudo' => $credentials['username']]);
+        }
+        //$user = $this->entityManager->getRepository(Participant::class)->findOneBy(['pseudo' => $credentials['username']]);
 
 
         if (!$user) {
