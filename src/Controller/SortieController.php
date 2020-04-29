@@ -17,7 +17,7 @@ class SortieController extends AbstractController
      */
     public function index()
     {
-        $this->denyAccessUnlessGranted("ROLE_USER");
+        $this->denyAccessUnlessGranted(['ROLE_USER']);
 
        $repository= $this->getDoctrine()->getRepository(Sortie::class);
 
