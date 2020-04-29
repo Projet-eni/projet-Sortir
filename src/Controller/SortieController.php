@@ -22,6 +22,7 @@ class SortieController extends AbstractController
 
         $this->denyAccessUnlessGranted("ROLE_USER");
 
+        $participant = $this->getUser();
         $filtre = new FiltreRechecheSortie();
 
         $form = $this->createForm(FiltreRecherche::class,$filtre);
@@ -29,7 +30,7 @@ class SortieController extends AbstractController
 
         $sorties = $repository->rechercheParSite($filtre);
 
-        return $this->render('sortie/listeSortie.html.twig',['sorties'=>$sorties,'filtreForm'=>$form->createView()]);
+        return $this->render('sortie/listeSortie.html.twig',['participant'=>$participant,'sorties'=>$sorties,'filtreForm'=>$form->createView()]);
     }
 
     /**

@@ -10,6 +10,13 @@
  {% endblock %}
 
 {% block main %}
+    
+    <div class="bloc-user">
+        <ul>
+            <li>Date du jour : {{ "now"|date("d/m/Y") }}</li>
+            <li>Participant : {{ participant.prenom }} {{ participant.nom|u.truncate(1)|upper }}.</li>
+        </ul>
+    </div>
 
     <div class="block">
         <form method="get">
