@@ -31,8 +31,9 @@
                 //Ajout d' un champs de formulaire supplémentaire
                 ->add('plainPassword', RepeatedType::class, [
                     'type' => PasswordType::class,
-                    //Ajout d' une ligne non associé a l'objet qui sera prise en compte.
+                    //Ajout d' une ligne non associé à l'objet qui sera prise en compte.
                     'mapped' => false,
+                    'required' => false,
                     'first_options' => ['label' => 'Mot de passe'],
                     'second_options' => ['label' => 'Confirmer Mot de passe']
                 ]);
