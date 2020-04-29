@@ -78,6 +78,13 @@ nav li a{
     margin-top: 10px;
 }
 
+/*------------------------Responsive Design---------------------------------*/
+
+@media screen and (max-width: 800px){
+
+
+}
+
 /*------------------------------Formulaire--------------------------------*/
 label{
     display: inline-block;
