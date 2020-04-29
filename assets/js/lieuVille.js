@@ -17,10 +17,16 @@ function charge(){
 }
 function afficher(value){
     let xhr = new XMLHttpRequest();
-    xhr.open("GET", "/liste-lieux/" + value, true);
     xhr.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200){
-            document.getElementById("ville").innerText;
+            var lieu = JSON.parse(this.responseText);
+            document.getElementById("ville").innerText = lieu.ville;
+            document.getElementById("rue").innerText = lieu.rue;
+            document.getElementById("codePostal").innerText = lieu.codePostal;
+            document.getElementById("latitude").innerText = lieu.latitude;
+            document.getElementById("longitude").innerText = lieu.longitude;
         }
-    }
+    };
+    xhr.open("GET", "/liste-lieux/" + value, true);
+    xhr.send();
 }
