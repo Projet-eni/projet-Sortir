@@ -2,19 +2,48 @@
 
 namespace App\Data;
 
-use App\Entity\Sortie;
-use App\Entity\Site;
-
 class FiltreRechecheSortie {
 
-    /**
-     * @var array
-     */
-    public $sortie;
+
+    private $sortie;
+
+
+    private $fSite;
+
+
 
     /**
-     * @var array
+     * @return mixed
      */
-    public $Site;
+    public function getSortie()
+    {
+        return $this->sortie;
+    }
+
+    /**
+     * @param mixed $sortie
+     */
+    public function setSortie($sortie): void
+    {
+        $this->sortie = $sortie;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFSite()
+    {
+        return $this->fSite;
+    }
+
+    /**
+     * @param $fSite
+     */
+    public function setFSite($fSite)
+    {
+        $this->fSite = $fSite;
+    }
+
+
 }
 

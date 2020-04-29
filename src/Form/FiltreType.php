@@ -4,24 +4,26 @@ namespace App\Form;
 
 use App\Data\FiltreRechecheSortie;
 use App\Entity\Site;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class FiltreFormType extends AbstractType
+class FiltreRecherche extends AbstractType
 {
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('site',EntityType::class,['label'=>'site :',
-                                                        'class'=>Site::class,
-                                                        'query_builder'=>function(EntityRepository $er)
-                                                         {
-                                                         return $er->createQueryBuilder('c');
-                                                         },'choice_label'=>'site'])
-        ;
+            ->add('fSite',EntityType::class,['label'=>'site :',
+                'class'=>Site::class,
+                'query_builder'=>function(EntityRepository $er)
+                {
+                    return $er->createQueryBuilder('c');
+                },'choice_label'=>'nom']);
     }
+
 
     public function configureOptions(OptionsResolver $resolver)
     {

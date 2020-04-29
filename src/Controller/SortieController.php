@@ -3,7 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Sortie;
+use App\Form\FiltreRecherche;
 use App\Form\SortieType;
+use App\Data\FiltreRechecheSortie;
+use App\Repository\SortieRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,16 +17,19 @@ class SortieController extends AbstractController
     /**
      * @Route("/liste-sortie", name="liste-sortie")
      */
-    public function index()
+    public function index(SortieRepository $repository, Request $request)
     {
 
         $this->denyAccessUnlessGranted("ROLE_USER");
 
-        $repository= $this->getDoctrine()->getRepository(Sortie::class);
+        $filtre = new FiltreRechecheSortie();
 
-        $sorties = $repository->findAll();
+        $form = $this->createForm(FiltreRecherche::class,$filtre);
+        $form->handleRequest($request);
 
-        return $this->render('sortie/listeSortie.html.twig',['sorties'=>$sorties]);
+        $sorties = $repository->rechercheParSite($filtre);
+
+        return $this->render('sortie/listeSortie.html.twig',['sorties'=>$sorties,'filtreForm'=>$form->createView()]);
     }
 
     /**
