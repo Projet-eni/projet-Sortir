@@ -21,10 +21,10 @@ class SortieType extends AbstractType
         $builder
             ->add('nom', TextType::class, ['label' => 'Nom de la sortie : '])
             ->add('dateHeureDebut', DateTimeType::class, [
+                'label' => 'Date et heure de la sortie : ',
                 'placeholder' => [
                     'year' => 'Année', 'month' => 'Mois', 'day' => 'Jour',
-                    'hour' => 'Heure', 'minute' => 'Minute', 'second' => 'Second',
-                    'label' => 'Date et heure de la sortie : '
+                    'hour' => 'Heure', 'minute' => 'Minute', 'second' => 'Second'
                 ]
             ])
             ->add('dateLimiteInscription', DateTimeType::class, ['label' => 'Date limite d\'inscription : '])
@@ -37,7 +37,8 @@ class SortieType extends AbstractType
                 return $er->createQueryBuilder('l')
                     ->orderBy('l.nom', 'ASC');
                 },
-                'choice_label'=> 'Lieu : '
+                'choice_label'=> 'nom',
+                'label' => 'Lieu : ',
             ])
 
         ;
