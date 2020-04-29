@@ -26,6 +26,12 @@
       "css": [
         "/build/connexion.css"
       ]
+    },
+    "lieuVille": {
+      "js": [
+        "/build/runtime.js",
+        "/build/lieuVille.js"
+      ]
     }
   }
 }

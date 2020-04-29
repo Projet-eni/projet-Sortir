@@ -3,6 +3,7 @@
   "build/app.js": "/build/app.js",
   "build/connexion.css": "/build/connexion.css",
   "build/connexion.js": "/build/connexion.js",
+  "build/lieuVille.js": "/build/lieuVille.js",
   "build/listeSortie.css": "/build/listeSortie.css",
   "build/listeSortie.js": "/build/listeSortie.js",
   "build/runtime.js": "/build/runtime.js"
