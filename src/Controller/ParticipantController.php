@@ -7,6 +7,7 @@
     use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\Routing\Annotation\Route;
+    use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
     class ParticipantController extends AbstractController
     {
@@ -17,48 +18,43 @@
          */
 
         //Mise à jour d'un participant par son id stocker en session.
-        public function Update(Request $request)
+        public function Update(Request $request, UserPasswordEncoderInterface $encoder)
 
         {//to do: tester si l user est connecter
             $participant = $this->getUser();
+            $password = $participant->getPassword();
+
             // récupération et instanciation de l' utilisateur en session par son id
             $em = $this->getDoctrine()->getManager();
-            $participant = $em->getRepository(Participant::class)->find(1);
+            $participant = $em->getRepository(Participant::class)->find($participant);
 
-            $ModifParticipantForm = $this->createForm(ModifParticipantType::class, $participant);
+            $modifParticipantForm = $this->createForm(ModifParticipantType::class, $participant);
             //partie controle du fomulaire
-            $ModifParticipantForm->handleRequest($request);
+            $modifParticipantForm->handleRequest($request);
             //modification sile formulaire est valide et envoyé
-            if ($ModifParticipantForm->isSubmitted() && $ModifParticipantForm->isValid()) {
-                //Traitement
-                dump($request);
-                //if ()
-                //nom
+            if ($modifParticipantForm->isSubmitted() && $modifParticipantForm->isValid()) {
 
-                /* prénom,
+                /*modification du motDePasse*/
 
-                pseudo,
+                if (empty($modifParticipantForm->get('plainPassword')->getData())) {
+                    $participant->setMotDePasse($password);
 
-                email,
-
-                mot de passe,
-
-                 et téléphone
-
-                 . Le pseudo doit être unique
-                 entre tous les participants.
-
-                */
-                //Récupère la valeur saisie dans le champ
-                $plainPassword = $ModifParticipantForm->get('plainPassword')->getData();
-                //to do :si le champs n'est pas null et pas vide on l' encode et enregistre en bdd
-
+                    //Récupère la valeur saisie dans le champ
+                } elseif(!empty($modifParticipantForm->get('plainPassword')->getData())){
+                    $plainPassword = $modifParticipantForm->get('plainPassword')->getData();
+                    $participant->setMotDePasse($plainPassword);
+                    //encode le password
+                    $password = $encoder->encodePassword($participant, $participant->getMotDePasse());
+                    $participant->setMotDePasse($password);
+                }
                 $em->persist($participant);
                 $em->flush();
                 //affichage du message de succès de traitement
-                //$this->addFlash('success', "Vos données ont bien été mise à jour.");
+                $this->addFlash('success', "Vos données ont bien été mise à jour.");
+
+
             }
-            return $this->render('participant/profil.html.twig', ['participantForm' => $ModifParticipantForm->createView()]);
+            return $this->render('participant/profil.html.twig', ['participantForm' => $modifParticipantForm->createView(),  'participant'=>$participant]);
         }
 
 

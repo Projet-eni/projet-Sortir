@@ -12,13 +12,19 @@
 {% block main %}
 
     <div class="block">
-
+        <form method="get">
         <div class="title">Filtrer les sorties</div>
-        <div>site : <select name="site" id="site"></select>
+        <div>site : <select name="site" id="site">
+                <option value="">Site</option>
+                {% for site in sites %}
+                    <option name="{{ site.id }}" value="{{ site.id }}">{{ site.nom }}</option>
+                {% endfor %}
+            </select>
         </div>
         <div>Le nom de la sortie contient : <input type="search" id="search"></div>
         <div>Entre : <input type="date" id="date-before"> et <input type="date" id="date-after"></div>
-
+        <button type="submit">Rechercher</button>
+        </form>
         <table class="tableau">
             <tr>
                 <td>
@@ -62,7 +68,5 @@
                 {% endfor %}
             </tr>
         </table>
-
-
-    </div>
+<h1>{{ choice }}</h1>
 {% endblock %}
