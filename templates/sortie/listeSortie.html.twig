@@ -12,53 +12,59 @@
 {% block main %}
 
     <div class="block">
-    <form method="get">
-    <div class="title">Filtrer les sorties</div>
-        {{ form_start(filtreForm) }}
-        {{ form_widget(filtreForm) }}
-        <button type="submit"> modifier</button>
-        {{ form_end(filtreForm) }}
-    <table class="tableau">
-        <tr>
-            <td>
-                Nom de la sortie
-            </td>
-            <td>
-                Date de la sortie
-            </td>
-            <td>
-                Clôture
-            </td>
-            <td>
-                Inscrits/Places
-            </td>
-            <td>
-                Etat
-            </td>
-            <td>
-                Inscrit
-            </td>
-            <td>
-                Organisateur
-            </td>
-            <td>
-                Actions
-            </td>
-        </tr>
-        <tr>
+        <form method="get">
+        <div class="title">Filtrer les sorties</div>
+        <div>site : <select name="site" id="site">
+                <option value="">Site</option>
+                {% for site in sites %}
+                    <option name="{{ site.id }}" value="{{ site.id }}">{{ site.nom }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>Le nom de la sortie contient : <input type="search" id="search"></div>
+        <div>Entre : <input type="date" id="date-before"> et <input type="date" id="date-after"></div>
+        <button type="submit">Rechercher</button>
+        </form>
+        <table class="tableau">
+            <tr>
+                <td>
+                    Nom de la sortie
+                </td>
+                <td>
+                    Date de la sortie
+                </td>
+                <td>
+                    Clôture
+                </td>
+                <td>
+                    Inscrits/Places
+                </td>
+                <td>
+                    Etat
+                </td>
+                <td>
+                    Inscrit
+                </td>
+                <td>
+                    Organisateur
+                </td>
+            </tr>
+            <tr>
 
-            {% for sortie in sorties %}
+                {% for sortie in sorties %}
 
-                <td>{{ sortie.nom }}</td>
-                <td>{{ sortie.dateHeureDebut|date("d/m/Y") }}</td>
-                <td>{{ sortie.dateHeureDebut|date_modify("+"~sortie.duree~" day")|date("d/m/Y" ) }}</td>
-                <td>{{ sortie.sortieInscrits|length }}/{{ sortie.nbInscriptionsMax }}</td>
-                <td>{{ sortie.etat.libelle }}</td>
-                <td> faire la X</td>
-                <td>{{ sortie.site.nom }}</td>
-                <td>Actions</td>
+                    <td>{{ sortie.nom }}</td>
+                    <td>{{ sortie.dateHeureDebut|date("d/m/Y") }}</td>
+                    <td>{{ sortie.dateHeureDebut|date_modify("+"~sortie.duree~" day")|date("d/m/Y" ) }}</td>
+                    <td>{{ sortie.sortieInscrits|length }}/{{ sortie.nbInscriptionsMax }}</td>
+                    <td>{{ sortie.etat.libelle }}</td>
+                    <td> faire la X</td>
+                    <td>{{ sortie.site.nom }}</td>
+                    <td>
+                        <a href="{{ (path('afficherSortie', {'id': sortie.id})) }}">Afficher</a>
+                    </td>
 
-            {% endfor %}
-        </tr>
-    </table>
+                {% endfor %}
+            </tr>
+        </table>
 {% endblock %}

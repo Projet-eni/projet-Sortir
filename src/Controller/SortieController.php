@@ -2,11 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Site;
 use App\Entity\Sortie;
-use App\Form\FiltreRecherche;
 use App\Form\SortieType;
-use App\Data\FiltreRechecheSortie;
-use App\Repository\SortieRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,19 +15,19 @@ class SortieController extends AbstractController
     /**
      * @Route("/liste-sortie", name="liste-sortie")
      */
-    public function index(SortieRepository $repository, Request $request)
+    public function index()
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
 
-        $this->denyAccessUnlessGranted("ROLE_USER");
+        $repository= $this->getDoctrine()->getRepository(Site::class);
 
-        $filtre = new FiltreRechecheSortie();
+        $sites = $repository->findAll();
 
-        $form = $this->createForm(FiltreRecherche::class,$filtre);
-        $form->handleRequest($request);
+        $repository= $this->getDoctrine()->getRepository(Sortie::class);
 
-        $sorties = $repository->rechercheParSite($filtre);
+        $sorties = $repository->findAll();
 
-        return $this->render('sortie/listeSortie.html.twig',['sorties'=>$sorties,'filtreForm'=>$form->createView()]);
+        return $this->render('sortie/listeSortie.html.twig',['sorties'=>$sorties, 'sites'=>$sites]);
     }
 
     /**
@@ -56,4 +54,38 @@ class SortieController extends AbstractController
 
         return $this->render('sortie/ajoutSortie.html.twig', ['sortieForm' => $sortieForm->createView()]);
     }
+
+    /**
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     *@Route("/afficher-sortie/{id}", name="afficherSortie")
+     */
+    public function afficherSortie(Sortie $sortie){
+
+        return $this->render('sortie/afficherSortie.html.twig', ['sorties' => $sortie]);
+    }
+
+    /**
+     * @param EntityManagerInterface $em
+     * @param Sortie $sortie
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/inscription{id}", name="inscription")
+     */
+    public function inscription(EntityManagerInterface $em, Sortie $sortie){
+
+        $user = $this->getUser();
+        $user->addInscrits($sortie);
+        $sortie->addSortieInscrits($user);
+        $em->flush();
+        $this->addFlash('success', 'Vous avez bien été inscrits à cette sortie');
+
+       return $this->render('sortie/afficherSortie.html.twig', ['sorties' => $sortie]);
+    }
+
+
+
+
+
+
+
 }

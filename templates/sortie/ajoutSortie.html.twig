@@ -11,5 +11,29 @@ Ajout sortie
 <button type="submit">Créer</button>
 {{ form_end(sortieForm) }}
 
+    <div>
+        <span>Ville :</span> <span id="ville"></span>
+    </div>
+    <br>
+    <div>
+        <span>Rue :</span> <span id="rue"></span>
+    </div>
+    <br>
+    <div>
+        <span>Code Postal :</span> <span id="codePostal"></span>
+    </div>
+    <br>
+    <div>
+        <span>Latitude :</span> <span id="latitude"></span>
+    </div>
+    <br>
+    <div>
+        <span>Longitude :</span> <span id="longitude"></span>
+    </div>
 
+
+{% endblock %}
+{% block javascripts %}
+    {{ encore_entry_script_tags ( 'app' ) }}
+    {{ encore_entry_script_tags ( 'lieuVille' ) }}
 {% endblock %}

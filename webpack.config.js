@@ -26,6 +26,8 @@ Encore
     .addEntry('app', './assets/js/app.js')
     .addEntry('listeSortie', './assets/css/listeSortie.css')
     .addEntry('connexion','./assets/css/connexion.css')
+    .addEntry('lieuVille','./assets/js/lieuVille.js')
+
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
 

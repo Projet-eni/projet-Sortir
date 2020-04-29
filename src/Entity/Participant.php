@@ -2,11 +2,10 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use phpDocumentor\Reflection\Types\Self_;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ParticipantRepository")
  * @UniqueEntity("pseudo", message="Ce pseudo est déjà utilisé.")
@@ -78,6 +77,37 @@ class Participant implements UserInterface
     }
 
     /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Sortie", inversedBy="sortie_inscrits")
+     */
+    private $inscrits;
+
+    public function __construct()
+    {
+        $this->inscrits = new ArrayCollection();
+    }
+
+    /**
+     * @param mixed $inscrits
+     */
+    public function addInscrits($inscrits): void
+    {
+        if ($this->inscrits->contains($inscrits))
+        {
+            return;
+        }
+        $this->inscrits->add($inscrits);
+    }
+
+    public function removeInscrits($inscrits): void
+    {
+        if ($this->inscrits->contains($inscrits))
+        {
+            $this->inscrits->removeElement($inscrits);
+        }
+        return;
+    }
+
+    /**
      * @return mixed
      */
     public function getInscrits()
@@ -129,11 +159,6 @@ class Participant implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\Sortie", mappedBy="sorties_organisees")
      */
     private $organisateur;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Sortie", inversedBy="sortie_inscrits")
-     */
-    private $inscrits;
 
     /**
      * @return mixed
@@ -237,7 +262,6 @@ class Participant implements UserInterface
      */
     public function getSalt()
     {
-        // TODO: Implement getSalt() method.
     }
 
     /**
@@ -254,6 +278,5 @@ class Participant implements UserInterface
      */
     public function eraseCredentials()
     {
-        // TODO: Implement eraseCredentials() method.
     }
 }
