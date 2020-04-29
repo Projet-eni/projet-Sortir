@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Sortie;
 use App\Form\SortieType;
 use Doctrine\ORM\EntityManagerInterface;
-use PhpParser\Node\Expr\New_;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,7 +18,7 @@ class SortieController extends AbstractController
     {
         $this->denyAccessUnlessGranted(['ROLE_USER']);
 
-       $repository= $this->getDoctrine()->getRepository(Sortie::class);
+        $repository= $this->getDoctrine()->getRepository(Sortie::class);
 
         $sorties = $repository->findAll();
 

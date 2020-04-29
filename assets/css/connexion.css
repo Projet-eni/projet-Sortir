@@ -1,0 +1,33 @@
+
+#inputPseudo, #inputPassword {
+    border: 1px solid black;
+    width: 100%;
+}
+
+.h3{
+font-size: 46px;
+}
+
+.form-login{
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: sans-serif;
+}
+
+.btn{
+    border: 0px solid ;
+    background-color: rgba(57,83,161,0.4);
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.checkbox{
+    width: auto;
+}
+
+.alert{
+   text-align: center;
+}
