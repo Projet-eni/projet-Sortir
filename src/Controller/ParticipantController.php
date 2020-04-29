@@ -22,6 +22,7 @@
 
         {//to do: tester si l user est connecter
             $participant = $this->getUser();
+            $password = $participant->getPassword();
 
             // récupération et instanciation de l' utilisateur en session par son id
             $em = $this->getDoctrine()->getManager();
@@ -34,13 +35,18 @@
             if ($modifParticipantForm->isSubmitted() && $modifParticipantForm->isValid()) {
 
                 /*modification du motDePasse*/
-                //Récupère la valeur saisie dans le champ
-                $plainPassword = $modifParticipantForm->get('plainPassword')->getData();
-                $participant->setMotDePasse($plainPassword);
-                //encode le password
-                $password = $encoder->encodePassword($participant, $participant->getMotDePasse());
-                $participant->setMotDePasse($password);
 
+                if (empty($modifParticipantForm->get('plainPassword')->getData())) {
+                    $participant->setMotDePasse($password);
+
+                    //Récupère la valeur saisie dans le champ
+                } elseif(!empty($modifParticipantForm->get('plainPassword')->getData())){
+                    $plainPassword = $modifParticipantForm->get('plainPassword')->getData();
+                    $participant->setMotDePasse($plainPassword);
+                    //encode le password
+                    $password = $encoder->encodePassword($participant, $participant->getMotDePasse());
+                    $participant->setMotDePasse($password);
+                }
                 $em->persist($participant);
                 $em->flush();
                 //affichage du message de succès de traitement
@@ -48,7 +54,7 @@
 
 
             }
-            return $this->render('participant/profil.html.twig', ['participantForm' => $modifParticipantForm->createView()]);
+            return $this->render('participant/profil.html.twig', ['participantForm' => $modifParticipantForm->createView(),  'participant'=>$participant]);
         }
 
 
