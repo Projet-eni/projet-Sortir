@@ -15,19 +15,19 @@ class SortieController extends AbstractController
     /**
      * @Route("/liste-sortie", name="liste-sortie")
      */
-    public function index()
+    public function index(SortieRepository $repository, Request $request)
     {
-        $this->denyAccessUnlessGranted('ROLE_USER');
 
-        $repository= $this->getDoctrine()->getRepository(Site::class);
+        $this->denyAccessUnlessGranted("ROLE_USER");
 
-        $sites = $repository->findAll();
+        $filtre = new FiltreRechecheSortie();
 
-        $repository= $this->getDoctrine()->getRepository(Sortie::class);
+        $form = $this->createForm(FiltreRecherche::class,$filtre);
+        $form->handleRequest($request);
 
-        $sorties = $repository->findAll();
+        $sorties = $repository->rechercheParSite($filtre);
 
-        return $this->render('sortie/listeSortie.html.twig',['sorties'=>$sorties, 'sites'=>$sites]);
+        return $this->render('sortie/listeSortie.html.twig',['sorties'=>$sorties,'filtreForm'=>$form->createView()]);
     }
 
     /**
