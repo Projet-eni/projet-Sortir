@@ -21,9 +21,7 @@ class LieuController extends AbstractController
         $tab= [];
         $status = 404;
         if($lieu != null){
-            $tab = ['id' => $lieu->getId(),
-                    'nom' => $lieu->getNom(),
-                    'ville' => $lieu->getVille()->getNom(),
+            $tab = ['ville' => $lieu->getVille()->getNom(),
                     'rue' => $lieu->getRue(),
                     'codePostal' => $lieu->getVille()->getCodePostal(),
                     'latitude' => $lieu->getLatitude(),

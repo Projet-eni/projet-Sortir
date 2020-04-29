@@ -17,5 +17,10 @@ function charge(){
 }
 function afficher(value){
     let xhr = new XMLHttpRequest();
-    xhr.open("GET", "/liste-lieux/" + value, )
+    xhr.open("GET", "/liste-lieux/" + value, true);
+    xhr.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200){
+            document.getElementById("ville").innerText;
+        }
+    }
 }
