@@ -50,7 +50,6 @@ class Participant implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @assert\unique
      */
     private $pseudo;
 
