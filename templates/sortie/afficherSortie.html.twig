@@ -71,11 +71,12 @@
         </tr>
     </table>
 
-    <button class="btn btn-lg btn-primary" type="submit" formaction="{{ (path('participant_update'))}}">
+    <a href="{{ (path('inscription', {'id': sorties.id} )) }}">
         S'inscrire
-    </button>
-    <button class="btn btn-lg btn-primary" type="submit" formaction="{{ (path('participant_update'))}}">
+    </a>
+    <br>
+    <a href="{{ (path('inscription', {'id': sorties.id} )) }}">
         Se désister
-    </button>
+    </a>
 
 {% endblock %}

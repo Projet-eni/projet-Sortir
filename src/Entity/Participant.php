@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -76,6 +77,37 @@ class Participant implements UserInterface
     }
 
     /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Sortie", inversedBy="sortie_inscrits")
+     */
+    private $inscrits;
+
+    public function __construct()
+    {
+        $this->inscrits = new ArrayCollection();
+    }
+
+    /**
+     * @param mixed $inscrits
+     */
+    public function addInscrits($inscrits): void
+    {
+        if ($this->inscrits->contains($inscrits))
+        {
+            return;
+        }
+        $this->inscrits->add($inscrits);
+    }
+
+    public function removeInscrits($inscrits): void
+    {
+        if ($this->inscrits->contains($inscrits))
+        {
+            $this->inscrits->removeElement($inscrits);
+        }
+        return;
+    }
+
+    /**
      * @return mixed
      */
     public function getInscrits()
@@ -127,11 +159,6 @@ class Participant implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\Sortie", mappedBy="sorties_organisees")
      */
     private $organisateur;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Sortie", inversedBy="sortie_inscrits")
-     */
-    private $inscrits;
 
     /**
      * @return mixed

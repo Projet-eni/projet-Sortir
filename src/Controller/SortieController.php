@@ -65,8 +65,21 @@ class SortieController extends AbstractController
         return $this->render('sortie/afficherSortie.html.twig', ['sorties' => $sortie]);
     }
 
-    public function inscription(){
+    /**
+     * @param EntityManagerInterface $em
+     * @param Sortie $sortie
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/inscription{id}", name="inscription")
+     */
+    public function inscription(EntityManagerInterface $em, Sortie $sortie){
 
+        $user = $this->getUser();
+        $user->addInscrits($sortie);
+        $sortie->addSortieInscrits($user);
+        $em->flush();
+        $this->addFlash('success', 'Vous avez bien été inscrits à cette sortie');
+
+       return $this->render('sortie/afficherSortie.html.twig', ['sorties' => $sortie]);
     }
 
 
