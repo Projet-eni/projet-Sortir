@@ -49,4 +49,18 @@ class SortieController extends AbstractController
 
         return $this->render('sortie/ajoutSortie.html.twig', ['sortieForm' => $sortieForm->createView()]);
     }
+
+    /**
+     * @param
+     * @param
+     *@Route("/afficher-sortie", name="afficherSortie")
+     */
+    public function afficherSortie(){
+
+        $repository= $this->getDoctrine()->getRepository(Sortie::class);
+
+        $sorties = $repository->find('id');
+
+        return $this->render('afficherSortie.html.twig', ['sorties' =>$sorties]);
+    }
 }
