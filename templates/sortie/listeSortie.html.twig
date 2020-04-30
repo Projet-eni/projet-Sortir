@@ -57,7 +57,7 @@
                         <td>{{ sortie.dateHeureDebut|date_modify("+"~sortie.duree~" day")|date("d/m/Y" ) }}</td>
                         <td>{{ sortie.sortieInscrits|length }}/{{ sortie.nbInscriptionsMax }}</td>
                         <td>{{ sortie.etat.libelle }}</td>
-                        <td> faire la X</td>
+                        <td>{{ participant.inscrits. }}</td>
                         <td>{{ sortie.site.nom }}</td>
                         <td>
                             <a href="{{ (path('afficherSortie', {'id': sortie.id})) }}">Afficher</a>
