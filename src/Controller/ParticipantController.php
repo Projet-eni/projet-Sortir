@@ -20,7 +20,7 @@
         //Mise à jour d'un participant par son id stocker en session.
         public function Update(Request $request, UserPasswordEncoderInterface $encoder)
 
-        {//to do: tester si l user est connecter
+        {
             $participant = $this->getUser();
 
             // récupération et instanciation de l' utilisateur en session par son id
@@ -50,7 +50,7 @@
 
 
             }
-            return $this->render('participant/profil.html.twig', ['participantForm' => $modifParticipantForm->createView(),  'participant'=>$participant]);
+            return $this->render('participant/modifProfil.html.twig', ['participantForm' => $modifParticipantForm->createView(),  'participant'=>$participant]);
         }
 
 
