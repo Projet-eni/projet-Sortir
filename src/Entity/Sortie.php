@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -60,6 +61,32 @@ class Sortie
      * @ORM\ManyToMany(targetEntity="App\Entity\Participant", mappedBy="inscrits")
      */
     private $sortie_inscrits;
+
+    public function __construct()
+    {
+        $this->sortie_inscrits = new ArrayCollection();
+    }
+
+    /**
+     * @param $sortie_inscrits
+     */
+    public function addSortieInscrits($sortie_inscrits): void
+    {
+        if ($this->sortie_inscrits->contains($sortie_inscrits))
+        {
+            return;
+        }
+        $this->sortie_inscrits->add($sortie_inscrits);
+    }
+
+    public function removeSortieInscrits($sortie_inscrits): void
+    {
+        if ($this->sortie_inscrits->contains($sortie_inscrits))
+        {
+            $this->sortie_inscrits->removeElement($sortie_inscrits);
+        }
+        return;
+    }
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Lieu", inversedBy="sorties_lieu")

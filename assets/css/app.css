@@ -28,6 +28,7 @@ body {
     margin-left: auto;
     justify-content: space-between;
     position: relative;
+    height: 40px;
 }
 
 .logo{

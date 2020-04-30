@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
-use App\Entity\Site;
+use App\Data\FiltreRechecheSortie;
 use App\Entity\Sortie;
+use App\Form\FiltreRecherche;
 use App\Form\SortieType;
+use App\Repository\SortieRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,19 +17,20 @@ class SortieController extends AbstractController
     /**
      * @Route("/liste-sortie", name="liste-sortie")
      */
-    public function index()
+    public function index(SortieRepository $repository, Request $request)
     {
-        $this->denyAccessUnlessGranted('ROLE_USER');
 
-        $repository= $this->getDoctrine()->getRepository(Site::class);
+        $this->denyAccessUnlessGranted("ROLE_USER");
 
-        $sites = $repository->findAll();
+        $participant = $this->getUser();
+        $filtre = new FiltreRechecheSortie();
 
-        $repository= $this->getDoctrine()->getRepository(Sortie::class);
+        $form = $this->createForm(FiltreRecherche::class,$filtre);
+        $form->handleRequest($request);
 
-        $sorties = $repository->findAll();
+        $sorties = $repository->rechercheParSite($filtre);
 
-        return $this->render('sortie/listeSortie.html.twig',['sorties'=>$sorties, 'sites'=>$sites]);
+        return $this->render('sortie/listeSortie.html.twig',['participant'=>$participant,'sorties'=>$sorties,'filtreForm'=>$form->createView()]);
     }
 
     /**
@@ -57,16 +60,36 @@ class SortieController extends AbstractController
     }
 
     /**
-     * @param
-     * @param
-     *@Route("/afficher-sortie", name="afficherSortie")
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     *@Route("/afficher-sortie/{id}", name="afficherSortie")
      */
-    public function afficherSortie(){
+    public function afficherSortie(Sortie $sortie){
 
-        $repository= $this->getDoctrine()->getRepository(Sortie::class);
-
-        $sorties = $repository->find('id');
-
-        return $this->render('afficherSortie.html.twig', ['sorties' =>$sorties]);
+        return $this->render('sortie/afficherSortie.html.twig', ['sorties' => $sortie]);
     }
+
+    /**
+     * @param EntityManagerInterface $em
+     * @param Sortie $sortie
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/inscription{id}", name="inscription")
+     */
+    public function inscription(EntityManagerInterface $em, Sortie $sortie){
+
+        $user = $this->getUser();
+        $user->addInscrits($sortie);
+        $sortie->addSortieInscrits($user);
+        $em->flush();
+        $this->addFlash('success', 'Vous avez bien été inscrits à cette sortie');
+
+       return $this->render('sortie/afficherSortie.html.twig', ['sorties' => $sortie]);
+    }
+
+
+
+
+
+
+
 }

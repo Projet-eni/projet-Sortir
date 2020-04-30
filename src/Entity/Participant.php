@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -62,6 +63,53 @@ class Participant implements UserInterface
     /**
      * @return mixed
      */
+    public function getOrganisateur()
+    {
+        return $this->organisateur;
+    }
+
+    /**
+     * @param mixed $organisateur
+     */
+    public function setOrganisateur($organisateur): void
+    {
+        $this->organisateur = $organisateur;
+    }
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Sortie", inversedBy="sortie_inscrits")
+     */
+    private $inscrits;
+
+    public function __construct()
+    {
+        $this->inscrits = new ArrayCollection();
+    }
+
+    /**
+     * @param mixed $inscrits
+     */
+    public function addInscrits($inscrits): void
+    {
+        if ($this->inscrits->contains($inscrits))
+        {
+            return;
+        }
+        $this->inscrits->add($inscrits);
+    }
+
+    public function removeInscrits($inscrits): void
+    {
+        if ($this->inscrits->contains($inscrits))
+        {
+            $this->inscrits->removeElement($inscrits);
+        }
+        return;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getInscrits()
     {
         return $this->inscrits;
@@ -108,14 +156,9 @@ class Participant implements UserInterface
     }
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Sortie", mappedBy="organisateur")
+     * @ORM\OneToMany(targetEntity="App\Entity\Sortie", mappedBy="sorties_organisees")
      */
-    private $sorties_organisee;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Sortie", inversedBy="sortie_inscrits")
-     */
-    private $inscrits;
+    private $organisateur;
 
     /**
      * @return mixed
@@ -236,21 +279,4 @@ class Participant implements UserInterface
     public function eraseCredentials()
     {
     }
-
-    /**
-     * @return mixed
-     */
-    public function getSortiesOrganisee()
-    {
-        return $this->sorties_organisee;
-    }
-
-    /**
-     * @param mixed $sorties_organisee
-     */
-    public function setSortiesOrganisee($sorties_organisee): void
-    {
-        $this->sorties_organisee = $sorties_organisee;
-    }
-
 }
