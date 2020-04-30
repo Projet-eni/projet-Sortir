@@ -57,7 +57,14 @@
                         <td>{{ sortie.dateHeureDebut|date_modify("+"~sortie.duree~" day")|date("d/m/Y" ) }}</td>
                         <td>{{ sortie.sortieInscrits|length }}/{{ sortie.nbInscriptionsMax }}</td>
                         <td>{{ sortie.etat.libelle }}</td>
-                        <td>test</td>
+                        <td>{% for inscrit in sortie.sortieInscrits %}
+                                {% if inscrit.id == participant.id %}
+                                    {{ 'X' }}
+                                {% else %}
+                                    {{ ' ' }}
+                                {% endif %}
+                            {% endfor %}
+                        </td>
                         <td>{{ sortie.site.nom }}</td>
                         <td>
                             <a href="{{ (path('afficherSortie', {'id': sortie.id})) }}">Afficher</a>
