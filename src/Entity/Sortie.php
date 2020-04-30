@@ -54,23 +54,7 @@ class Sortie
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Participant",inversedBy="organisateur")
      */
-    private $sorties_organisees;
-
-    /**
-     * @return mixed
-     */
-    public function getSortiesOrganisees()
-    {
-        return $this->sorties_organisees;
-    }
-
-    /**
-     * @param mixed $sorties_organisees
-     */
-    public function setSortiesOrganisees($sorties_organisees): void
-    {
-        $this->sorties_organisees = $sorties_organisees;
-    }
+    private $organisateur;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Participant", mappedBy="inscrits")
@@ -231,4 +215,21 @@ class Sortie
     {
         $this->sortie_inscrits = $sortie_inscrits;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getOrganisateur()
+    {
+        return $this->organisateur;
+    }
+
+    /**
+     * @param mixed $organisateur
+     */
+    public function setOrganisateur($organisateur): void
+    {
+        $this->organisateur = $organisateur;
+    }
+
 }

@@ -62,22 +62,6 @@ class Participant implements UserInterface
     /**
      * @return mixed
      */
-    public function getOrganisateur()
-    {
-        return $this->organisateur;
-    }
-
-    /**
-     * @param mixed $organisateur
-     */
-    public function setOrganisateur($organisateur): void
-    {
-        $this->organisateur = $organisateur;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getInscrits()
     {
         return $this->inscrits;
@@ -124,9 +108,9 @@ class Participant implements UserInterface
     }
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Sortie", mappedBy="sorties_organisees")
+     * @ORM\OneToMany(targetEntity="App\Entity\Sortie", mappedBy="organisateur")
      */
-    private $organisateur;
+    private $sorties_organisee;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Sortie", inversedBy="sortie_inscrits")
@@ -252,4 +236,21 @@ class Participant implements UserInterface
     public function eraseCredentials()
     {
     }
+
+    /**
+     * @return mixed
+     */
+    public function getSortiesOrganisee()
+    {
+        return $this->sorties_organisee;
+    }
+
+    /**
+     * @param mixed $sorties_organisee
+     */
+    public function setSortiesOrganisee($sorties_organisee): void
+    {
+        $this->sorties_organisee = $sorties_organisee;
+    }
+
 }
