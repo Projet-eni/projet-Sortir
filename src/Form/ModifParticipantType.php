@@ -22,7 +22,7 @@
                 ->add('nom', TextType::class, ['label' => 'nom'])
                 ->add('prenom', TextType::class, ['label' => 'prenom'])
                 ->add('pseudo', TextType::class, ['label' => 'pseudo',
-                                                               'title'=>'Votre pseudo doit contenir une majuscule, une minuscule et avoir une longueur entre 2 et 10 caractères' ])
+                                                              'attr'=> ['title'=>'Votre pseudo doit contenir une majuscule, une minuscule et avoir une longueur entre 2 et 10 caractères' ]])
                 ->add('telephone', IntegerType::class, ['label' => 'telephone'])
                 ->add('mail', RepeatedType::class, [
                     'type' => EmailType::class,
@@ -33,7 +33,7 @@
                 //Ajout d' un champs de formulaire supplémentaire
                 ->add('plainPassword', RepeatedType::class, [
                     'type' => PasswordType::class,
-                    'title'=>'Votre mot de passe doit contenir une majuscule et avoir une longueur entre 4 et 10 caractères',
+
                     //Ajout d' une ligne non associé à l'objet qui sera prise en compte.
                     'mapped' => false,
                     'required' => false,
@@ -41,8 +41,8 @@
                         'pattern' =>"/^(?=.*[A-Z]).{4,10}$/",
                         'message' =>"Votre mot de passe doit contenir une majuscule et avoir une longueur entre 4 et 10 caratères"]
                              )],
-                    'first_options' => ['label' => 'Mot de passe'],
-                    'second_options' => ['label' => 'Confirmer Mot de passe']
+                    'first_options' => ['label' => 'Mot de passe','attr'=> ['title'=>'Votre mot de passe doit contenir une majuscule et avoir une longueur entre 4 et 10 caractères']],
+                    'second_options' => ['label' => 'Confirmer Mot de passe','attr'=> ['title'=>'Votre mot de passe doit contenir une majuscule et avoir une longueur entre 4 et 10 caractères']]
                 ]);
 
         }
