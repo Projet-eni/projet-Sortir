@@ -85,7 +85,22 @@ class SortieController extends AbstractController
        return $this->render('sortie/afficherSortie.html.twig', ['sorties' => $sortie]);
     }
 
+    /**
+     * @param EntityManagerInterface $em
+     * @param Sortie $sortie
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/desistement{id}", name="desistement")
+     */
+    public function seDesister(EntityManagerInterface $em, Sortie $sortie){
 
+        $user = $this->getUser();
+        $user->removeInscrits($sortie);
+        $sortie->removeSortieInscrits($user);
+        $em->flush();
+        $this->addFlash('success', 'Vous vous êtes désistés');
+
+        return $this->render('sortie/afficherSortie.html.twig', ['sorties' => $sortie]);
+    }
 
 
 
