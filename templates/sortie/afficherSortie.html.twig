@@ -71,15 +71,16 @@
         </tr>
         {% endfor %}
     </table>
-    {% if sortie.sortieInscrits.contains(app.user) %}
-        <a href="{{ (path('desistement', {'id': sortie.id} )) }}">
-            Se désister
-        </a>
-    {% else %}
-        <a href="{{ (path('inscription', {'id': sortie.id} )) }}">
-            S'inscrire
-        </a>
-
+    
+    {% if sortie.etat.id == 6 %}
+        {% if sortie.sortieInscrits.contains(app.user) %}
+            <a href="{{ (path('desistement', {'id': sortie.id} )) }}">
+                Se désister
+            </a>
+        {% else %}
+            <a href="{{ (path('inscription', {'id': sortie.id} )) }}">
+                S'inscrire
+            </a>
+        {% endif %}
     {% endif %}
-
 {% endblock %}

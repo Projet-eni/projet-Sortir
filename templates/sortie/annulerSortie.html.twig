@@ -1,0 +1,41 @@
+{% extends'base.html.twig' %}
+
+{% block title %}
+    Annuler Une Sortie
+{% endblock %}
+
+ {% block stylesheets %}
+     {{ encore_entry_link_tags ( 'app' ) }}
+ {% endblock %}
+
+{% block main %}
+
+    <p>
+        Nom de la Sortie : {{ sortie.nom }}
+    </p>
+
+    <p>
+        Date de la sortie : {{ sortie.dateHeureDebut|date("d/m/Y") }}
+    </p>
+
+    <p>
+        Site orgarnisateur : {{ sortie.site.nom }}
+    </p>
+        Lieu : {{ sortie.lieu.nom }} {{ sortie.lieu.rue }} {{ sortie.lieu.ville.codePostal }} {{ sortie.lieu.ville.nom }}
+
+    <p>Motif :</p>
+    {{ form_start(annulSortieForm) }}
+    {{ form_widget(annulSortieForm) }}
+    <button type="submit" value="1" name="enr">Enregistrer</button>
+    <button onclick=window.location.href='{{ path('liste-sortie') }}';>Annuler</button>
+    {{ form_end(annulSortieForm) }}
+
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags ( 'app' ) }}
+    {{ encore_entry_script_tags ( 'lieuVille' ) }}
+{% endblock %}
