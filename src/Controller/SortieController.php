@@ -85,8 +85,8 @@ class SortieController extends AbstractController
      *@Route("/afficher-sortie/{id}", name="afficherSortie")
      */
     public function afficherSortie(Sortie $sortie){
-
-        return $this->render('sortie/afficherSortie.html.twig', ['sortie' => $sortie]);
+        $user = $this->getUser();
+        return $this->render('sortie/afficherSortie.html.twig', ['sortie' => $sortie, 'user' => $user]);
     }
 
     /**
