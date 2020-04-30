@@ -139,6 +139,7 @@ class AppFixtures extends Fixture
         $sortie->setDateHeureDebut(new \DateTime("2020-05-10 10:00:00"));
         $sortie->setNbInscriptionsMax(10);
         $sortie->setSortiesOrganisees($participant);
+        $sortie->setLieu($lieu);
         $sortie->setEtat($etat);
         $sortie->setInfosSortie('Journée de présentation de l\'école avec des anciens élèves');
         $manager->persist($sortie);
