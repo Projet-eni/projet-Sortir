@@ -64,7 +64,6 @@ class SortieController extends AbstractController
             } elseif (isset($_POST['pub'])) {
                 $idetat = 6;
             }
-            dump($idetat);exit();
             $repo = $this->getDoctrine()->getRepository(Etat::class);
             $etat = $repo->find($idetat);
             $sortie->setEtat($etat);
