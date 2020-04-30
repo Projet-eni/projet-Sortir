@@ -246,17 +246,19 @@ class Sortie
     /**
      * @return mixed
      */
-    public function getOrganisateur()
+    public function getSortiesOrganisees()
     {
-        return $this->organisateur;
+        return $this->sorties_organisees;
     }
 
     /**
-     * @param mixed $organisateur
+     * @param mixed $sorties_organisees
      */
-    public function setOrganisateur($organisateur): void
+    public function setSortiesOrganisees($sorties_organisees): void
     {
-        $this->organisateur = $organisateur;
+        $this->sorties_organisees = $sorties_organisees;
     }
+
+
 
 }

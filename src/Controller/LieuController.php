@@ -48,7 +48,7 @@ class LieuController extends AbstractController
             $ville = new Ville();
             $ville->setNom($lieuForm->get('ville')->getData());
             $ville->setCodePostal($lieuForm->get('codePostal')->getData());
-            $ville->setLieu($lieu);
+            $ville->addLieu($lieu);
             $lieu->setVille($ville);
             $em->persist($ville);
             $em->persist($lieu);
