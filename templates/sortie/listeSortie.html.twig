@@ -68,7 +68,7 @@
                         <td>{{ sortie.site.nom }}</td>
                         <td>
                             <a href="{{ (path('afficherSortie', {'id': sortie.id})) }}">Afficher</a>
-                            <a href="{{ (path('annulerSortie', {'id': sortie.id})) }}">Annuler</a>
+                            <a href="{{ (path('annuler', {'id': sortie.id})) }}">Annuler</a>
                         </td>
                 </tr>
                     {% endfor %}

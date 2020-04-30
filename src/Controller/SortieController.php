@@ -137,7 +137,14 @@ class SortieController extends AbstractController
         return $this->render('sortie/afficherSortie.html.twig', ['sortie' => $sortie]);
     }
 
+    /**
+     * @param Sortie $sortie
+     * @Route("/annuler{id}", name="annuler")
+     */
+    public function annuler(Sortie $sortie){
 
+        //return $this->render('sortie/annulerSortie.html.twig', ['sortie' => $sortie]);
+    }
 
 
 
