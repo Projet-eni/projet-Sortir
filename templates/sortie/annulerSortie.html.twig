@@ -24,11 +24,11 @@
         Lieu : {{ sortie.lieu.nom }} {{ sortie.lieu.rue }} {{ sortie.lieu.ville.codePostal }} {{ sortie.lieu.ville.nom }}
 
     <p>Motif :</p>
-    {{ form_start(sortieForm) }}
-    {{ form_widget(sortieForm) }}
+    {{ form_start(annulSortieForm) }}
+    {{ form_widget(annulSortieForm) }}
     <button type="submit" value="1" name="enr">Enregistrer</button>
     <button onclick=window.location.href='{{ path('liste-sortie') }}';>Annuler</button>
-    {{ form_end(sortieForm) }}
+    {{ form_end(annulSortieForm) }}
 
 
 

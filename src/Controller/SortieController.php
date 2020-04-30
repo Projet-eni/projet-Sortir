@@ -150,24 +150,27 @@ class SortieController extends AbstractController
 
         $user = $this->getUser();
 
-        $sortieForm = $this->createForm(AnnulSortieType::class, $sortie);
+        $annulSortieForm = $this->createForm(AnnulSortieType::class, $sortie);
 
-        $sortieForm->handleRequest($request);
+        $annulSortieForm->handleRequest($request);
 
-        if ($sortieForm->isSubmitted() && $sortieForm->isValid()){
+        if ($annulSortieForm->isSubmitted() && $annulSortieForm->isValid()){
             if (isset($_POST['enr'])) {
+                $motif = $annulSortieForm->get('infosSortie')->getData();
                 $idetat = 5;
             }
+
             $repo = $this->getDoctrine()->getRepository(Etat::class);
             $etat = $repo->find($idetat);
             $sortie->setEtat($etat);
+            $sortie->setInfosSortie($motif);
             $em->persist($sortie);
             $em->flush();
             $this->addFlash('success', 'Votre sortie a bien été annulée');
             return $this->redirectToRoute("liste-sortie");
         }
 
-        return $this->render('sortie/annulerSortie.html.twig', ['sortie' => $sortie, 'sortieForm' => $sortieForm->createView()]);
+        return $this->render('sortie/annulerSortie.html.twig', ['sortie' => $sortie, 'sortieForm' => $annulSortieForm->createView()]);
     }
 
 
