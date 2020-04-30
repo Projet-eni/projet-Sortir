@@ -27,7 +27,8 @@ class Sortie
     /**
      * @ORM\Column(type="date")
      * @Assert\NotBlank()
-     * @Assert\GreaterThanOrEqual(propertyPath="dateLimiteInscription")
+     * @Assert\GreaterThanOrEqual(propertyPath="dateLimiteInscription",
+     *     message="La date de début ne peut pas être inférieure à la date de clôture des inscriptions")
      */
     private $dateHeureDebut;
 
@@ -41,7 +42,7 @@ class Sortie
     /**
      * @ORM\Column(type="date")
      * @Assert\NotBlank()
-     * @Assert\LessThanOrEqual(propertyPath="dateLimiteInscription")
+     * @Assert\GreaterThanOrEqual("today", message="La date de clôture des inscriptions doit être supérieure à aujourd'hui")
      */
     private $dateLimiteInscription;
 
