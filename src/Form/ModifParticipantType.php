@@ -11,6 +11,7 @@
     use Symfony\Component\Form\Extension\Core\Type\TextType;
     use Symfony\Component\Form\FormBuilderInterface;
     use Symfony\Component\OptionsResolver\OptionsResolver;
+    use Symfony\Component\Validator\Constraints\Regex;
 
 
     class ModifParticipantType extends AbstractType
@@ -34,6 +35,10 @@
                     //Ajout d' une ligne non associé à l'objet qui sera prise en compte.
                     'mapped' => false,
                     'required' => false,
+                    'constraints' => [new Regex([
+                        'pattern' =>"/^(?=.*[a-z])(?=.*[A-Z]).{4,10}$/",
+                        'message' =>"Votre mot de passe doit contenir une majuscule et avoir une longueur entre 4 et 10 caratères"]
+                             )],
                     'first_options' => ['label' => 'Mot de passe'],
                     'second_options' => ['label' => 'Confirmer Mot de passe']
                 ]);

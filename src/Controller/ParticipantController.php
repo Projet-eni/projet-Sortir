@@ -22,11 +22,9 @@
 
         {//to do: tester si l user est connecter
             $participant = $this->getUser();
-            $password = $participant->getPassword();
 
             // récupération et instanciation de l' utilisateur en session par son id
             $em = $this->getDoctrine()->getManager();
-            $participant = $em->getRepository(Participant::class)->find($participant);
 
             $modifParticipantForm = $this->createForm(ModifParticipantType::class, $participant);
             //partie controle du fomulaire
@@ -36,11 +34,9 @@
 
                 /*modification du motDePasse*/
 
-                if (empty($modifParticipantForm->get('plainPassword')->getData())) {
-                    $participant->setMotDePasse($password);
 
                     //Récupère la valeur saisie dans le champ
-                } elseif(!empty($modifParticipantForm->get('plainPassword')->getData())){
+                     if(!empty($modifParticipantForm->get('plainPassword')->getData())){
                     $plainPassword = $modifParticipantForm->get('plainPassword')->getData();
                     $participant->setMotDePasse($plainPassword);
                     //encode le password
