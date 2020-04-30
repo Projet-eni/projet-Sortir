@@ -48,23 +48,22 @@
                         Organisateur
                     </td>
                 </tr>
-                <tr>
+
 
                     {% for sortie in sorties %}
-
+                <tr>
                         <td>{{ sortie.nom }}</td>
                         <td>{{ sortie.dateHeureDebut|date("d/m/Y") }}</td>
                         <td>{{ sortie.dateHeureDebut|date_modify("+"~sortie.duree~" day")|date("d/m/Y" ) }}</td>
                         <td>{{ sortie.sortieInscrits|length }}/{{ sortie.nbInscriptionsMax }}</td>
                         <td>{{ sortie.etat.libelle }}</td>
-                        <td>{{ participant.inscrits. }}</td>
+                        <td>test</td>
                         <td>{{ sortie.site.nom }}</td>
                         <td>
                             <a href="{{ (path('afficherSortie', {'id': sortie.id})) }}">Afficher</a>
                         </td>
-
-                    {% endfor %}
                 </tr>
+                    {% endfor %}
             </table>
         </div>
     </div>
