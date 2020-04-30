@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Filtre;
 use App\Entity\Sortie;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -22,17 +23,28 @@ class SortieRepository extends ServiceEntityRepository
     /**
      * @return Sortie[] Returns an array of Sortie objects
      */
-    public function rechercheParSite($filtre)
+    public function filtreRecherche(Filtre $filtre)
     {
 
        $query = $this->createQueryBuilder('s');
+
+       //requete filtre site.
             if($filtre->getFSite()!==null)
             {
                 $query = $query
                 ->andWhere('s.site = '.$filtre->getFSite()->getId());
+            }
+
+            if ($filtre->getSearch() !==null){
+
+
+                $query = $query
+                    ->andWhere('s.nom = '.$filtre->getSearch());
 
             }
-            return $query->getQuery()->getResult();
+
+
+            return $query->getquery()->getResult();
 
     }
 
