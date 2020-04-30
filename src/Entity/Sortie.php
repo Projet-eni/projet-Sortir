@@ -55,7 +55,7 @@ class Sortie
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Participant",inversedBy="organisateur")
      */
-    private $organisateur;
+    private $sorties_organisees;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Participant", mappedBy="inscrits")
