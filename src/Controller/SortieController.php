@@ -88,10 +88,17 @@ class SortieController extends AbstractController
     public function inscription(EntityManagerInterface $em, Sortie $sortie){
 
         $user = $this->getUser();
-        $user->addInscrits($sortie);
-        $sortie->addSortieInscrits($user);
-        $em->flush();
-        $this->addFlash('success', 'Vous avez bien été inscrits à cette sortie');
+
+        if($sortie->getEtat()->getId() == 6 && $sortie->getDateLimiteInscription() < date("d/m/Y") && $sortie->getSortieInscrits().count() < $sortie->getNbInscriptionsMax())
+        {
+            $user->addInscrits($sortie);
+            $sortie->addSortieInscrits($user);
+            $em->flush();
+            $this->addFlash('success', 'Vous avez bien été inscrits à cette sortie');
+        }
+        else {
+            $this->addFlash('success', 'Vous ne pouvez pas vous inscrire à cette sortie');
+        }
 
        return $this->render('sortie/afficherSortie.html.twig', ['sortie' => $sortie]);
     }
