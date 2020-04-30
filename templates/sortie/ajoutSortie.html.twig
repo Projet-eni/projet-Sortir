@@ -8,8 +8,12 @@ Ajout sortie
 
     {{ form_start(sortieForm) }}
     {{ form_widget(sortieForm) }}
-<button type="submit">Créer</button>
-{{ form_end(sortieForm) }}
+    <button type="submit" value="1" name="enr">Enregistrer</button>
+    <button type="submit" value="6" name="pub">Publier</button>
+    <button onclick=window.location.href='{{ path('liste-sortie') }}';>Annuler</button>
+    {{ form_end(sortieForm) }}
+
+    <button onclick=window.location.href='{{ path('ajoutLieu') }}';>Ajouter un lieu</button>
 
     <div>
         <span>Ville :</span> <span id="ville"></span>

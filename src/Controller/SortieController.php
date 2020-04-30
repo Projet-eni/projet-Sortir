@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Data\FiltreRechecheSortie;
+use App\Entity\Etat;
+use App\Entity\Participant;
 use App\Entity\Sortie;
 use App\Form\FiltreRecherche;
 use App\Form\SortieType;
@@ -30,7 +32,8 @@ class SortieController extends AbstractController
 
         $sorties = $repository->rechercheParSite($filtre);
 
-        return $this->render('sortie/listeSortie.html.twig',['participant'=>$participant,'sorties'=>$sorties,'filtreForm'=>$form->createView()]);
+        return $this->render('sortie/listeSortie.html.twig',['participant'=>$participant,'sorties'=>$sorties,
+                                    'filtreForm'=>$form->createView()]);
     }
 
     /**
@@ -41,7 +44,14 @@ class SortieController extends AbstractController
      */
     public function creerSortie(EntityManagerInterface $em, Request $request)
     {
+        /**
+         * @var Participant $user
+         */
+        $user = $this->getUser();
         $sortie = new Sortie();
+        $sortie->setSortiesOrganisees($this->getUser());
+        $sortie->setSite($user->getSite());
+
 
 
         $sortieForm = $this->createForm(SortieType::class, $sortie);
@@ -49,10 +59,19 @@ class SortieController extends AbstractController
         $sortieForm->handleRequest($request);
         if ($sortieForm->isSubmitted() && $sortieForm->isValid())
         {
+            if (isset($_POST['enr'])) {
+                $idetat = 1;
+            } elseif (isset($_POST['pub'])) {
+                $idetat = 6;
+            }
+            dump($idetat);exit();
+            $repo = $this->getDoctrine()->getRepository(Etat::class);
+            $etat = $repo->find($idetat);
+            $sortie->setEtat($etat);
             $em->persist($sortie);
             $em->flush();
             $this->addFlash('success', 'Votre sortie a bien été créée');
-            $this->redirectToRoute("liste-sortie");
+            return $this->redirectToRoute("liste-sortie");
         }
 
         return $this->render('sortie/ajoutSortie.html.twig', ['sortieForm' => $sortieForm->createView()]);
@@ -65,7 +84,7 @@ class SortieController extends AbstractController
      */
     public function afficherSortie(Sortie $sortie){
 
-        return $this->render('sortie/afficherSortie.html.twig', ['sorties' => $sortie]);
+        return $this->render('sortie/afficherSortie.html.twig', ['sortie' => $sortie]);
     }
 
     /**
@@ -82,7 +101,7 @@ class SortieController extends AbstractController
         $em->flush();
         $this->addFlash('success', 'Vous avez bien été inscrits à cette sortie');
 
-       return $this->render('sortie/afficherSortie.html.twig', ['sorties' => $sortie]);
+       return $this->render('sortie/afficherSortie.html.twig', ['sortie' => $sortie]);
     }
 
     /**
@@ -99,7 +118,7 @@ class SortieController extends AbstractController
         $em->flush();
         $this->addFlash('success', 'Vous vous êtes désistés');
 
-        return $this->render('sortie/afficherSortie.html.twig', ['sorties' => $sortie]);
+        return $this->render('sortie/afficherSortie.html.twig', ['sortie' => $sortie]);
     }
 
 
