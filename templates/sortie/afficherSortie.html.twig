@@ -56,9 +56,9 @@
                 Nom
             </td>
         </tr>
-        <tr>
 
-            {% for inscrit in sortie.sortieInscrits %}
+        {% for inscrit in sortie.sortieInscrits %}
+        <tr>
 
             <td>
                 {{ inscrit.pseudo }}
@@ -67,8 +67,9 @@
                 {{ inscrit.nom }}
             </td>
 
-            {% endfor %}
+
         </tr>
+        {% endfor %}
     </table>
 
     <a href="{{ (path('inscription', {'id': sortie.id} )) }}">
