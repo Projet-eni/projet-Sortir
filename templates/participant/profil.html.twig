@@ -21,5 +21,8 @@
         <span>Site de rattachement : </span><span>{{ p.site.nom }}</span>
     </div>
 
+    {% if app.user.id == p.id %}
+        <button onclick=window.location.href='{{ path('participant_update') }}';>Modifier</button>
+    {% endif %}
 </div>
 {% endblock %}
