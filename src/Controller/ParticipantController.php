@@ -50,7 +50,7 @@
 
 
             }
-            return $this->render('participant/profil.html.twig', ['participantForm' => $modifParticipantForm->createView(),  'participant'=>$participant]);
+            return $this->render('participant/modifProfil.html.twig', ['participantForm' => $modifParticipantForm->createView(),  'participant'=>$participant]);
         }
 
 
