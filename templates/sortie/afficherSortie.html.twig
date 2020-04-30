@@ -12,40 +12,40 @@
 
     <h1>Afficher Une Sortie</h1>
 
-    <p>Nom de la sortie : {{ sorties.nom }}</p>
+    <p>Nom de la sortie : {{ sortie.nom }}</p>
 
 
-    <p>Date et heure de la sortie : {{ sorties.dateHeureDebut|date("d/m/Y") }}</p>
+    <p>Date et heure de la sortie : {{ sortie.dateHeureDebut|date("d/m/Y") }}</p>
 
 
-    <p>Date limite d'inscription : {{ sorties.dateHeureDebut|date_modify("+"~sorties.duree~" day")|date("d/m/Y" ) }}</p>
+    <p>Date limite d'inscription : {{ sortie.dateHeureDebut|date_modify("+"~sortie.duree~" day")|date("d/m/Y" ) }}</p>
 
 
-    <p>Nombre de places : {{ sorties.nbInscriptionsMax }}</p>
+    <p>Nombre de places : {{ sortie.nbInscriptionsMax }}</p>
 
 
-    <p>Durée : {{ sorties.duree }}</p>
+    <p>Durée : {{ sortie.duree }}</p>
 
 
-    <p>Description et infos : {{ sorties.infosSortie }}</p>
+    <p>Description et infos : {{ sortie.infosSortie }}</p>
 
 
-    <p>Lieu : {{ sorties.lieu.nom }}</p>
+    <p>Lieu : {{ sortie.lieu.nom }}</p>
 
 
-    <p>Rue : {{ sorties.lieu.rue }}</p>
+    <p>Rue : {{ sortie.lieu.rue }}</p>
 
 
-    <p>Ville : {{ sorties.lieu.ville.nom }}</p>
+    <p>Ville : {{ sortie.lieu.ville.nom }}</p>
 
 
-    <p>Code Postal : {{ sorties.lieu.ville.codePostal }}</p>
+    <p>Code Postal : {{ sortie.lieu.ville.codePostal }}</p>
 
 
-    <p>Latitude : {{  sorties.lieu.latitude }}</p>
+    <p>Latitude : {{  sortie.lieu.latitude }}</p>
 
 
-    <p>Longitude : {{ sorties.lieu.longitude }}</p>
+    <p>Longitude : {{ sortie.lieu.longitude }}</p>
 
     <table class="tableau">
         <tr>
@@ -58,24 +58,24 @@
         </tr>
         <tr>
 
-            {% for sortie in sorties %}
+            {% for inscrit in sortie.sortieInscrits %}
 
             <td>
-                {{ sorties.sortieInscrits.pseudo }}
+                {{ inscrit.pseudo }}
             </td>
             <td>
-                {{ sorties.sortieInscrits.nom }}
+                {{ inscrit.nom }}
             </td>
 
             {% endfor %}
         </tr>
     </table>
 
-    <a href="{{ (path('inscription', {'id': sorties.id} )) }}">
+    <a href="{{ (path('inscription', {'id': sortie.id} )) }}">
         S'inscrire
     </a>
     <br>
-    <a href="{{ (path('desistement', {'id': sorties.id} )) }}">
+    <a href="{{ (path('desistement', {'id': sortie.id} )) }}">
         Se désister
     </a>
 
