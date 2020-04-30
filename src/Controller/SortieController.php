@@ -155,7 +155,16 @@ class SortieController extends AbstractController
         $sortieForm->handleRequest($request);
 
         if ($sortieForm->isSubmitted() && $sortieForm->isValid()){
-
+            if (isset($_POST['enr'])) {
+                $idetat = 5;
+            }
+            $repo = $this->getDoctrine()->getRepository(Etat::class);
+            $etat = $repo->find($idetat);
+            $sortie->setEtat($etat);
+            $em->persist($sortie);
+            $em->flush();
+            $this->addFlash('success', 'Votre sortie a bien été annulée');
+            return $this->redirectToRoute("liste-sortie");
         }
 
         return $this->render('sortie/annulerSortie.html.twig', ['sortie' => $sortie, 'sortieForm' => $sortieForm->createView()]);
