@@ -6,6 +6,7 @@ use App\Data\FiltreRechecheSortie;
 use App\Entity\Etat;
 use App\Entity\Participant;
 use App\Entity\Sortie;
+use App\Form\AnnulSortieType;
 use App\Form\FiltreRecherche;
 use App\Form\SortieType;
 use App\Repository\SortieRepository;
@@ -13,6 +14,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class SortieController extends AbstractController
@@ -40,7 +42,7 @@ class SortieController extends AbstractController
     /**
      * @param EntityManagerInterface $em
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      * @Route("/ajouter-sortie", name="ajouterSortie")
      */
     public function creerSortie(EntityManagerInterface $em, Request $request)
@@ -79,7 +81,7 @@ class SortieController extends AbstractController
 
     /**
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      *@Route("/afficher-sortie/{id}", name="afficherSortie")
      */
     public function afficherSortie(Sortie $sortie){
@@ -90,7 +92,7 @@ class SortieController extends AbstractController
     /**
      * @param EntityManagerInterface $em
      * @param Sortie $sortie
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      * @Route("/inscription{id}", name="inscription")
      */
     public function inscription(EntityManagerInterface $em, Sortie $sortie){
@@ -118,7 +120,7 @@ class SortieController extends AbstractController
     /**
      * @param EntityManagerInterface $em
      * @param Sortie $sortie
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      * @Route("/desistement{id}", name="desistement")
      */
     public function seDesister(EntityManagerInterface $em, Sortie $sortie){
@@ -139,11 +141,24 @@ class SortieController extends AbstractController
 
     /**
      * @param Sortie $sortie
+     * @param EntityManagerInterface $em
+     * @param Request $request
+     * @return Response
      * @Route("/annuler{id}", name="annuler")
      */
-    public function annuler(Sortie $sortie){
+    public function annuler(Sortie $sortie, EntityManagerInterface $em, Request $request){
 
-        //return $this->render('sortie/annulerSortie.html.twig', ['sortie' => $sortie]);
+        $user = $this->getUser();
+
+        $sortieForm = $this->createForm(AnnulSortieType::class, $sortie);
+
+        $sortieForm->handleRequest($request);
+
+        if ($sortieForm->isSubmitted() && $sortieForm->isValid()){
+
+        }
+
+        return $this->render('sortie/annulerSortie.html.twig', ['sortie' => $sortie, 'sortieForm' => $sortieForm->createView()]);
     }
 
 
