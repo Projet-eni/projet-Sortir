@@ -1,14 +1,28 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}  Sortir | Modifier mon profil{% endblock %}
+{% block title %}  Sortir | Consulter profil{% endblock %}
 
 {% block main %}
 <div class="blockMonProfil">
-    <h1> Modifier mon profil</h1>
+    <h1>Profil de {{ p.pseudo }}</h1>
+    <div>
+        <span>Prénom : </span><span>{{ p.prenom }}</span>
+    </div>
+    <div>
+        <span>Nom : </span><span>{{ p.nom }}</span>
+    </div>
+    <div>
+        <span>Téléphone : </span><span>{{ p.telephone }}</span>
+    </div>
+    <div>
+        <span>Email : </span><span>{{ p.mail }}</span>
+    </div>
+    <div>
+        <span>Site de rattachement : </span><span>{{ p.site.nom }}</span>
+    </div>
 
-    {{ form_start(participantForm) }}
-    {{ form_widget(participantForm) }}
-    <button type="submit"> modifier</button>
-    {{ form_end(participantForm) }}
+    {% if app.user.id == p.id %}
+        <button onclick=window.location.href='{{ path('participant_update') }}';>Modifier</button>
+    {% endif %}
 </div>
 {% endblock %}

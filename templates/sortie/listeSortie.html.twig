@@ -65,7 +65,7 @@
                                 {% endif %}
                             {% endfor %}
                         </td>
-                        <td>{{ sortie.site.nom }}</td>
+                        <td><a href="{{ path('afficherProfil',{'id' : sortie.sortiesOrganisees.id }) }}">{{ sortie.sortiesOrganisees.pseudo }}</a></td>
                         <td>
                             <a href="{{ (path('afficherSortie', {'id': sortie.id})) }}">Afficher</a>
                         </td>

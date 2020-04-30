@@ -21,7 +21,8 @@
             $builder
                 ->add('nom', TextType::class, ['label' => 'nom'])
                 ->add('prenom', TextType::class, ['label' => 'prenom'])
-                ->add('pseudo', TextType::class, ['label' => 'pseudo'])
+                ->add('pseudo', TextType::class, ['label' => 'pseudo',
+                                                              'attr'=> ['title'=>'Votre pseudo doit contenir une majuscule, une minuscule et avoir une longueur entre 2 et 10 caractères' ]])
                 ->add('telephone', IntegerType::class, ['label' => 'telephone'])
                 ->add('mail', RepeatedType::class, [
                     'type' => EmailType::class,
@@ -32,15 +33,16 @@
                 //Ajout d' un champs de formulaire supplémentaire
                 ->add('plainPassword', RepeatedType::class, [
                     'type' => PasswordType::class,
+
                     //Ajout d' une ligne non associé à l'objet qui sera prise en compte.
                     'mapped' => false,
                     'required' => false,
                     'constraints' => [new Regex([
-                        'pattern' =>"/^(?=.*[a-z])(?=.*[A-Z]).{4,10}$/",
+                        'pattern' =>"/^(?=.*[A-Z]).{4,10}$/",
                         'message' =>"Votre mot de passe doit contenir une majuscule et avoir une longueur entre 4 et 10 caratères"]
                              )],
-                    'first_options' => ['label' => 'Mot de passe'],
-                    'second_options' => ['label' => 'Confirmer Mot de passe']
+                    'first_options' => ['label' => 'Mot de passe','attr'=> ['title'=>'Votre mot de passe doit contenir une majuscule et avoir une longueur entre 4 et 10 caractères']],
+                    'second_options' => ['label' => 'Confirmer Mot de passe','attr'=> ['title'=>'Votre mot de passe doit contenir une majuscule et avoir une longueur entre 4 et 10 caractères']]
                 ]);
 
         }
