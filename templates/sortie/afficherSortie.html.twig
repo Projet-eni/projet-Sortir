@@ -61,23 +61,25 @@
         <tr>
 
             <td>
-                {{ inscrit.prenom }}
+                <a href="{{ path('afficherProfil',{'id' : inscrit.id }) }}">{{ inscrit.prenom }}</a>
             </td>
             <td>
-                {{ inscrit.nom }}
+                <a href="{{ path('afficherProfil',{'id' : inscrit.id }) }}">{{ inscrit.nom }}</a>
             </td>
 
 
         </tr>
         {% endfor %}
     </table>
+    {% if sortie.sortieInscrits.contains(app.user) %}
+        <a href="{{ (path('desistement', {'id': sortie.id} )) }}">
+            Se désister
+        </a>
+    {% else %}
+        <a href="{{ (path('inscription', {'id': sortie.id} )) }}">
+            S'inscrire
+        </a>
 
-    <a href="{{ (path('inscription', {'id': sortie.id} )) }}">
-        S'inscrire
-    </a>
-    <br>
-    <a href="{{ (path('desistement', {'id': sortie.id} )) }}">
-        Se désister
-    </a>
+    {% endif %}
 
 {% endblock %}
