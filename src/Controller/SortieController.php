@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Data\FiltreRechecheSortie;
+use App\Entity\Etat;
+use App\Entity\Participant;
 use App\Entity\Sortie;
 use App\Form\FiltreRecherche;
 use App\Form\SortieType;
@@ -41,7 +43,16 @@ class SortieController extends AbstractController
      */
     public function creerSortie(EntityManagerInterface $em, Request $request)
     {
+        /**
+         * @var Participant $user
+         */
+        $user = $this->getUser();
         $sortie = new Sortie();
+        $sortie->setSortiesOrganisees($this->getUser());
+        $sortie->setSite($user->getSite());
+        $repo = $this->getDoctrine()->getRepository(Etat::class);
+        $etat = $repo->find(1);
+        $sortie->setEtat($etat);
 
 
         $sortieForm = $this->createForm(SortieType::class, $sortie);
