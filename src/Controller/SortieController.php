@@ -11,7 +11,6 @@ use App\Form\FiltreRecherche;
 use App\Form\SortieType;
 use App\Repository\SortieRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,25 +18,22 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class SortieController extends AbstractController
 {
+    
     /**
      * @Route("/liste-sortie", name="liste-sortie")
      */
     public function index(SortieRepository $repository, Request $request)
     {
-
         $this->denyAccessUnlessGranted("ROLE_USER");
-
         $participant = $this->getUser();
-        $filtre = new FiltreRechecheSortie();
-
-        $form = $this->createForm(FiltreRecherche::class,$filtre);
+        $filtre = new Filtre();
+        $form = $this->createForm(FiltreType::class,$filtre);
         $form->handleRequest($request);
-
-        $sorties = $repository->rechercheParSite($filtre);
-
+        $sorties = $repository->filtreRecherche($filtre);
         return $this->render('sortie/listeSortie.html.twig',['participant'=>$participant,'sorties'=>$sorties,
-                                    'filtreForm'=>$form->createView()]);
+            'filtreForm'=>$form->createView()]);
     }
+
 
     /**
      * @param EntityManagerInterface $em
@@ -106,13 +102,13 @@ class SortieController extends AbstractController
             $this->addFlash('success', 'La date limite des inscriptions est passée');
         }
         elseif ($sortie->getSortieInscrits()->count() >= $sortie->getNbInscriptionsMax()){
-            $this->addFlash('success', 'La sortie est remplie et ne peut accueillir d\'autres inscrits');
+            $this->addFlash('success', 'Le nombre maximal d\'inscription a déjà été atteint');
         }
         else {
             $user->addInscrits($sortie);
             $sortie->addSortieInscrits($user);
             $em->flush();
-            $this->addFlash('success', 'Vous avez bien été inscrits à cette sortie');
+            $this->addFlash('success', 'Vous avez bien été inscrit à cette sortie');
         }
        return $this->render('sortie/afficherSortie.html.twig', ['sortie' => $sortie]);
     }
@@ -133,7 +129,7 @@ class SortieController extends AbstractController
             $this->addFlash('success', 'Vous vous êtes désisté');
         }
         else {
-            $this->addFlash('success', 'La sortie a débuté, vous ne pouvez plus vous désisté');
+            $this->addFlash('success', 'La sortie a débuté, vous ne pouvez plus vous désister');
         }
 
         return $this->render('sortie/afficherSortie.html.twig', ['sortie' => $sortie]);
@@ -170,7 +166,7 @@ class SortieController extends AbstractController
             return $this->redirectToRoute("liste-sortie");
         }
 
-        return $this->render('sortie/annulerSortie.html.twig', ['sortie' => $sortie, 'sortieForm' => $annulSortieForm->createView()]);
+        return $this->render('sortie/annulerSortie.html.twig', ['sortie' => $sortie, 'annulSortieForm' => $annulSortieForm->createView()]);
     }
 
 
