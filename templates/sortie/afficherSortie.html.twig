@@ -61,10 +61,10 @@
         <tr>
 
             <td>
-                {{ inscrit.prenom }}
+                <a href="{{ path('afficherProfil',{'id' : inscrit.id }) }}">{{ inscrit.prenom }}</a>
             </td>
             <td>
-                {{ inscrit.nom }}
+                <a href="{{ path('afficherProfil',{'id' : inscrit.id }) }}">{{ inscrit.nom }}</a>
             </td>
 
 
