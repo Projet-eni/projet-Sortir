@@ -10,6 +10,7 @@ use App\Form\FiltreRecherche;
 use App\Form\SortieType;
 use App\Repository\SortieRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -95,11 +96,22 @@ class SortieController extends AbstractController
     public function inscription(EntityManagerInterface $em, Sortie $sortie){
 
         $user = $this->getUser();
-        $user->addInscrits($sortie);
-        $sortie->addSortieInscrits($user);
-        $em->flush();
-        $this->addFlash('success', 'Vous avez bien été inscrits à cette sortie');
 
+        if($sortie->getEtat()->getId() != 6) {
+            $this->addFlash('success', 'Le statut de la sortie n\'est pas ouvert');
+        }
+        elseif ($sortie->getDateLimiteInscription() < date("d/m/Y")) {
+            $this->addFlash('success', 'La date limite des inscriptions est passée');
+        }
+        elseif ($sortie->getSortieInscrits()->count() >= $sortie->getNbInscriptionsMax()){
+            $this->addFlash('success', 'La sortie est remplie et ne peut accueillir d\'autres inscrits');
+        }
+        else {
+            $user->addInscrits($sortie);
+            $sortie->addSortieInscrits($user);
+            $em->flush();
+            $this->addFlash('success', 'Vous avez bien été inscrits à cette sortie');
+        }
        return $this->render('sortie/afficherSortie.html.twig', ['sortie' => $sortie]);
     }
 
@@ -111,11 +123,16 @@ class SortieController extends AbstractController
      */
     public function seDesister(EntityManagerInterface $em, Sortie $sortie){
 
-        $user = $this->getUser();
-        $user->removeInscrits($sortie);
-        $sortie->removeSortieInscrits($user);
-        $em->flush();
-        $this->addFlash('success', 'Vous vous êtes désistés');
+        if($sortie->getDateHeureDebut() > date("d/m/Y")){
+            $user = $this->getUser();
+            $user->removeInscrits($sortie);
+            $sortie->removeSortieInscrits($user);
+            $em->flush();
+            $this->addFlash('success', 'Vous vous êtes désisté');
+        }
+        else {
+            $this->addFlash('success', 'La sortie a débuté, vous ne pouvez plus vous désisté');
+        }
 
         return $this->render('sortie/afficherSortie.html.twig', ['sortie' => $sortie]);
     }
