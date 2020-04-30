@@ -52,9 +52,7 @@ class SortieController extends AbstractController
         $sortie = new Sortie();
         $sortie->setSortiesOrganisees($this->getUser());
         $sortie->setSite($user->getSite());
-        $repo = $this->getDoctrine()->getRepository(Etat::class);
-        $etat = $repo->find(1);
-        $sortie->setEtat($etat);
+
 
 
         $sortieForm = $this->createForm(SortieType::class, $sortie);
@@ -62,10 +60,19 @@ class SortieController extends AbstractController
         $sortieForm->handleRequest($request);
         if ($sortieForm->isSubmitted() && $sortieForm->isValid())
         {
+            if (isset($_POST['enr'])) {
+                $idetat = 1;
+            } elseif (isset($_POST['pub'])) {
+                $idetat = 6;
+            }
+            dump($idetat);exit();
+            $repo = $this->getDoctrine()->getRepository(Etat::class);
+            $etat = $repo->find($idetat);
+            $sortie->setEtat($etat);
             $em->persist($sortie);
             $em->flush();
             $this->addFlash('success', 'Votre sortie a bien été créée');
-            $this->redirectToRoute("liste-sortie");
+            return $this->redirectToRoute("liste-sortie");
         }
 
         return $this->render('sortie/ajoutSortie.html.twig', ['sortieForm' => $sortieForm->createView()]);
