@@ -10,61 +10,62 @@
  {% endblock %}
 
 {% block main %}
-    
-    <div class="bloc-user">
-        <ul>
-            <li>Date du jour : {{ "now"|date("d/m/Y") }}</li>
-            <li>Participant : {{ participant.prenom }} {{ participant.nom|u.truncate(1)|upper }}.</li>
-        </ul>
-    </div>
+    <div class="ensemble">
+        <div class="bloc-user">
+            <ul>
+                <li>Date du jour : {{ "now"|date("d/m/Y") }}</li>
+                <li>Participant : {{ participant.prenom }} {{ participant.nom|u.truncate(1)|upper }}.</li>
+            </ul>
+        </div>
+        <div class="form-filtre">
 
-    <div class="block">
-        <form method="get">
-        <div class="title">Filtrer les sorties</div>
+            <div class="title">Filtrer les sorties</div>
             {{ form_start(filtreForm) }}
             {{ form_widget(filtreForm) }}
-        <button type="submit">Rechercher</button>
+            <button type="submit">Rechercher</button>
             {{ form_end(filtreForm) }}
-        <table class="tableau">
-            <tr>
-                <td>
-                    Nom de la sortie
-                </td>
-                <td>
-                    Date de la sortie
-                </td>
-                <td>
-                    Clôture
-                </td>
-                <td>
-                    Inscrits/Places
-                </td>
-                <td>
-                    Etat
-                </td>
-                <td>
-                    Inscrit
-                </td>
-                <td>
-                    Organisateur
-                </td>
-            </tr>
-            <tr>
-
-                {% for sortie in sorties %}
-
-                    <td>{{ sortie.nom }}</td>
-                    <td>{{ sortie.dateHeureDebut|date("d/m/Y") }}</td>
-                    <td>{{ sortie.dateHeureDebut|date_modify("+"~sortie.duree~" day")|date("d/m/Y" ) }}</td>
-                    <td>{{ sortie.sortieInscrits|length }}/{{ sortie.nbInscriptionsMax }}</td>
-                    <td>{{ sortie.etat.libelle }}</td>
-                    <td> faire la X</td>
-                    <td>{{ sortie.site.nom }}</td>
+            <table class="tableau">
+                <tr>
                     <td>
-                        <a href="{{ (path('afficherSortie', {'id': sortie.id})) }}">Afficher</a>
+                        Nom de la sortie
                     </td>
+                    <td>
+                        Date de la sortie
+                    </td>
+                    <td>
+                        Clôture
+                    </td>
+                    <td>
+                        Inscrits/Places
+                    </td>
+                    <td>
+                        Etat
+                    </td>
+                    <td>
+                        Inscrit
+                    </td>
+                    <td>
+                        Organisateur
+                    </td>
+                </tr>
+                <tr>
 
-                {% endfor %}
-            </tr>
-        </table>
+                    {% for sortie in sorties %}
+
+                        <td>{{ sortie.nom }}</td>
+                        <td>{{ sortie.dateHeureDebut|date("d/m/Y") }}</td>
+                        <td>{{ sortie.dateHeureDebut|date_modify("+"~sortie.duree~" day")|date("d/m/Y" ) }}</td>
+                        <td>{{ sortie.sortieInscrits|length }}/{{ sortie.nbInscriptionsMax }}</td>
+                        <td>{{ sortie.etat.libelle }}</td>
+                        <td> faire la X</td>
+                        <td>{{ sortie.site.nom }}</td>
+                        <td>
+                            <a href="{{ (path('afficherSortie', {'id': sortie.id})) }}">Afficher</a>
+                        </td>
+
+                    {% endfor %}
+                </tr>
+            </table>
+        </div>
+    </div>
 {% endblock %}
