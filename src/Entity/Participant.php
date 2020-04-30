@@ -39,7 +39,7 @@
          * @ORM\Column(type="string", length=255)
          * @Assert\Regex(
          * pattern="/^(?=.*[A-Z]).{2,10}$/"
-         * message="Votre pseudo doit contenir une Majuscule et avoir une longueur entre 2 et 10 caractères"
+         * message="Votre pseudo doit contenir une Majuscule et avoir une longueur entre 2 et 10 caractères",
          * )
          */
         private $pseudo;
@@ -74,7 +74,7 @@
         {
             $this->inscrits = new ArrayCollection();
         }
-        //-------------------méthodess---------------------//
+        //-------------------méthodes---------------------//
 
         /**
          * @param mixed $inscrits
