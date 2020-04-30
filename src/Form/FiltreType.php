@@ -4,7 +4,6 @@ namespace App\Form;
 
 use App\Entity\Filtre;
 use App\Entity\Site;
-
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -29,9 +28,11 @@ class FiltreType extends AbstractType
             ->add('search',TextType::class,['label'=>'Le nom de la sortie contient ',
                                                             'required'=>false])
             ->add('dateDebut',DateType::class,['label'=>'Entre ',
-                                    'input'=>'datetime_immutable'])
+                                                            'required'=>false,
+                                                            'widget'=>'single_text'])
             ->add('dateFin',DateType::class,['label'=>' et ',
-                                    'input'=>'datetime_immutable'])
+                                                            'required'=>false,
+                                                            'widget'=>'single_text'])
             ->add('checkboxOrganisateur', CheckboxType::class,['label'=>'Sorties dont je suis l\' organisateur/trice',
                                                                             'required'=>false])
             ->add('checkboxInscrit', CheckboxType::class,['label'=>'Sorties auxquelles je suis inscrit/e',
@@ -41,7 +42,6 @@ class FiltreType extends AbstractType
             ->add('checkboxSortiesPassees', CheckboxType::class,['label'=>'Sorties passées',
                                                                             'required'=>false])
         ;
-
     }
 
     public function configureOptions(OptionsResolver $resolver)
