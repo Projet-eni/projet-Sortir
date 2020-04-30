@@ -76,7 +76,7 @@ class SortieController extends AbstractController
      */
     public function afficherSortie(Sortie $sortie){
 
-        return $this->render('sortie/afficherSortie.html.twig', ['sorties' => $sortie]);
+        return $this->render('sortie/afficherSortie.html.twig', ['sortie' => $sortie]);
     }
 
     /**
@@ -93,7 +93,7 @@ class SortieController extends AbstractController
         $em->flush();
         $this->addFlash('success', 'Vous avez bien été inscrits à cette sortie');
 
-       return $this->render('sortie/afficherSortie.html.twig', ['sorties' => $sortie]);
+       return $this->render('sortie/afficherSortie.html.twig', ['sortie' => $sortie]);
     }
 
     /**
@@ -110,7 +110,7 @@ class SortieController extends AbstractController
         $em->flush();
         $this->addFlash('success', 'Vous vous êtes désistés');
 
-        return $this->render('sortie/afficherSortie.html.twig', ['sorties' => $sortie]);
+        return $this->render('sortie/afficherSortie.html.twig', ['sortie' => $sortie]);
     }
 
 
