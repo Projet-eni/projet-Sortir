@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -31,6 +32,11 @@ class Ville
      */
     private $lieu;
 
+    public function __construct()
+    {
+        $this->lieu = new ArrayCollection();
+    }
+
     /**
      * @return mixed
      */
@@ -39,12 +45,14 @@ class Ville
         return $this->lieu;
     }
 
-    /**
-     * @param mixed $lieu
-     */
-    public function setLieu($lieu): void
+
+    public function addLieu($lieu): void
     {
-        $this->lieu = $lieu;
+        if ($this->lieu->contains($lieu))
+        {
+            return;
+        }
+        $this->lieu->add($lieu);
     }
 
     public function getId(): ?int

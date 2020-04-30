@@ -3,9 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Lieu;
+use App\Entity\Ville;
+use App\Form\LieuType;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class LieuController extends AbstractController
@@ -30,5 +34,30 @@ class LieuController extends AbstractController
             $status = 200;
         }
         return new JsonResponse($tab, $status);
+    }
+
+    /**
+     * @Route("/ajoutLieu", name="ajoutLieu")
+     */
+    public function ajoutLieu(EntityManagerInterface $em, Request $request){
+        $lieu = new Lieu();
+
+        $lieuForm = $this->createForm(LieuType::class, $lieu);
+        $lieuForm->handleRequest($request);
+        if ($lieuForm->isSubmitted()&&$lieuForm->isValid()){
+            $ville = new Ville();
+            $ville->setNom($lieuForm->get('ville')->getData());
+            $ville->setCodePostal($lieuForm->get('codePostal')->getData());
+            $ville->addLieu($lieu);
+            $lieu->setVille($ville);
+            $em->persist($ville);
+            $em->persist($lieu);
+            $em->flush();
+            $this->addFlash('success', 'Votre lieu est bien rajouté');
+            $this->redirectToRoute('ajouterSortie');
+        }
+        return $this->render('lieu/ajout.html.twig',[
+            'lieuForm' => $lieuForm->createView()
+        ]);
     }
 }
