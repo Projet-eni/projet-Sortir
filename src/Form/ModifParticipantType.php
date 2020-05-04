@@ -41,8 +41,10 @@
                         'pattern' =>"/^(?=.*[A-Z]).{4,10}$/",
                         'message' =>"Votre mot de passe doit contenir une majuscule et avoir une longueur entre 4 et 10 caratères"]
                              )],
+                    'invalid_message' => 'Les mots de passe ne sont pas identiques.',
                     'first_options' => ['label' => 'Mot de passe','attr'=> ['title'=>'Votre mot de passe doit contenir une majuscule et avoir une longueur entre 4 et 10 caractères']],
-                    'second_options' => ['label' => 'Confirmer Mot de passe','attr'=> ['title'=>'Votre mot de passe doit contenir une majuscule et avoir une longueur entre 4 et 10 caractères']]
+                    'second_options' => ['label' => 'Confirmer Mot de passe','attr'=> ['title'=>'Votre mot de passe doit contenir une majuscule et avoir une longueur entre 4 et 10 caractères'
+                       ]]
                 ]);
 
         }
