@@ -24,9 +24,14 @@ Encore
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
     .addEntry('app', './assets/js/app.js')
+    .addEntry('lieuVille','./assets/js/lieuVille.js')
+
     .addEntry('listeSortie', './assets/css/listeSortie.css')
     .addEntry('connexion','./assets/css/connexion.css')
-    .addEntry('lieuVille','./assets/js/lieuVille.js')
+    .addEntry('profil','./assets/css/profil.css')
+    .addEntry('modification','./assets/css/modificationProfil.css')
+    .addEntry('afficherSortie','./assets/css/afficherSortie.css')
+    .addEntry('creerSortie','./assets/css/creerUneSortie.css')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()

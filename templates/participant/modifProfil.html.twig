@@ -1,14 +1,20 @@
 {% extends 'base.html.twig' %}
 
+ {% block stylesheets %}
+     {{ encore_entry_link_tags ( 'app' ) }}
+     {{ encore_entry_link_tags ( 'modification' ) }}
+ {% endblock %}
+
 {% block title %}  Sortir | Modifier mon profil{% endblock %}
 
 {% block main %}
     <div class="blockMonProfil">
-        <h1> Modifier mon profil</h1>
-        <div></div>
+
+        <div class="titre"><h1> Modifier mon profil</h1></div>
+
         {{ form_start(participantForm) }}
         {{ form_widget(participantForm) }}
-        <button type="submit"> modifier</button>
+        <div class="placement-button"> <button class="btn" type="submit"> modifier</button> </div></div>
         {{ form_end(participantForm) }}
     </div>
 {% endblock %}

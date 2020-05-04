@@ -9,6 +9,12 @@
         "/build/app.css"
       ]
     },
+    "lieuVille": {
+      "js": [
+        "/build/runtime.js",
+        "/build/lieuVille.js"
+      ]
+    },
     "listeSortie": {
       "js": [
         "/build/runtime.js",
@@ -27,10 +33,40 @@
         "/build/connexion.css"
       ]
     },
-    "lieuVille": {
+    "profil": {
       "js": [
         "/build/runtime.js",
-        "/build/lieuVille.js"
+        "/build/profil.js"
+      ],
+      "css": [
+        "/build/profil.css"
+      ]
+    },
+    "modification": {
+      "js": [
+        "/build/runtime.js",
+        "/build/modification.js"
+      ],
+      "css": [
+        "/build/modification.css"
+      ]
+    },
+    "afficherSortie": {
+      "js": [
+        "/build/runtime.js",
+        "/build/afficherSortie.js"
+      ],
+      "css": [
+        "/build/afficherSortie.css"
+      ]
+    },
+    "creerSortie": {
+      "js": [
+        "/build/runtime.js",
+        "/build/creerSortie.js"
+      ],
+      "css": [
+        "/build/creerSortie.css"
       ]
     }
   }

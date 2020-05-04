@@ -1,86 +1,68 @@
 {% extends'base.html.twig' %}
 
+{% block stylesheets %}
+    {{ encore_entry_link_tags ( 'app' ) }}
+    {{ encore_entry_link_tags ( 'afficherSortie' ) }}
+{% endblock %}
+
 {% block title %}
     Afficher Une Sortie
 {% endblock %}
 
- {% block stylesheets %}
-     {{ encore_entry_link_tags ( 'app' ) }}
- {% endblock %}
-
 {% block main %}
 
-    <h1>Afficher Une Sortie</h1>
-
-    <p>Nom de la sortie : {{ sortie.nom }}</p>
-
-
-    <p>Date et heure de la sortie : {{ sortie.dateHeureDebut|date("d/m/Y") }}</p>
+    <div class="blockMonProfil">
+        <div class="parent">
+            <h1 class="titre">Afficher Une Sortie</h1>
 
 
-    <p>Date limite d'inscription : {{ sortie.dateHeureDebut|date_modify("+"~sortie.duree~" day")|date("d/m/Y" ) }}</p>
+            <div class="description">
+                <p>Nom de la sortie : {{ sortie.nom }}</p>
+                <p>Date et heure de la sortie : {{ sortie.dateHeureDebut|date("d/m/Y") }}</p>
+                <p>Date limite d'inscription
+                    : {{ sortie.dateHeureDebut|date_modify("+"~sortie.duree~" day")|date("d/m/Y" ) }}</p>
+                <p>Nombre de places : {{ sortie.nbInscriptionsMax }}</p>
+                <p>Durée : {{ sortie.duree }} minutes.</p>
+                <p>Description et infos : {{ sortie.infosSortie }}</p>
+            </div>
+            <div class="lieu">
+                <p>Lieu : {{ sortie.lieu.nom }}</p>
+                <p>Rue : {{ sortie.lieu.rue }}</p>
+                <p>Ville : {{ sortie.lieu.ville.nom }}</p>
+                <p>Code Postal : {{ sortie.lieu.ville.codePostal }}</p>
+                <p>Latitude : {{ sortie.lieu.latitude }}</p>
+                <p>Longitude : {{ sortie.lieu.longitude }}</p>
+            </div>
 
 
-    <p>Nombre de places : {{ sortie.nbInscriptionsMax }}</p>
-
-
-    <p>Durée : {{ sortie.duree }}</p>
-
-
-    <p>Description et infos : {{ sortie.infosSortie }}</p>
-
-
-    <p>Lieu : {{ sortie.lieu.nom }}</p>
-
-
-    <p>Rue : {{ sortie.lieu.rue }}</p>
-
-
-    <p>Ville : {{ sortie.lieu.ville.nom }}</p>
-
-
-    <p>Code Postal : {{ sortie.lieu.ville.codePostal }}</p>
-
-
-    <p>Latitude : {{  sortie.lieu.latitude }}</p>
-
-
-    <p>Longitude : {{ sortie.lieu.longitude }}</p>
-
-    <table class="tableau">
-        <tr>
-            <td>
-                Pseudo
-            </td>
-            <td>
-                Nom
-            </td>
-        </tr>
-
-        {% for inscrit in sortie.sortieInscrits %}
-        <tr>
-
-            <td>
-                <a href="{{ path('afficherProfil',{'id' : inscrit.id }) }}">{{ inscrit.prenom }}</a>
-            </td>
-            <td>
-                <a href="{{ path('afficherProfil',{'id' : inscrit.id }) }}">{{ inscrit.nom }}</a>
-            </td>
-
-
-        </tr>
-        {% endfor %}
-    </table>
-    
-    {% if sortie.etat.id == 6 %}
-        {% if sortie.sortieInscrits.contains(app.user) %}
-            <a href="{{ (path('desistement', {'id': sortie.id} )) }}">
-                Se désister
-            </a>
-        {% else %}
-            <a href="{{ (path('inscription', {'id': sortie.id} )) }}">
-                S'inscrire
-            </a>
-        {% endif %}
-    {% endif %}
+            <div class="inscrits">
+                <ul id="menu-inscrit">
+                    <li class="taille-1">Liste des participants
+                        <ul>
+                            {% for inscrit in sortie.sortieInscrits %}
+                                <li>
+                                    <a href="{{ path('afficherProfil',{'id' : inscrit.id }) }}">{{ inscrit.prenom }} {{ inscrit.nom }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <li class="taille-2">Inscription
+                        <ul>
+                            {% if sortie.etat.id == 6 %}
+                                {% if sortie.sortieInscrits.contains(app.user) %}
+                                    <li><a href="{{ (path('desistement', {'id': sortie.id} )) }}">
+                                            Se désister
+                                        </a></li>
+                                {% else %}
+                                    <li><a href="{{ (path('inscription', {'id': sortie.id} )) }}">
+                                            S'inscrire
+                                        </a></li>
+                                {% endif %}
+                            {% endif %}
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 {% endblock %}

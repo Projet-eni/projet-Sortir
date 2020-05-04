@@ -8,10 +8,15 @@
 
 .tableau{
     margin-top: 70px;
+    border: 2px solid rgba(57,83,161,0.4);
+    width: 100%;
 }
 
 .tableau td{
     width: 15%;
+    border-left: 1px solid rgba(57,83,161,0.4);
+
+
 }
 
 .bloc-user li{
@@ -23,4 +28,17 @@
 
 .bloc-user{
     float: right;
+}
+
+.bouton-creer{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+    display: block;
+    background-color: rgba(57,83,161,0.4);
+    text-decoration: none;
+    font-family: sans-serif;
+    margin-top: 3%;
+    width: 150px;
+    color: black;
 }

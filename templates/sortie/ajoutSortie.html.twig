@@ -1,38 +1,55 @@
 {% extends'base.html.twig' %}
 
+{% block stylesheets %}
+    {{ encore_entry_link_tags ( 'app' ) }}
+    {{ encore_entry_link_tags ( 'creerSortie' ) }}
+{% endblock %}
+
 {% block title %}
-Ajout sortie
+    Ajout sortie
 {% endblock %}
 
 {% block main %}
 
-    {{ form_start(sortieForm) }}
-    {{ form_widget(sortieForm) }}
-    <button type="submit" value="1" name="enr">Enregistrer</button>
-    <button type="submit" value="6" name="pub">Publier</button>
-    <button onclick=window.location.href='{{ path('main') }}';>Annuler</button>
-    {{ form_end(sortieForm) }}
+    <div class="bloc">
+        <h1>Creer une sortie</h1>
+        <div class="form">
+            {{ form_start(sortieForm) }}
+            {{ form_widget(sortieForm) }}
+            <div class="form-button">
+                <button type="submit" value="1" name="enr">Enregistrer</button>
+                <button type="submit" value="6" name="pub">Publier</button>
+                <button onclick=window.location.href='{{ path('main') }}';>Annuler</button>
+            </div>
+            {{ form_end(sortieForm) }}
+        </div>
 
-    <button onclick=window.location.href='{{ path('ajoutLieu') }}';>Ajouter un lieu</button>
+        <div class="ville">
+            <div class="ville-button">
+                <button onclick=window.location.href='{{ path('ajoutLieu') }}';>Ajouter un lieu</button>
+            </div>
 
-    <div>
-        <span>Ville :</span> <span id="ville"></span>
-    </div>
-    <br>
-    <div>
-        <span>Rue :</span> <span id="rue"></span>
-    </div>
-    <br>
-    <div>
-        <span>Code Postal :</span> <span id="codePostal"></span>
-    </div>
-    <br>
-    <div>
-        <span>Latitude :</span> <span id="latitude"></span>
-    </div>
-    <br>
-    <div>
-        <span>Longitude :</span> <span id="longitude"></span>
+            <div class="span-ville">Ville :
+                <div id="ville"></div>
+            </div>
+
+            <div class="span-ville">Rue :
+                <div id="rue"></div>
+            </div>
+
+            <div class="span-ville">Code Postal :
+                <div id="codePostal"></div>
+            </div>
+
+            <div class="span-ville">Latitude :
+                <div id="latitude"></div>
+            </div>
+
+            <div class="span-ville">Longitude :
+                <div id="longitude"></div>
+            </div>
+
+        </div>
     </div>
 
 

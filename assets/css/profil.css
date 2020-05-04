@@ -1,0 +1,50 @@
+
+.blockMonProfil{
+
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: sans-serif;
+}
+
+.titre{
+    font-family: sans-serif;
+    margin-bottom: 20%;
+    text-align: center;
+}
+
+.tableau-profil td{
+
+    font-size: 20px;
+    font-family: sans-serif;
+}
+
+.tableau-profil tr{
+
+    margin-bottom: 10px;
+    height: 40px;
+}
+
+.appel{
+    height: 50px;
+}
+
+table{
+    width: 500px;
+}
+
+.btn{
+    border: 0px solid ;
+    background-color: rgba(57,83,161,0.4);
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 25px;
+    padding-right: 25px;
+    margin-top: 5%;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
+.placement-button{
+    text-align: center;
+}
