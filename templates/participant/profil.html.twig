@@ -12,6 +12,10 @@
    <div class="titre"><h1>Profil de {{ p.pseudo }}</h1></div>
     <table class="tableau-profil">
         <tr>
+            <td class="appel">Image de profil :</td>
+            <td class="td-centre"><img src="{{ vich_uploader_asset(p) }}" alt="{{ p.image }}" /></td>
+        </tr>
+        <tr>
             <td class="appel">Prénom :</td>
             <td class="td-centre">{{ p.prenom }}</td>
         </tr>
