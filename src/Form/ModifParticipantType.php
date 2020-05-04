@@ -19,11 +19,11 @@
         public function buildForm(FormBuilderInterface $builder, array $options)
         {
             $builder
-                ->add('nom', TextType::class, ['label' => 'nom'])
-                ->add('prenom', TextType::class, ['label' => 'prenom'])
-                ->add('pseudo', TextType::class, ['label' => 'pseudo',
+                ->add('nom', TextType::class, ['label' => 'Nom'])
+                ->add('prenom', TextType::class, ['label' => 'Prénom'])
+                ->add('pseudo', TextType::class, ['label' => 'Pseudo',
                                                               'attr'=> ['title'=>'Votre pseudo doit contenir une majuscule, une minuscule et avoir une longueur entre 2 et 10 caractères' ]])
-                ->add('telephone', IntegerType::class, ['label' => 'telephone'])
+                ->add('telephone', IntegerType::class, ['label' => 'Téléphone'])
                 ->add('mail', RepeatedType::class, [
                     'type' => EmailType::class,
                     'invalid_message' => 'L\'adresse mail indiqué doit être identique.',

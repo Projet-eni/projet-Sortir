@@ -51,7 +51,7 @@ class AppFixtures extends Fixture
         $manager->persist($ville);
 
         $lieu = new Lieu();
-        $lieu->setNom('ENI Ecole');
+        $lieu->setNom('ENI Ecole Niort');
         $lieu->setRue('19 Avenue Léo Lagrange');
         $lieu->setLatitude(46.3160155);
         $lieu->setLongitude(-0.4713764);
@@ -62,7 +62,7 @@ class AppFixtures extends Fixture
         $lieu->setVille($ville);
         $manager->persist($lieu);
         $lieu = new Lieu();
-        $lieu->setNom('ENI Ecole');
+        $lieu->setNom('ENI Ecole Nantes');
         $lieu->setRue('3 rue Michael Faraday');
         $lieu->setLatitude(47.2258547);
         $lieu->setLongitude(-1.6200333);
