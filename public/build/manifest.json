@@ -1,10 +1,18 @@
 {
+  "build/afficherSortie.css": "/build/afficherSortie.css",
+  "build/afficherSortie.js": "/build/afficherSortie.js",
   "build/app.css": "/build/app.css",
   "build/app.js": "/build/app.js",
   "build/connexion.css": "/build/connexion.css",
   "build/connexion.js": "/build/connexion.js",
+  "build/creerSortie.css": "/build/creerSortie.css",
+  "build/creerSortie.js": "/build/creerSortie.js",
   "build/lieuVille.js": "/build/lieuVille.js",
   "build/listeSortie.css": "/build/listeSortie.css",
   "build/listeSortie.js": "/build/listeSortie.js",
+  "build/modification.css": "/build/modification.css",
+  "build/modification.js": "/build/modification.js",
+  "build/profil.css": "/build/profil.css",
+  "build/profil.js": "/build/profil.js",
   "build/runtime.js": "/build/runtime.js"
 }

@@ -1,28 +1,41 @@
 {% extends 'base.html.twig' %}
 
+ {% block stylesheets %}
+     {{ encore_entry_link_tags ( 'app' ) }}
+     {{ encore_entry_link_tags ( 'profil' ) }}
+ {% endblock %}
+
 {% block title %}  Sortir | Consulter profil{% endblock %}
 
 {% block main %}
 <div class="blockMonProfil">
-    <h1>Profil de {{ p.pseudo }}</h1>
-    <div>
-        <span>Prénom : </span><span>{{ p.prenom }}</span>
-    </div>
-    <div>
-        <span>Nom : </span><span>{{ p.nom }}</span>
-    </div>
-    <div>
-        <span>Téléphone : </span><span>{{ p.telephone }}</span>
-    </div>
-    <div>
-        <span>Email : </span><span>{{ p.mail }}</span>
-    </div>
-    <div>
-        <span>Site de rattachement : </span><span>{{ p.site.nom }}</span>
-    </div>
+   <div class="titre"><h1>Profil de {{ p.pseudo }}</h1></div>
+    <table class="tableau-profil">
+        <tr>
+            <td class="appel">Prénom :</td>
+            <td class="td-centre">{{ p.prenom }}</td>
+        </tr>
+        <tr>
+            <td class="appel">Nom : </td>
+            <td class="td-centre">{{ p.nom }}</td>
+        </tr>
+        <tr>
+            <td class="appel">Téléphone : </td>
+            <td class="td-centre">{{ p.telephone }}</td>
+        </tr>
+        <tr>
+            <td class="appel">Email : </td>
+            <td class="td-centre">{{ p.mail }}</td>
+        </tr>
+        <tr>
+            <td class="appel">Site de rattachement : </td>
+            <td class="td-centre">{{ p.site.nom }}</td>
+        </tr>
+    </table>
+
 
     {% if app.user.id == p.id %}
-        <button onclick=window.location.href='{{ path('participant_update') }}';>Modifier</button>
+       <div class="placement-button"><button class="btn" onclick=window.location.href='{{ path('participant_update') }}';>Modifier</button></div>
     {% endif %}
 </div>
 {% endblock %}
