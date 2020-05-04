@@ -47,9 +47,6 @@
                     <td>
                         Organisateur
                     </td>
-                    <td>
-                        Actions
-                    </td>
                 </tr>
 
 
@@ -73,14 +70,16 @@
                             <a href="{{ (path('afficherSortie', {'id': sortie.id})) }}">Afficher</a>
 
                             {% if sortie.sortiesOrganisees.pseudo == participant.username %}
+                                {% if "now"|date('Y-m-d') < sortie.dateHeureDebut|date('Y-m-d') %}
                                     <a href="{{ (path('annuler', {'id': sortie.id})) }}">Annuler</a>
+                                {% endif %}
                             {% endif %}
 
                         </td>
                 </tr>
                     {% endfor %}
             </table>
-            <div><a class="bouton-creer" href="{{ path('ajouterSortie') }}"> Créer une sortie</a></div>
+            <div><a href="{{ path('ajouterSortie') }}"> Créer une sortie</a></div>
         </div>
     </div>
 {% endblock %}
