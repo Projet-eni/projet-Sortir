@@ -70,7 +70,7 @@
                             <a href="{{ (path('afficherSortie', {'id': sortie.id})) }}">Afficher</a>
 
                             {% if sortie.sortiesOrganisees.pseudo == participant.username %}
-                                {% if sortie.dateHeureDebut|date("d/m/Y") > date("d/m/Y") %}
+                                {% if "now"|date('Y-m-d') < sortie.dateHeureDebut|date('Y-m-d') %}
                                     <a href="{{ (path('annuler', {'id': sortie.id})) }}">Annuler</a>
                                 {% endif %}
                             {% endif %}
