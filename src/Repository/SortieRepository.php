@@ -29,18 +29,27 @@ class SortieRepository extends ServiceEntityRepository
 
         $query = $this->createQueryBuilder('s');
 
+        if($filtre->getFSite() !== null) {
 
-        //requete filtre par rapport au site.
-        if ($filtre->getFSite() !== null) {
+            if ($filtre->getFSite() !== null){
+                $query = $query
+                    ->andWhere('s.site = :key')
+                    ->setParameter('key',$filtre->getFSite()->getId());
+            }
 
+            //requete filtre résultat barre de recherche.
+            if ($filtre->getSearch() !== null) {
+                $query = $query
+                    ->andWhere('s.nom LIKE :key')
+                    ->setParameter('key', "%{$filtre->getSearch()}%");
+            }
 
             //requete checkbox si le participant en session est organisateur
             if ($filtre->getCheckboxOrganisateur() == true) {
                 $query = $query
-                    ->andWhere('s.sorties_organisees = :key')
-                    ->setParameter('key', $participant->getId())
-                    ->andWhere('s.site = :key')
-                    ->setParameter('key', $filtre->getFSite()->getId());
+                    ->andWhere('s.site = :key AND s.sorties_organisees = :key2')
+                    ->setParameter('key', $filtre->getFSite()->getId())
+                    ->setParameter('key2', $participant->getId());
             }
 
             //requete checkbox si le participant en session est inscrit
@@ -48,10 +57,9 @@ class SortieRepository extends ServiceEntityRepository
                 $query = $query
                     ->addSelect('i')
                     ->join('s.sortie_inscrits', 'i')
-                    ->where('i.id = :key')
+                    ->where('i.id = :key AND s.site = :key2')
                     ->setParameter('key', $participant->getId())
-                    ->andWhere('s.site = :key')
-                    ->setParameter('key', $filtre->getFSite()->getId());
+                    ->setParameter('key2', $filtre->getFSite()->getId());
             }
 
             //requete checkbox si le participant en session n' est pas inscrit
@@ -59,26 +67,16 @@ class SortieRepository extends ServiceEntityRepository
                 $query = $query
                     ->addSelect('i')
                     ->join('s.sortie_inscrits', 'i')
-                    ->where('i.id != :key')
+                    ->where('i.id != :key AND s.site = :key2')
                     ->setParameter('key', $participant->getId())
-                    ->andWhere('s.site = :key')
-                    ->setParameter('key', $filtre->getFSite()->getId());
+                    ->setParameter('key2', $filtre->getFSite()->getId());
             }
 
             //requete checkbox si les sorties sont en état passées
             if ($filtre->getCheckboxSortiesPassees() == true) {
                 $query = $query
-                    ->andWhere('s.etat = 4')
-                    ->andWhere('s.site = :key')
-                    ->setParameter('key', $filtre->getFSite()->getId());
-            }
-
-            //requete filtre résultat barre de recherche.
-            if ($filtre->getSearch() !== null) {
-
-                $query = $query
-                    ->andWhere('s.nom LIKE :key ')
-                    ->setParameter('key', "%{$filtre->getSearch()}%");
+                    ->andWhere('s.etat = 4 AND s.site = :key2')
+                    ->setParameter('key2', $filtre->getFSite()->getId());
             }
 
             //requete filtre en fonction des dates rentrées.
@@ -96,9 +94,9 @@ class SortieRepository extends ServiceEntityRepository
                     ->andWhere('s.dateHeureDebut <= :end')
                     ->setParameter('end', $filtre->getDateFin());
             }
-
-
-            return $query->getquery()->getResult();
         }
+
+        return $query->getQuery()->getResult();
+
     }
 }
