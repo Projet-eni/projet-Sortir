@@ -4,17 +4,40 @@
 
 namespace App\Command;
 
+use App\Entity\Participant;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-
+use App\Entity\Athlete;
+use App\Entity\Competitor;
+use Doctrine\ORM\EntityManagerInterface;
+use League\Csv\Reader;
 /**
  * Class CsvImportCommand
  * @package App\ConsoleCommand
  */
 class CsvImportCommand extends Command
 {
+    /**
+     * @var EntityManagerInterface
+     */
+    private $em;
+
+    /**
+     * CsvImportCommand constructor.
+     *
+     * @param EntityManagerInterface $em
+     *
+     * @throws \Symfony\Component\Console\Exception\LogicException
+     */
+    public function __construct(EntityManagerInterface $em)
+    {
+        parent::__construct();
+
+        $this->em = $em;
+    }
+
     /**
      * Configure
      * @throws \Symfony\Component\Console\Exception\InvalidArgumentException
@@ -36,7 +59,64 @@ class CsvImportCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $io = new SymfonyStyle($input, $output);
+        $io->title('Attempting import of Feed...');
 
-        $io->success('Command exited cleanly!');
+        $reader = Reader::createFromPath('%kernel.root_dir%/../src/App/Data/MOCK_DATA.csv');
+
+        $results = $reader->fetchAssoc();
+        $io->progressStart(iterator_count($results));
+        foreach ($results as $row) {
+
+            //check DB if participant exist
+            $participant = $this->em->getRepository('App:Participant')
+                ->findOneBy([
+                   'pseudo' => $row['pseudo'],
+                    'mail' => $row['mail']
+                ]);
+
+            if($participant === null) {
+                // create new participant if not
+                $participant = (new Participant())
+                    ->setNom($row['nom'])
+                    ->setMotDePasse($row['mot_de_passe'])
+                    ->setPrenom($row['prenom'])
+                    ->setPseudo($row['pseudo'])
+                    ->setTelephone($row['telephone'])
+                    ->setMail($row['mail'])
+                    ->setRole(['ROLE_USER'])
+                ;
+
+                $this->em->persist($participant);
+
+                $this->em->flush();
+            }
+
+            // check DB if site exist
+            $site = $this->em->getRepository('App:Site')
+                ->findOneBy([
+                    'nom' => $row['site']
+                ]);
+
+            if($site === null) {
+                // create new site if not
+                $site = (new Site())
+                    ->setNom($row['site'])
+                ;
+
+                $this->em->persist($site);
+
+                $this->em->flush();
+            }
+
+            $participant->setSite($site);
+
+            $io->progressAdvance();
+        }
+
+        $this->em->flush();
+
+        $io->progressFinish();
+
+        $io->success('Success!');
     }
 }
