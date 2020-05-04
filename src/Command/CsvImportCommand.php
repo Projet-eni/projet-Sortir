@@ -5,12 +5,13 @@
 namespace App\Command;
 
 use App\Entity\Participant;
+use App\Entity\Site;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Exception\InvalidArgumentException;
+use Symfony\Component\Console\Exception\LogicException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use App\Entity\Athlete;
-use App\Entity\Competitor;
 use Doctrine\ORM\EntityManagerInterface;
 use League\Csv\Reader;
 /**
@@ -19,9 +20,7 @@ use League\Csv\Reader;
  */
 class CsvImportCommand extends Command
 {
-    /**
-     * @var EntityManagerInterface
-     */
+
     private $em;
 
     /**
@@ -29,24 +28,24 @@ class CsvImportCommand extends Command
      *
      * @param EntityManagerInterface $em
      *
-     * @throws \Symfony\Component\Console\Exception\LogicException
+     * @throws LogicException
      */
     public function __construct(EntityManagerInterface $em)
     {
-        parent::__construct();
-
         $this->em = $em;
+
+        parent::__construct();
     }
 
     /**
      * Configure
-     * @throws \Symfony\Component\Console\Exception\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     protected function configure()
     {
         $this
             ->setName('csv:import')
-            ->setDescription('Imports the mock CSV data file')
+            ->setDescription('Imports the test CSV data file')
         ;
     }
 
@@ -61,7 +60,7 @@ class CsvImportCommand extends Command
         $io = new SymfonyStyle($input, $output);
         $io->title('Attempting import of Feed...');
 
-        $reader = Reader::createFromPath('%kernel.root_dir%/../src/App/Data/MOCK_DATA.csv');
+        $reader = Reader::createFromPath('C:\wamp64\www\projet-Sortir\src\Data\participant.csv');
 
         $results = $reader->fetchAssoc();
         $io->progressStart(iterator_count($results));
@@ -70,8 +69,7 @@ class CsvImportCommand extends Command
             //check DB if participant exist
             $participant = $this->em->getRepository('App:Participant')
                 ->findOneBy([
-                   'pseudo' => $row['pseudo'],
-                    'mail' => $row['mail']
+                   'pseudo' => $row['pseudo']
                 ]);
 
             if($participant === null) {
