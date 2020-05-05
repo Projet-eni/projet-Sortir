@@ -6,10 +6,12 @@
 
  {% block stylesheets %}
      {{ encore_entry_link_tags ( 'app' ) }}
+     {{ encore_entry_link_tags ( 'annuler' ) }}
  {% endblock %}
 
 {% block main %}
 
+    <div class="blockAnnuler">
     <p>
         Nom de la Sortie : {{ sortie.nom }}
     </p>
@@ -29,7 +31,7 @@
     <button type="submit" value="1" name="enr">Enregistrer</button>
     <button onclick=window.location.href='{{ path('liste-sortie') }}';>Annuler</button>
     {{ form_end(annulSortieForm) }}
-
+    </div>
 
 
 
