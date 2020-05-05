@@ -1,4 +1,4 @@
-
+/*-------------------------------Filtre-----------------------------*/
 .title{
     font-family: sans-serif;
     font-weight: bold;
@@ -6,17 +6,87 @@
     margin-top: 50px;
 }
 
+form div div{
+    margin-bottom: 1%;
+}
+
+label{
+    font-family: sans-serif;
+    display: block;
+    width: 300px;
+    float: left;
+}
+
+input, select{
+    width: 180px;
+}
+
+[for=dateDebut]{
+    width: 50px;
+    display: inline;
+}
+
+[for=dateFin]{
+    width: 50px;
+}
+
+#dateDebut, #dateFin{
+    width: 125px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*-----------------------------Tableau----------------------------*/
+
 .tableau{
     margin-top: 70px;
     border: 2px solid rgba(57,83,161,0.4);
-    width: 100%;
+    width: 990px;
+    height: 168px;
+    font-family: sans-serif;
 }
 
-.tableau td{
-    width: 15%;
-    border-left: 1px solid rgba(57,83,161,0.4);
+.ligne-titre{
+    height: 30px;
+}
 
+thead{
+    background-color: rgba(57,83,161,0.4);
+    text-align: center;
+}
 
+tbody{
+    text-align: center;
+}
+
+.ligne-nom, .ligne-inscrits, .ligne-organisateur{
+    width: 110px;
+}
+
+.ligne-dateSortie, .ligne-cloture, .ligne-etat{
+    width: 90px;
+}
+
+.ligne-inscrit{
+    width: 70px;
+}
+
+.pseudo-organisateur a, .actions a{
+    text-decoration: none;
+    color: black;
 }
 
 .bloc-user li{
