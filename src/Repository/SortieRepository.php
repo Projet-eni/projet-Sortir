@@ -69,9 +69,8 @@ class SortieRepository extends ServiceEntityRepository
             //requete checkbox si le participant en session est inscrit
             if ($filtre->getCheckboxInscrit() == true) {
                 $query = $query
-                    ->addSelect('i')
-                    ->join('s.sortie_inscrits', 'i')
-                    ->andWhere('i.id = :siteCheckIns AND s.site = :siteCheckIns2')
+
+                    ->andWhere(':siteCheckIns MEMBER OF s.sortie_inscrits AND s.site = :siteCheckIns2')
                     ->setParameter('siteCheckIns', $participant->getId())
                     ->setParameter('siteCheckIns2', $filtre->getFSite()->getId());
             }
@@ -79,9 +78,8 @@ class SortieRepository extends ServiceEntityRepository
             //requete checkbox si le participant en session n' est pas inscrit
             if ($filtre->getCheckboxNonInscrit() == true) {
                 $query = $query
-                    ->addSelect('i')
-                    ->join('s.sortie_inscrits', 'i')
-                    ->andWhere('i.id != :siteCheckNonIns AND s.site = :siteCheckNonIns2')
+
+                    ->andWhere(' :siteCheckNonIns NOT MEMBER OF s.sortie_inscrits AND s.site = :siteCheckNonIns2')
                     ->setParameter('siteCheckNonIns', $participant->getId())
                     ->setParameter('siteCheckNonIns2', $filtre->getFSite()->getId());
             }
