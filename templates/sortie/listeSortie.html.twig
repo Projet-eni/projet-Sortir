@@ -52,7 +52,7 @@
 
                     {% for sortie in sorties %}
                         {#les sortie de plus d'un mois ne seront pas consultable#}
-                        {% if not date( sortie.dateHeureDebut) > date('+31days') %}
+                {% if date( sortie.dateHeureDebut) > date('+31days') %}
                 <tr>
                         <td>{{ sortie.nom }}</td>
                         <td>{{ sortie.dateHeureDebut|date("d/m/Y") }}</td>
@@ -79,7 +79,7 @@
                             {% endif %}
                         </td>
                 </tr>
-                    {% endif %}
+                {% endif %}
                     {% endfor %}
             </table>
             <div><a class="bouton-creer" href="{{ path('ajouterSortie') }}"> Créer une sortie</a></div>
