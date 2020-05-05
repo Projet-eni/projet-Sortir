@@ -12,5 +12,9 @@
 
 <h1>Bonjour tu vas pouvoir importer des nouveaux stagiaires, c'est cool non?</h1>
 
+    {{ form_start(importForm) }}
+    {{ form_widget(importForm) }}
+    <div class="placement-button"> <button class="btn" type="submit"> Enregistrer</button> </div></div>
+    {{ form_end(importForm) }}
 
 {% endblock %}
