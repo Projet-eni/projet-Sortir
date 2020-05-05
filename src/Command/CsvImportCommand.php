@@ -6,15 +6,16 @@ namespace App\Command;
 
 use App\Entity\Participant;
 use App\Entity\Site;
-use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Exception\InvalidArgumentException;
-use Symfony\Component\Console\Exception\LogicException;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Doctrine\ORM\EntityManagerInterface;
 use League\Csv\Reader;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
+
 /**
  * Class CsvImportCommand
  * @package App\ConsoleCommand
@@ -24,17 +25,20 @@ class CsvImportCommand extends Command
 
     private $em;
 
+    private $validator;
+
     /**
      * CsvImportCommand constructor.
      *
      * @param EntityManagerInterface $em
      *
-     * @param LoggerInterface $logger
+     * @param ValidatorInterface $validator
      */
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(EntityManagerInterface $em, ValidatorInterface $validator)
     {
         parent::__construct();
         $this->em = $em;
+        $this->validator = $validator;
     }
 
     /**
@@ -46,6 +50,7 @@ class CsvImportCommand extends Command
         $this
             ->setName('csv:import')
             ->setDescription('Imports the test CSV data file')
+            ->addArgument('path', InputArgument::REQUIRED, 'Quel est le nom du fichier à importer ?')
 
         ;
     }
@@ -54,27 +59,36 @@ class CsvImportCommand extends Command
      * @param InputInterface  $input
      * @param OutputInterface $output
      *
-     * @return void
+     * @return int
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $io = new SymfonyStyle($input, $output);
         $io->title('Attempting import of Feed...');
 
-        $reader = Reader::createFromPath('C:\wamp64\www\projet-Sortir\src\Data\participant.csv');
+        $csvFilePath = 'C:\wamp64\www\projet-Sortir\src\Data\\'.$input->getArgument('path');
+        $reader = Reader::createFromPath($csvFilePath);
 
         $results = $reader->fetchAssoc();
         $io->progressStart(iterator_count($results));
 
+        $counter = 1;
         foreach ($results as $row) {
 
+            $counter++;
+
             //check DB if participant exist
-            $participant = $this->em->getRepository(Participant::class)
+            $participantPseudo = $this->em->getRepository(Participant::class)
                 ->findOneBy([
                    'pseudo' => $row['pseudo']
                 ]);
 
-            if($participant === null) {
+            $participantMail = $this->em->getRepository(Participant::class)
+                ->findOneBy([
+                    'mail' => $row['mail']
+                ]);
+
+            if($participantPseudo === null && $participantMail === null) {
                 // create new participant if not
                 $participant = (new Participant())
                     ->setNom($row['nom'])
@@ -86,10 +100,21 @@ class CsvImportCommand extends Command
                     ->setRole(['ROLE_USER'])
                 ;
 
-                $this->em->persist($participant);
+                $errors = $this->validator->validate($participant);
+                if(count($errors) > 0){
+                    $output->write('Les informations à la ligne '.$counter.' que vous essayez d\'importer ne sont pas conformes ' );
+                    return 0;
+                }
 
-                $this->em->flush();
             }
+            else{
+                $output->write('Un utilisateur avec ce pseudo ou ce mail existe déjà. Ligne : '.$counter);
+                return 0;
+            }
+
+
+            $this->em->persist($participant);
+            $this->em->flush();
 
             // check DB if site exist
             $site = $this->em->getRepository('App:Site')
@@ -118,5 +143,7 @@ class CsvImportCommand extends Command
         $io->progressFinish();
 
         $io->success('Success!');
+
+        return 0;
     }
 }
