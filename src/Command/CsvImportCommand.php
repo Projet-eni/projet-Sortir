@@ -6,6 +6,7 @@ namespace App\Command;
 
 use App\Entity\Participant;
 use App\Entity\Site;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Exception\InvalidArgumentException;
 use Symfony\Component\Console\Exception\LogicException;
@@ -28,13 +29,12 @@ class CsvImportCommand extends Command
      *
      * @param EntityManagerInterface $em
      *
-     * @throws LogicException
+     * @param LoggerInterface $logger
      */
     public function __construct(EntityManagerInterface $em)
     {
-        $this->em = $em;
-
         parent::__construct();
+        $this->em = $em;
     }
 
     /**
@@ -46,6 +46,7 @@ class CsvImportCommand extends Command
         $this
             ->setName('csv:import')
             ->setDescription('Imports the test CSV data file')
+
         ;
     }
 
@@ -64,10 +65,11 @@ class CsvImportCommand extends Command
 
         $results = $reader->fetchAssoc();
         $io->progressStart(iterator_count($results));
+
         foreach ($results as $row) {
 
             //check DB if participant exist
-            $participant = $this->em->getRepository('App:Participant')
+            $participant = $this->em->getRepository(Participant::class)
                 ->findOneBy([
                    'pseudo' => $row['pseudo']
                 ]);
