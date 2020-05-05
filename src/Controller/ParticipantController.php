@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Participant;
 use App\Form\ModifParticipantType;
+use App\Form\SiteType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -56,11 +58,18 @@ class ParticipantController extends AbstractController
     /**
      * @Route("/afficherProfil/{id}", name="afficherProfil")
      */
-    public function afficherProfil(Participant $participant)
+    public function afficherProfil(Participant $participant, EntityManagerInterface $em, Request $request)
     {
-        // lien a mettre pour accéder à la route :
-        // <a href="{{ path('afficherProfil',{'id' : p.id }) }}"><h3>{{ p.titre }}</h3></a>
-        return $this->render('participant/profil.html.twig', ['p'=>$participant]);
+        $siteForm = $this->createForm(SiteType::class, $participant);
+        $siteForm->handleRequest($request);
+        if ($siteForm->isSubmitted() && $siteForm->isValid())
+        {
+            $em->persist($participant);
+            $em->flush();
+            $this->addFlash('success', 'Le site de rattachement a bien été modifié');
+            return $this->redirectToRoute('main');
+        }
+        return $this->render('participant/profil.html.twig', ['p'=>$participant, 'siteForm'=>$siteForm->createView()]);
     }
 
 
