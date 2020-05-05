@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class ParticipantController extends AbstractController
 {
@@ -67,28 +68,35 @@ class ParticipantController extends AbstractController
     /**
      * @Route("/importer", name="importer")
      */
-    public function importerUtilisateur(Request $request)
+    public function importerUtilisateur(Request $request, SluggerInterface $slugger)
     {
-        $participant = $this->getUser();
-        $em = $this->getDoctrine()->getManager();
-
-        $importForm = $this->createForm(CsvType::class, $participant);
+        $importForm = $this->createForm(CsvType::class);
         $importForm->handleRequest($request);
 
-        if($importForm->isSubmitted() && $importForm->isValid()){
-            if(!empty($importForm->get('csvFile')->getData())){
-                $csvFile = $importForm->get('csvFile')->getData();
-                $participant->setCsvFile($csvFile);
-                $this->addFlash('success', "Le fichier a bien été uploadé, veuillez utiliser la commande csv:import pour importer le fichier dans la BDD");
+        if ($importForm->isSubmitted() && $importForm->isValid()) {
+
+            $csvFile = $importForm->get('csvFile')->getData();
+
+            if ($csvFile) {
+                $originalFilename = pathinfo($csvFile->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $csvFile->guessExtension();
+
+                // Move the file to the directory where brochures are stored
+                try {
+                    $csvFile->move(
+                        $this->getParameter('csv_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                    $this->addFlash('success', 'an error occured during file upload');
+                }
             }
-            else {
-                $this->addFlash('success', "Veuillez enregistrer un fichier .csv valide");
-            }
-            $em->persist($participant);
-            $em->flush();
         }
 
-        return $this->render('participant/importerFichier.html.twig', [ 'importForm' => $importForm->createView(), 'participant' => $participant]);
+        return $this->render('participant/importerFichier.html.twig', [ 'importForm' => $importForm->createView()]);
     }
 
 

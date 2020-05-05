@@ -92,24 +92,6 @@
          */
         private $updatedAt;
 
-        /**
-         * @ORM\Column(type="string", length=255, nullable=true)
-         * @var string
-         */
-        private $csvFileName;
-
-        /**
-         * @Vich\UploadableField(mapping="csv", fileNameProperty="csvFileName")
-         * @var File
-         */
-        private $csvFile;
-
-        /**
-         * @ORM\Column(type="datetime", nullable=true)
-         * @var \DateTime
-         */
-        private $csvUpdatedAt;
-
 
         //-------------------constructeurs---------------------//
 
@@ -356,40 +338,6 @@
         public function getImage()
         {
             return $this->image;
-        }
-
-        /**
-         * @return string
-         */
-        public function getCsvFileName()
-        {
-            return $this->csvFileName;
-        }
-
-        /**
-         * @param string $csvFileName
-         */
-        public function setCsvFileName(string $csvFileName)
-        {
-            $this->csvFileName = $csvFileName;
-        }
-
-        public function getCsvFile()
-        {
-            return $this->csvFile;
-        }
-
-        /**
-         * @param File $csvFile
-         */
-        public function setCsvFile(File $csvFile = null)
-        {
-            $this->csvFile = $csvFile;
-
-            if ($csvFile) {
-                // if 'updatedAt' is not defined in your entity, use another property
-                $this->csvUpdatedAt = new \DateTime('now');
-            }
         }
 
         /**
