@@ -92,6 +92,24 @@
          */
         private $updatedAt;
 
+        /**
+         * @ORM\Column(type="string", length=255, nullable=true)
+         * @var string
+         */
+        private $csvFileName;
+
+        /**
+         * @Vich\UploadableField(mapping="csv", fileNameProperty="csvFileName")
+         * @var File
+         */
+        private $csvFile;
+
+        /**
+         * @ORM\Column(type="datetime", nullable=true)
+         * @var \DateTime
+         */
+        private $csvUpdatedAt;
+
 
         //-------------------constructeurs---------------------//
 
@@ -165,9 +183,11 @@
         /**
          * @param mixed $site
          */
-        public function setSite($site): void
+        public function setSite($site): self
         {
             $this->site = $site;
+
+            return $this;
         }
 
         public function getId(): ?int
@@ -262,9 +282,11 @@
         /**
          * @param mixed $motDePasse
          */
-        public function setMotDePasse($motDePasse): void
+        public function setMotDePasse($motDePasse): self
         {
             $this->motDePasse = $motDePasse;
+
+            return $this;
         }
 
         /**
@@ -294,9 +316,11 @@
         /**
          * @param mixed $pseudo
          */
-        public function setPseudo($pseudo): void
+        public function setPseudo($pseudo): self
         {
             $this->pseudo = $pseudo;
+
+            return $this;
         }
 
         /**
@@ -332,6 +356,40 @@
         public function getImage()
         {
             return $this->image;
+        }
+
+        /**
+         * @return string
+         */
+        public function getCsvFileName()
+        {
+            return $this->csvFileName;
+        }
+
+        /**
+         * @param string $csvFileName
+         */
+        public function setCsvFileName(string $csvFileName)
+        {
+            $this->csvFileName = $csvFileName;
+        }
+
+        public function getCsvFile()
+        {
+            return $this->csvFile;
+        }
+
+        /**
+         * @param File $csvFile
+         */
+        public function setCsvFile(File $csvFile = null)
+        {
+            $this->csvFile = $csvFile;
+
+            if ($csvFile) {
+                // if 'updatedAt' is not defined in your entity, use another property
+                $this->csvUpdatedAt = new \DateTime('now');
+            }
         }
 
         /**

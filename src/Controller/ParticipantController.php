@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Participant;
+use App\Form\CsvType;
 use App\Form\ModifParticipantType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -61,6 +62,33 @@ class ParticipantController extends AbstractController
         // lien a mettre pour accéder à la route :
         // <a href="{{ path('afficherProfil',{'id' : p.id }) }}"><h3>{{ p.titre }}</h3></a>
         return $this->render('participant/profil.html.twig', ['p'=>$participant]);
+    }
+
+    /**
+     * @Route("/importer", name="importer")
+     */
+    public function importerUtilisateur(Request $request)
+    {
+        $participant = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+
+        $importForm = $this->createForm(CsvType::class, $participant);
+        $importForm->handleRequest($request);
+
+        if($importForm->isSubmitted() && $importForm->isValid()){
+            if(!empty($importForm->get('csvFile')->getData())){
+                $csvFile = $importForm->get('csvFile')->getData();
+                $participant->setCsvFile($csvFile);
+                $this->addFlash('success', "Le fichier a bien été uploadé, veuillez utiliser la commande csv:import pour importer le fichier dans la BDD");
+            }
+            else {
+                $this->addFlash('success', "Veuillez enregistrer un fichier .csv valide");
+            }
+            $em->persist($participant);
+            $em->flush();
+        }
+
+        return $this->render('participant/importerFichier.html.twig', [ 'importForm' => $importForm->createView(), 'participant' => $participant]);
     }
 
 

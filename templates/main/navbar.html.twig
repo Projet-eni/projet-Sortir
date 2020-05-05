@@ -1,6 +1,9 @@
 <nav>
     <ul>
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            {% if is_granted('ROLE_ADMIN') %}
+                <li><a href="{{ path('importer') }}">Importer un fichier</a></li>
+            {% endif %}
         <li><a href="{{ path('app_logout') }}">Se déconnecter</a></li>
         <li><a href="{{ path('afficherProfil',{'id' : app.user.id }) }}">Mon Profil</a></li>
         {% endif %}
