@@ -63,5 +63,13 @@ class ParticipantController extends AbstractController
         return $this->render('participant/profil.html.twig', ['p'=>$participant]);
     }
 
+    /**
+     * @Route("/importer", name="importer")
+     */
+    public function importerUtilisateur()
+    {
+        return $this->render('participant/importerFichier.html.twig');
+    }
+
 
 }
