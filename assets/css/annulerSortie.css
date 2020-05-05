@@ -4,6 +4,53 @@
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
     font-family: sans-serif;
-    width: 80%;
+
 }
 
+.titre{
+    font-family: sans-serif;
+    margin-bottom: 10%;
+    text-align: center;
+}
+
+.affichage{
+    width: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.affichage p{
+    display: inline-block;
+}
+
+.text{
+    float: right;
+}
+
+.formulaire{
+    display: inline-block;
+}
+
+#annul_sortie_infosSortie{
+    border: 1px solid;
+    border-color: #8959A8;
+    float: right;
+    width: 368px;
+    height: 62px;
+}
+
+button{
+    border: 0px solid ;
+    background-color: rgba(57,83,161,0.4);
+    font-family: sans-serif;
+    font-weight: bold;
+    width: 100px;
+    height: 30px;
+}
+
+.form-button{
+    position: absolute;
+    width: 80%;
+    text-align: center;
+    margin-top: 25%;
+}
