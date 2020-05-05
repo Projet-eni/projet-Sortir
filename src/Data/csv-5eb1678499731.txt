@@ -1,0 +1,4 @@
+site,nom,mot_de_passe,prenom,pseudo,telephone,mail,role
+AFPA de La Roche sur Yon,LOESEL,$2y$13$fFiP2FsSvZ.17/o5xFXMOe8q/bZfUxH44t4m3SDxpmLEk/FWi5GaW,Pierre,Skull,17314053,pierre@hotmail.com,['ROLE_USER']
+AFPA de La Roche sur Yon,MARTIN,$2y$13$fFiP2FsSvZ.17/o5xFXMOe8q/bZfUxH44t4m3SDxpmLEk/FWi5GaW,Gaetan,Sch,34357574,gaetan@hotmail.com,['ROLE_USER']
+AFPA de La Roche sur Yon,GONCALVES DIAS,$2y$13$fFiP2FsSvZ.17/o5xFXMOe8q/bZfUxH44t4m3SDxpmLEk/FWi5GaW,Daniel,Le brillant Dan,51401095,daniel@hotmail.com,['ROLE_USER']
