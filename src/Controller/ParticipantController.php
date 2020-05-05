@@ -93,6 +93,7 @@ class ParticipantController extends AbstractController
                     // ... handle exception if something happens during file upload
                     $this->addFlash('success', 'an error occured during file upload');
                 }
+                $this->addFlash('success', 'Votre fichier a été enregistré avec succès. Le nom du fichier est : '.$newFilename);
             }
         }
 
