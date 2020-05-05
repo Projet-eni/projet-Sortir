@@ -1,0 +1,20 @@
+{% extends'base.html.twig' %}
+
+{% block title %}
+    Importer un fichier
+{% endblock %}
+
+ {% block stylesheets %}
+     {{ encore_entry_link_tags ( 'app' ) }}
+ {% endblock %}
+
+{% block main %}
+
+<h1>Importer des utilisateurs</h1>
+
+    {{ form_start(importForm) }}
+    {{ form_widget(importForm) }}
+    <div class="placement-button"> <button class="btn" type="submit"> Enregistrer</button> </div></div>
+    {{ form_end(importForm) }}
+
+{% endblock %}

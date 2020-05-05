@@ -68,6 +68,15 @@
       "css": [
         "/build/creerSortie.css"
       ]
+    },
+    "annuler": {
+      "js": [
+        "/build/runtime.js",
+        "/build/annuler.js"
+      ],
+      "css": [
+        "/build/annuler.css"
+      ]
     }
   }
 }

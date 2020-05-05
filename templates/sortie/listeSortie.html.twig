@@ -51,12 +51,15 @@
 
 
                     {% for sortie in sorties %}
+                        {#les sortie de plus d'un mois ne seront pas consultable#}
+                {% if date( sortie.dateHeureDebut) > date('+31days')  %}
                 <tr>
                         <td>{{ sortie.nom }}</td>
                         <td>{{ sortie.dateHeureDebut|date("d/m/Y") }}</td>
                         <td>{{ sortie.dateLimiteInscription|date("d/m/Y") }}</td>
                         <td>{{ sortie.sortieInscrits|length }}/{{ sortie.nbInscriptionsMax }}</td>
                         <td>{{ sortie.etat.libelle }}</td>
+
                         <td>{% for inscrit in sortie.sortieInscrits %}
                                 {% if inscrit.id == participant.id %}
                                     {{ 'X' }}
@@ -74,9 +77,9 @@
                                     <a href="{{ (path('annuler', {'id': sortie.id})) }}">Annuler</a>
                                 {% endif %}
                             {% endif %}
-
                         </td>
                 </tr>
+                {% endif %}
                     {% endfor %}
             </table>
             <div><a class="bouton-creer" href="{{ path('ajouterSortie') }}"> Créer une sortie</a></div>

@@ -177,9 +177,11 @@
         /**
          * @param mixed $site
          */
-        public function setSite($site): void
+        public function setSite($site): self
         {
             $this->site = $site;
+
+            return $this;
         }
 
         public function getId(): ?int
@@ -274,9 +276,11 @@
         /**
          * @param mixed $motDePasse
          */
-        public function setMotDePasse($motDePasse): void
+        public function setMotDePasse($motDePasse): self
         {
             $this->motDePasse = $motDePasse;
+
+            return $this;
         }
 
         /**
@@ -306,9 +310,11 @@
         /**
          * @param mixed $pseudo
          */
-        public function setPseudo($pseudo): void
+        public function setPseudo($pseudo): self
         {
             $this->pseudo = $pseudo;
+
+            return $this;
         }
 
         /**

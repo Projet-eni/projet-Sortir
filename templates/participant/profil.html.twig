@@ -10,11 +10,9 @@
 {% block main %}
 <div class="blockMonProfil">
    <div class="titre"><h1>Profil de {{ p.pseudo }}</h1></div>
+    <div class="block-tab-photo">
+    <div class="photo"><img src="{{ vich_uploader_asset(p) }}" alt="{{ p.image }}" /></div>
     <table class="tableau-profil">
-        <tr>
-            <td class="appel">Image de profil :</td>
-            <td class="td-centre"><img src="{{ vich_uploader_asset(p) }}" alt="{{ p.image }}" /></td>
-        </tr>
         <tr>
             <td class="appel">Prénom :</td>
             <td class="td-centre">{{ p.prenom }}</td>
@@ -36,7 +34,7 @@
             <td class="td-centre">{{ p.site.nom }}</td>
         </tr>
     </table>
-
+    </div>
 
     {% if app.user.id == p.id %}
        <div class="placement-button"><button class="btn" onclick=window.location.href='{{ path('participant_update') }}';>Modifier</button></div>

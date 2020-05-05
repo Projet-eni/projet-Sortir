@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Participant;
+use App\Form\CsvType;
 use App\Form\ModifParticipantType;
 use App\Form\SiteType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -10,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class ParticipantController extends AbstractController
 {
@@ -70,6 +72,41 @@ class ParticipantController extends AbstractController
             return $this->redirectToRoute('main');
         }
         return $this->render('participant/profil.html.twig', ['p'=>$participant, 'siteForm'=>$siteForm->createView()]);
+    }
+
+    /**
+     * @Route("/importer", name="importer")
+     */
+    public function importerUtilisateur(Request $request, SluggerInterface $slugger)
+    {
+        $importForm = $this->createForm(CsvType::class);
+        $importForm->handleRequest($request);
+
+        if ($importForm->isSubmitted() && $importForm->isValid()) {
+
+            $csvFile = $importForm->get('csvFile')->getData();
+
+            if ($csvFile) {
+                $originalFilename = pathinfo($csvFile->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $csvFile->guessExtension();
+
+                // Move the file to the directory where brochures are stored
+                try {
+                    $csvFile->move(
+                        $this->getParameter('csv_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                    $this->addFlash('success', 'an error occured during file upload');
+                }
+                $this->addFlash('success', 'Votre fichier a été enregistré avec succès. Le nom du fichier est : '.$newFilename);
+            }
+        }
+
+        return $this->render('participant/importerFichier.html.twig', [ 'importForm' => $importForm->createView()]);
     }
 
 
