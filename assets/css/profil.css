@@ -5,12 +5,17 @@
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
     font-family: sans-serif;
+    width: 80%;
 }
 
 .titre{
     font-family: sans-serif;
-    margin-bottom: 20%;
+    margin-bottom: 7%;
     text-align: center;
+}
+
+.tableau-profil{
+    padding-left: 10%;
 }
 
 .tableau-profil td{
@@ -30,7 +35,8 @@
 }
 
 table{
-    width: 500px;
+    width: 70%;
+    display: inline-block;
 }
 
 .btn{
@@ -47,4 +53,15 @@ table{
 
 .placement-button{
     text-align: center;
+}
+
+.photo{
+    float: left;
+    width: 30%;
+    text-align: center;
+}
+
+.photo img{
+    width: 120px;
+    height: 150px;
 }

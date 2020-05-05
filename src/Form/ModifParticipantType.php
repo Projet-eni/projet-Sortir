@@ -48,7 +48,7 @@
                 ->add('imageFile', VichImageType::class, [
                     'required' => false,
                     'allow_delete' => true,
-                    'label' => 'Image de profil : '
+                    'label' => 'Ma photo :'
                 ]);
 
         }
