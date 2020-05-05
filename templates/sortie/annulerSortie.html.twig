@@ -12,27 +12,33 @@
 {% block main %}
 
     <div class="blockAnnuler">
-    <p>
-        Nom de la Sortie : {{ sortie.nom }}
-    </p>
+        {% if sortie.etat.id == '5' %}
+            <h1 class="titre">Modifier l'annulation</h1>
+        {% else %}
+            <h1 class="titre">Annuler la sortie</h1>
+        {% endif %}
 
-    <p>
-        Date de la sortie : {{ sortie.dateHeureDebut|date("d/m/Y") }}
-    </p>
+        <div class="affichage">
+            <div><p>Nom de la Sortie : </p><p class="text"> {{ sortie.nom }}</p></div>
 
-    <p>
-        Site orgarnisateur : {{ sortie.site.nom }}
-    </p>
-        Lieu : {{ sortie.lieu.nom }} {{ sortie.lieu.rue }} {{ sortie.lieu.ville.codePostal }} {{ sortie.lieu.ville.nom }}
+            <div><p>Date de la sortie : </p><p class="text">{{ sortie.dateHeureDebut|date("d/m/Y") }}</p></div>
 
-    <p>Motif :</p>
-    {{ form_start(annulSortieForm) }}
-    {{ form_widget(annulSortieForm) }}
-    <button type="submit" value="1" name="enr">Enregistrer</button>
-    <button onclick=window.location.href='{{ path('liste-sortie') }}';>Annuler</button>
-    {{ form_end(annulSortieForm) }}
+            <div><p>Site orgarnisateur : </p><p class="text">{{ sortie.site.nom }}</p></div>
+
+            <div><p>Lieu : </p><p class="text">{{ sortie.lieu.nom }} {{ sortie.lieu.rue }} {{ sortie.lieu.ville.codePostal }} {{ sortie.lieu.ville.nom }}</p></div>
+
+            <div><p>Motif : </p>
+                <div class="formulaire">
+            {{ form_start(annulSortieForm) }}
+            {{ form_widget(annulSortieForm) }}
+                    <div class="form-button">
+            <button type="submit" value="1" name="enr">Enregistrer</button>
+            <button onclick=window.location.href='{{ path('liste-sortie') }}';>Annuler</button>
+                    </div>
+            {{ form_end(annulSortieForm) }}
+            </div>
+        </div>
     </div>
-
 
 
 {% endblock %}
