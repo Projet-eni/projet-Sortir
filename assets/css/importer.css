@@ -1,0 +1,38 @@
+.bloc{
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: sans-serif;
+}
+
+.titre{
+    font-family: sans-serif;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 20%;
+}
+
+label
+{
+    display: block;
+    width: 150px;
+    float: left;
+}
+
+button {
+    border: 0px solid;
+    background-color: rgba(57, 83, 161, 0.4);
+    font-family: sans-serif;
+    font-weight: bold;
+    width: 100px;
+    height: 40px;
+}
+
+input{
+    font-family: sans-serif;
+}
+
+.placement-button{
+    text-align: center;
+    margin-top: 3%;
+}

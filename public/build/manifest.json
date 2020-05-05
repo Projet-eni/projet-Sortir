@@ -9,6 +9,8 @@
   "build/connexion.js": "/build/connexion.js",
   "build/creerSortie.css": "/build/creerSortie.css",
   "build/creerSortie.js": "/build/creerSortie.js",
+  "build/importer.css": "/build/importer.css",
+  "build/importer.js": "/build/importer.js",
   "build/lieuVille.js": "/build/lieuVille.js",
   "build/listeSortie.css": "/build/listeSortie.css",
   "build/listeSortie.js": "/build/listeSortie.js",

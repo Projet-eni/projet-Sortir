@@ -33,6 +33,7 @@ Encore
     .addEntry('afficherSortie','./assets/css/afficherSortie.css')
     .addEntry('creerSortie','./assets/css/creerUneSortie.css')
     .addEntry('annuler', './assets/css/annulerSortie.css')
+    .addEntry('importer','./assets/css/importer.css')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
