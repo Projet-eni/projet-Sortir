@@ -4,6 +4,7 @@ namespace App\Controller;
 
 
 use App\Entity\Participant;
+use App\Entity\Site;
 use App\Entity\Sortie;
 use App\Form\GestionAdminType;
 use App\Form\InscriptionType;
@@ -75,12 +76,13 @@ class AdminController extends AbstractController
         if($inscriptionForm->isSubmitted() && $inscriptionForm->isValid())
         {
             $nomSite = $inscriptionForm->get('site')->getData();
-            $repo = $repo = $this->getDoctrine()->getRepository(Sortie::class);
+            $repo = $repo = $this->getDoctrine()->getRepository(Site::class);
             $site = $repo->findOneBy([
                 'nom' => $nomSite
             ]);
             $participant->setSite($site);
             $participant->setRole(["ROLE_USER"]);
+            $participant->setActif(true);
             //encode le password
             $password = $encoder->encodePassword($participant, $inscriptionForm->get('plainPassword')->getData());
             $participant->setMotDePasse($password);

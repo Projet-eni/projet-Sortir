@@ -80,7 +80,7 @@
                             <td class="actions">
                                 <a href="{{ (path('afficherSortie', {'id': sortie.id})) }}">Afficher </a>
 
-                                {% if sortie.sortiesOrganisees.pseudo == participant.username %}
+                                {% if sortie.sortiesOrganisees.pseudo == participant.username or is_granted('ROLE_ADMIN') %}
                                     {% if "now"|date('Y-m-d') < sortie.dateHeureDebut|date('Y-m-d') %}
                                         <a href="{{ (path('annuler', {'id': sortie.id})) }}">Annuler </a>
                                     {% endif %}
