@@ -18,6 +18,11 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Filtre;
 use App\Form\FiltreType;
 
+/**
+ * Class SortieController
+ * @package App\Controller
+ * @Route("/user")
+ */
 class SortieController extends AbstractController
 {
 

@@ -3,6 +3,7 @@
     namespace App\Entity;
 
     use Doctrine\Common\Collections\ArrayCollection;
+    use Doctrine\Common\Collections\Collection;
     use Doctrine\ORM\Mapping as ORM;
     use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
     use Symfony\Component\Security\Core\User\UserInterface;
@@ -65,12 +66,16 @@
          */
         private $role;
         /**
+         * @ORM\Column(type="boolean")
+         */
+        private $actif;
+        /**
          * @ORM\ManyToOne(targetEntity="App\Entity\Site", inversedBy="participants")
          *
          */
         private $site;
         /**
-         * @ORM\OneToMany(targetEntity="App\Entity\Sortie", mappedBy="sorties_organisees")
+         * @ORM\OneToMany(targetEntity="App\Entity\Sortie", mappedBy="sorties_organisees", orphanRemoval=true)
          */
         private $organisateur;
 
@@ -110,6 +115,7 @@
         public function __construct()
         {
             $this->inscrits = new ArrayCollection();
+            $this->groupes = new ArrayCollection();
         }
         //-------------------méthodes---------------------//
 
@@ -146,6 +152,37 @@
         public function setOrganisateur($organisateur): void
         {
             $this->organisateur = $organisateur;
+        }
+
+        /**
+         * @return mixed
+         */
+        public function getActif()
+        {
+            return $this->actif;
+        }
+
+        /**
+         * @param mixed $actif
+         */
+        public function setActif($actif): self
+        {
+            $this->actif = $actif;
+
+            return $this;
+        }
+
+        /**
+         * @return mixed
+         */
+        public function getNomPrenomActif()
+        {
+            $sb = $this->nom;
+            $sb .= ' ';
+            $sb .= $this->prenom;
+            $sb .= ' ';
+            $sb .= $this->actif;
+            return $sb;
         }
 
 
@@ -428,4 +465,5 @@
             $this->token = $token;
             return $this;
         }
+
     }

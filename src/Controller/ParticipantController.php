@@ -13,6 +13,11 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
+/**
+ * Class ParticipantController
+ * @package App\Controller
+ * @Route("/user")
+ */
 class ParticipantController extends AbstractController
 {
     /**
