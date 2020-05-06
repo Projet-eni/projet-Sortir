@@ -37,7 +37,7 @@ class AdminController extends AbstractController
         // récupération et instanciation de l' utilisateur en session par son id
         $em = $this->getDoctrine()->getManager();
 
-        $inscriptionForm = $this->createForm(InscriptionType::class);
+        $inscriptionForm = $this->createForm(InscriptionType::class, $participant);
 
         $inscriptionForm ->handleRequest($request);
 
@@ -49,7 +49,7 @@ class AdminController extends AbstractController
                 'nom' => $nomSite
             ]);
             $participant->setSite($site);
-
+            $participant->setRole(["ROLE_USER"]);
             //encode le password
             $password = $encoder->encodePassword($participant, $inscriptionForm->get('plainPassword')->getData());
             $participant->setMotDePasse($password);
