@@ -2,6 +2,18 @@
 
 {% block title %}Gestion Administrative{% endblock %}
 
-{% block body %}
-
+{% block main %}
+<div class="bloc">
+    <h1>Adiministration des participants</h1>
+    <div class="form">
+        {{ form_start(userForm) }}
+        {{ form_widget(userForm) }}
+        <div class="form-button">
+            <button type="submit" value="1" name="desactive">Désactiver</button>
+            <button type="submit" value="2" name="reactiver">Réactiver</button>
+            <button type="submit" value="3" name="supprime">Supprimer</button>
+            <button onclick=window.location.href='{{ path('main') }}';>Annuler</button>
+        </div>
+        {{ form_end(userForm) }}
+    </div>
 {% endblock %}

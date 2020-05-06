@@ -86,6 +86,7 @@ class AppFixtures extends Fixture
         $participant->setTelephone(0102030405);
         $site=new Site();
         $site->setNom('Ecole ENI de Niort');
+        $participant->setActif(true);
         $manager->persist($site);
         $participant->setSite($site);
         $manager->persist($participant);
@@ -106,6 +107,7 @@ class AppFixtures extends Fixture
         $participant->setRole(['ROLE_USER']);
         $participant->setMail('gaetan@hotmail.fr');
         $participant->setTelephone(0203040506);
+        $participant->setActif(true);
         $participant->setSite($site);
         $manager->persist($participant);
 
@@ -117,6 +119,7 @@ class AppFixtures extends Fixture
         $participant->setRole(['ROLE_USER']);
         $participant->setMail('daniel@hotmail.fr');
         $participant->setTelephone(0304050607);
+        $participant->setActif(true);
         $participant->setSite($site);
         $manager->persist($participant);
 
@@ -128,6 +131,7 @@ class AppFixtures extends Fixture
         $participant->setMotDePasse($password);
         $participant->setRole(['ROLE_USER']);
         $participant->setMail('charles@hotmail.fr');
+        $participant->setActif(true);
         $participant->setSite($site);
         $manager->persist($participant);
 

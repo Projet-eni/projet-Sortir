@@ -64,7 +64,7 @@ class Sortie
     private $site;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Participant",inversedBy="organisateur")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Participant",inversedBy="organisateur", cascade={"remove"})
      */
     private $sorties_organisees;
 

@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Participant;
+use Doctrine\ORM\EntityRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -12,19 +14,16 @@ class GestionAdminType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nom')
-            ->add('motDePasse')
-            ->add('prenom')
-            ->add('pseudo')
-            ->add('telephone')
-            ->add('mail')
-            ->add('role')
-            ->add('image')
-            ->add('updatedAt')
-            ->add('passwordRequestedAt')
-            ->add('token')
-            ->add('inscrits')
-            ->add('site')
+            ->add('participant', EntityType::class,[
+                'class'=>Participant::class,
+                'query_builder' => function(EntityRepository $er) {
+                    return $er->createQueryBuilder('p')
+                        ->orderBy('p.nom', 'ASC');
+                },
+                'choice_label'=> 'nom'.'prenom'.'actif',
+                'label' => 'Utilisateur : ',
+                'mapped' => false,
+            ])
         ;
     }
 
