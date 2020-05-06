@@ -11,7 +11,7 @@
 <div class="blockMonProfil">
    <div class="titre"><h1>Profil de {{ p.pseudo }}</h1></div>
     <div class="block-tab-photo">
-    <div class="photo"><img src="{{ vich_uploader_asset(p) }}" alt="{{ p.image }}" /></div>
+    <div class="photo"><div class="border"><img src="{{ vich_uploader_asset(p) }}" alt="{{ p.image }}" /></div></div>
     <table class="tableau-profil">
         <tr>
             <td class="appel">Prénom :</td>
@@ -34,17 +34,21 @@
             <td class="td-centre">{{ p.site.nom }}</td>
         </tr>
     </table>
+
+        <div class="form-admin-position">
+            {% if is_granted('ROLE_ADMIN') %}
+                {{ form_start(siteForm) }}
+                {{ form_widget(siteForm) }}
+                <button class="check" type="submit">✓</button>
+                {{ form_end(siteForm) }}
+            {%endif%}
+        </div>
+
     </div>
 
     {% if app.user.id == p.id %}
        <div class="placement-button"><button class="btn" onclick=window.location.href='{{ path('participant_update') }}';>Modifier</button></div>
     {% endif %}
 
-    {% if is_granted('ROLE_ADMIN') %}
-        {{ form_start(siteForm) }}
-        {{ form_widget(siteForm) }}
-        <div class="placement-button"> <button class="btn" type="submit"> Modifier</button> </div></div>
-        {{ form_end(siteForm) }}
-    {%endif%}
 </div>
 {% endblock %}

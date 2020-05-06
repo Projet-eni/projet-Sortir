@@ -93,6 +93,15 @@
       "css": [
         "/build/importer.css"
       ]
+    },
+    "ajoutLieu": {
+      "js": [
+        "/build/runtime.js",
+        "/build/ajoutLieu.js"
+      ],
+      "css": [
+        "/build/ajoutLieu.css"
+      ]
     }
   }
 }
