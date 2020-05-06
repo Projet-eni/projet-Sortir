@@ -6,6 +6,7 @@
     transform: translate(-50%, -50%);
     font-family: sans-serif;
     width: 65%;
+    margin-top: -5%;
 }
 
 .titre{
@@ -17,7 +18,10 @@
 label{
     display: inline-block;
     width: 150px;
+}
 
+form{
+    text-align: center;
 }
 input{
     border: 1px solid;
@@ -28,7 +32,6 @@ input{
 }
 
 form label{
-
     width: 200px;
 }
 
@@ -103,4 +106,12 @@ form {
 #modif_participant_imageFile_delete{
    width: auto;
     margin: auto;
+}
+
+.site-footer{
+    margin-top: -5%;
+}
+
+#{
+    width: 125px;
 }

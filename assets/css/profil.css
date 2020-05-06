@@ -1,6 +1,5 @@
 
 .blockMonProfil{
-
     position: absolute;
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
@@ -35,7 +34,7 @@
 }
 
 table{
-    width: 70%;
+    width: 60%;
     display: inline-block;
 }
 
@@ -57,11 +56,34 @@ table{
 
 .photo{
     float: left;
-    width: 30%;
+    width: 40%;
     text-align: center;
 }
 
 .photo img{
     width: 120px;
     height: 150px;
+}
+
+.border{
+    width: 121px;
+    height: 151px;
+    border: 1px solid black;
+    margin-left: 25%;
+}
+
+.check{
+    background-color: rgba(57,83,161,0.4);
+    border: 0px solid;
+    display: inline;
+    margin-left: 2px;
+}
+
+#site{
+    display: inline;
+    float: left;
+}
+
+.form-admin-position{
+    width: 380px;
 }

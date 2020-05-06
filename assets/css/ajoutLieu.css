@@ -1,0 +1,40 @@
+
+.bloc{
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: sans-serif;
+}
+
+.titre{
+    font-family: sans-serif;
+    margin-bottom: 10%;
+    text-align: center;
+}
+
+.blocForm{
+    width: 100%;
+}
+
+form div {
+    margin: 3%;
+}
+
+label{
+    display: inline-block;
+    width: 150px;
+}
+
+button{
+    border: 0px solid ;
+    background-color: rgba(57,83,161,0.4);
+    font-family: sans-serif;
+    font-weight: bold;
+    width: 150px;
+    height: 40px;
+}
+
+form input{
+    border: 1px solid;
+    border-color: #8959A8;
+}
