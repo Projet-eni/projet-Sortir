@@ -6,6 +6,7 @@
     transform: translate(-50%, -50%);
     font-family: sans-serif;
     width: 65%;
+    margin-top: -5%;
 }
 
 .titre{
@@ -103,4 +104,12 @@ form {
 #modif_participant_imageFile_delete{
    width: auto;
     margin: auto;
+}
+
+.site-footer{
+    margin-top: -5%;
+}
+
+#modif_participant_imageFile_delete:nth-child(3n+1){
+    width: 125px;
 }
