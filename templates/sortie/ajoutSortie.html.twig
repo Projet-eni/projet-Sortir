@@ -12,13 +12,21 @@
 {% block main %}
 
     <div class="bloc">
-        <h1>Creer une sortie</h1>
+        {% if s.id!=null %}
+            <h1>Modifier une sortie</h1>
+        {% else %}
+             <h1>Creer une sortie</h1>
+        {% endif %}
         <div class="form">
             {{ form_start(sortieForm) }}
             {{ form_widget(sortieForm) }}
             <div class="form-button">
-                <button type="submit" value="1" name="enr">Enregistrer</button>
-                <button type="submit" value="6" name="pub">Publier</button>
+                {% if s.id!=null and s.etat.id==6 %}
+                    <button type="submit" value="6" name="pub">Modifier</button>
+                {% else %}
+                    <button type="submit" value="1" name="enr">Enregistrer</button>
+                    <button type="submit" value="6" name="pub">Publier</button>
+                {% endif %}
                 <button onclick=window.location.href='{{ path('main') }}';>Annuler</button>
             </div>
             {{ form_end(sortieForm) }}

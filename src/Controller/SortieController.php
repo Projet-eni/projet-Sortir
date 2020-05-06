@@ -80,7 +80,7 @@ class SortieController extends AbstractController
             return $this->redirectToRoute("liste-sortie");
         }
 
-        return $this->render('sortie/ajoutSortie.html.twig', ['sortieForm' => $sortieForm->createView()]);
+        return $this->render('sortie/ajoutSortie.html.twig', ['sortieForm' => $sortieForm->createView(), 's'=>$sortie]);
     }
 
     /**
@@ -96,21 +96,24 @@ class SortieController extends AbstractController
         $sortieForm->handleRequest($request);
         if ($sortieForm->isSubmitted() && $sortieForm->isValid())
         {
+            $idetat = null;
             if (isset($_POST['enr'])) {
                 $idetat = 1;
             } elseif (isset($_POST['pub'])) {
                 $idetat = 6;
             }
-            $repo = $this->getDoctrine()->getRepository(Etat::class);
-            $etat = $repo->find($idetat);
-            $sortie->setEtat($etat);
-            $em->persist($sortie);
-            $em->flush();
-            $this->addFlash('success', 'Votre sortie a bien été créée');
+            if ($idetat!=null) {
+                $repo = $this->getDoctrine()->getRepository(Etat::class);
+                $etat = $repo->find($idetat);
+                $sortie->setEtat($etat);
+                $em->persist($sortie);
+                $em->flush();
+                $this->addFlash('success', 'Votre sortie a bien été créée');
+            }
             return $this->redirectToRoute("liste-sortie");
         }
 
-        return $this->render('sortie/ajoutSortie.html.twig', ['sortieForm' => $sortieForm->createView()]);
+        return $this->render('sortie/ajoutSortie.html.twig', ['sortieForm' => $sortieForm->createView(), 's'=>$sortie]);
     }
 
     /**
@@ -187,20 +190,21 @@ class SortieController extends AbstractController
         $annulSortieForm = $this->createForm(AnnulSortieType::class, $sortie);
 
         $annulSortieForm->handleRequest($request);
-
+        $idetat=null;
         if ($annulSortieForm->isSubmitted() && $annulSortieForm->isValid()){
             if (isset($_POST['enr'])) {
                 $motif = $annulSortieForm->get('infosSortie')->getData();
                 $idetat = 5;
             }
-
-            $repo = $this->getDoctrine()->getRepository(Etat::class);
-            $etat = $repo->find($idetat);
-            $sortie->setEtat($etat);
-            $sortie->setInfosSortie($motif);
-            $em->persist($sortie);
-            $em->flush();
-            $this->addFlash('success', 'Votre sortie a bien été annulée');
+            if ($idetat!=null) {
+                $repo = $this->getDoctrine()->getRepository(Etat::class);
+                $etat = $repo->find($idetat);
+                $sortie->setEtat($etat);
+                $sortie->setInfosSortie($motif);
+                $em->persist($sortie);
+                $em->flush();
+                $this->addFlash('success', 'Votre sortie a bien été annulée');
+            }
             return $this->redirectToRoute("liste-sortie");
         }
 
