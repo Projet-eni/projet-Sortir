@@ -6,23 +6,16 @@
     font-family: sans-serif;
 }
 
-.titre{
-    font-family: sans-serif;
-    margin-bottom: 10%;
-    text-align: center;
-}
-
-.blocForm{
-    width: 100%;
-}
-
-form div {
-    margin: 3%;
-}
-
 label{
-    display: inline-block;
+    display: block;
     width: 150px;
+    float: left;
+}
+
+h1{
+    text-align: center;
+    font-family: sans-serif;
+    margin-bottom: 20%;
 }
 
 button{
@@ -34,7 +27,17 @@ button{
     height: 40px;
 }
 
-form input{
+input{
     border: 1px solid;
     border-color: #8959A8;
 }
+
+.div-button{
+    text-align: center;
+    margin-top: 20%;
+}
+
+form div{
+    margin-bottom: 5%;
+}
+

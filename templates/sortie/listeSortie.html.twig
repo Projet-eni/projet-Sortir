@@ -58,7 +58,7 @@
                 <tbody id="listColor">
                 {% for sortie in sorties %}
                     {#les sortie de plus d'un mois ne seront pas consultable#}
-                    {% if sortie.dateHeureDebut|date_modify("+31 days")|date('d/m/Y') > "now"|date('d/m/Y') %}
+
                         <tr>
                             <td>{{ sortie.nom }}</td>
                             <td>{{ sortie.dateHeureDebut|date("d/m/Y") }}</td>
@@ -90,7 +90,7 @@
                                 {% endif %}
                             </td>
                         </tr>
-                    {% endif %}
+
                 {% endfor %}
                 </tbody>
             </table>
