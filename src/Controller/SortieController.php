@@ -33,13 +33,6 @@ class SortieController extends AbstractController
         $form->handleRequest($request);
         $sorties = $repository->filtreRecherche($filtre, $participant);
 
-        foreach ($sorties as $sortie) {
-            foreach ($sortie->getSortieInscrits() as $inscrit)
-            {
-             //  dd($inscrit);
-            }
-        }
-
         return $this->render('sortie/listeSortie.html.twig',['participant'=>$participant,'sorties'=>$sorties,
             'filtreForm'=>$form->createView()]);
     }

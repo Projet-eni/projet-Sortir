@@ -14,9 +14,11 @@
   "build/lieuVille.js": "/build/lieuVille.js",
   "build/listeSortie.css": "/build/listeSortie.css",
   "build/listeSortie.js": "/build/listeSortie.js",
+  "build/listeSortieJs.js": "/build/listeSortieJs.js",
   "build/modification.css": "/build/modification.css",
   "build/modification.js": "/build/modification.js",
   "build/profil.css": "/build/profil.css",
   "build/profil.js": "/build/profil.js",
-  "build/runtime.js": "/build/runtime.js"
+  "build/runtime.js": "/build/runtime.js",
+  "build/vendors~listeSortieJs.js": "/build/vendors~listeSortieJs.js"
 }

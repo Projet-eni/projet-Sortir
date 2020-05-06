@@ -34,29 +34,21 @@ input, select{
     width: 125px;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*-----------------------------Tableau----------------------------*/
 
 .tableau{
-    margin-top: 70px;
+    width: 100%;
     border: 2px solid rgba(57,83,161,0.4);
+
+    font-family: sans-serif;
+}
+.scroll{
+    margin-top: 70px;
     width: 990px;
     height: 168px;
-    font-family: sans-serif;
+    overflow: auto;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .ligne-titre{
@@ -82,6 +74,10 @@ tbody{
 
 .ligne-inscrit{
     width: 70px;
+}
+
+#pair{
+    background-color: rgba(57,83,161,0.2);
 }
 
 .pseudo-organisateur a, .actions a{
@@ -111,4 +107,14 @@ tbody{
     margin-top: 3%;
     width: 150px;
     color: black;
+    font-weight: bold;
+}
+
+button{
+    border: 0px solid ;
+    background-color: rgba(57,83,161,0.4);
+    font-family: sans-serif;
+    font-weight: bold;
+    width: 90px;
+    height: 30px;
 }

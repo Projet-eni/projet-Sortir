@@ -24,6 +24,8 @@
             {{ form_widget(filtreForm) }}
             <button type="submit">Rechercher</button>
             {{ form_end(filtreForm) }}
+
+            <div class="scroll">
             <table class="tableau">
                 <thead>
                 <tr class="ligne-titre">
@@ -53,8 +55,7 @@
                     </td>
                 </tr>
                 </thead>
-
-                <tbody>
+                <tbody id="listColor">
                 {% for sortie in sorties %}
                     {#les sortie de plus d'un mois ne seront pas consultable#}
                     {% if date( sortie.dateHeureDebut) > date('+31days') %}
@@ -90,7 +91,13 @@
                 {% endfor %}
                 </tbody>
             </table>
+        </div>
             <div><a class="bouton-creer" href="{{ path('ajouterSortie') }}"> Créer une sortie</a></div>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags ( 'app' ) }}
+    {{ encore_entry_script_tags ( 'listeSortieJs' ) }}
 {% endblock %}

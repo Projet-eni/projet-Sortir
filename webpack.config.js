@@ -25,6 +25,7 @@ Encore
      */
     .addEntry('app', './assets/js/app.js')
     .addEntry('lieuVille','./assets/js/lieuVille.js')
+    .addEntry('listeSortieJs','./assets/js/listeSortie.js')
 
     .addEntry('listeSortie', './assets/css/listeSortie.css')
     .addEntry('connexion','./assets/css/connexion.css')
