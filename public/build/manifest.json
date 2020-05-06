@@ -1,6 +1,8 @@
 {
   "build/afficherSortie.css": "/build/afficherSortie.css",
   "build/afficherSortie.js": "/build/afficherSortie.js",
+  "build/ajoutLieu.css": "/build/ajoutLieu.css",
+  "build/ajoutLieu.js": "/build/ajoutLieu.js",
   "build/annuler.css": "/build/annuler.css",
   "build/annuler.js": "/build/annuler.js",
   "build/app.css": "/build/app.css",

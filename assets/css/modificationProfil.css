@@ -18,7 +18,10 @@
 label{
     display: inline-block;
     width: 150px;
+}
 
+form{
+    text-align: center;
 }
 input{
     border: 1px solid;
@@ -29,7 +32,6 @@ input{
 }
 
 form label{
-
     width: 200px;
 }
 
@@ -110,6 +112,6 @@ form {
     margin-top: -5%;
 }
 
-#modif_participant_imageFile_delete:nth-child(3n+1){
+#{
     width: 125px;
 }

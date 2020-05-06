@@ -1,10 +1,23 @@
 {% extends 'base.html.twig' %}
 
+ {% block stylesheets %}
+     {{ encore_entry_link_tags ( 'app' ) }}
+     {{ encore_entry_link_tags ( 'ajoutLieu' ) }}
+ {% endblock %}
+
 {% block title %}Ajout d'un lieu{% endblock %}
 
 {% block main %}
+
+    <div class="bloc">
+        <h1 class="titre">Ajout d'un lieu</h1>
+
+    <div class="blocForm">
     {{ form_start(lieuForm) }}
     {{ form_widget(lieuForm) }}
     <button type="submit">Ajouter un lieu</button>
     {{ form_end(lieuForm) }}
+    </div>
+
+    </div>
 {% endblock %}
