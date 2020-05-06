@@ -12,6 +12,11 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Class LieuController
+ * @package App\Controller
+ * @Route("/user")
+ */
 class LieuController extends AbstractController
 {
     /**
