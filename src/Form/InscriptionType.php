@@ -3,6 +3,9 @@
 namespace App\Form;
 
 use App\Entity\Participant;
+use App\Entity\Site;
+use Doctrine\ORM\EntityRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -43,7 +46,12 @@ class InscriptionType extends AbstractType
                 'first_options' => ['label' => 'Mot de passe : ','attr'=> ['title'=>'Le mot de passe doit contenir une majuscule et avoir une longueur entre 4 et 10 caractères']],
                 'second_options' => ['label' => 'Confirmer Mot de passe : ','attr'=> ['title'=>'Le mot de passe doit contenir une majuscule et avoir une longueur entre 4 et 10 caractères']]
             ])
-            ->add('site', TextType::class, ['label' => 'Site de rattachement : '])
+            ->add('site',EntityType::class,['label'=>'Site :',
+                'class'=>Site::class,
+                'query_builder'=>function(EntityRepository $er)
+                {
+                    return $er->createQueryBuilder('d');
+                },'choice_label'=>'nom'])
         ;
     }
 
