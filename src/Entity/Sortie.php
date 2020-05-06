@@ -36,6 +36,7 @@ class Sortie
      * @ORM\Column(type="integer")
      * @Assert\Type("integer")
      * @Assert\NotBlank()
+     * @Assert\GreaterThanOrEqual(1)
      */
     private $duree;
 
