@@ -26,38 +26,38 @@
             {{ form_end(filtreForm) }}
 
             <div class="scroll">
-            <table class="tableau">
-                <thead>
-                <tr class="ligne-titre">
-                    <td class="ligne-nom">
-                        Nom sortie
-                    </td>
-                    <td class="ligne-dateSortie">
-                        Date sortie
-                    </td>
-                    <td class="ligne-cloture">
-                        Clôture
-                    </td>
-                    <td class="ligne-inscrits">
-                        Inscrits/Places
-                    </td>
-                    <td class="ligne-etat">
-                        Etat
-                    </td>
-                    <td class="ligne-inscrit">
-                        Inscrit
-                    </td>
-                    <td class="ligne-organisateur">
-                        Organisateur
-                    </td>
-                    <td class="ligne-action">
-                        Actions
-                    </td>
-                </tr>
-                </thead>
-                <tbody id="listColor">
-                {% for sortie in sorties %}
-                    {#les sortie de plus d'un mois ne seront pas consultable#}
+                <table class="tableau">
+                    <thead>
+                    <tr class="ligne-titre">
+                        <td class="ligne-nom">
+                            Nom sortie
+                        </td>
+                        <td class="ligne-dateSortie">
+                            Date sortie
+                        </td>
+                        <td class="ligne-cloture">
+                            Clôture
+                        </td>
+                        <td class="ligne-inscrits">
+                            Inscrits/Places
+                        </td>
+                        <td class="ligne-etat">
+                            Etat
+                        </td>
+                        <td class="ligne-inscrit">
+                            Inscrit
+                        </td>
+                        <td class="ligne-organisateur">
+                            Organisateur
+                        </td>
+                        <td class="ligne-action">
+                            Actions
+                        </td>
+                    </tr>
+                    </thead>
+                    <tbody id="listColor">
+                    {% for sortie in sorties %}
+                        {#les sortie de plus d'un mois ne seront pas consultable#}
 
                         <tr>
                             <td>{{ sortie.nom }}</td>
@@ -91,10 +91,10 @@
                             </td>
                         </tr>
 
-                {% endfor %}
-                </tbody>
-            </table>
-        </div>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
             <div><a class="bouton-creer" href="{{ path('ajouterSortie') }}"> Créer une sortie</a></div>
         </div>
     </div>

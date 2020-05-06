@@ -1,8 +1,8 @@
-<nav>
+<nav class="desktop">
     <ul>
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-        <li><a href="{{ path('app_logout') }}">Se déconnecter</a></li>
-        <li><a href="{{ path('afficherProfil',{'id' : app.user.id }) }}">Mon Profil</a></li>
+            <li><a href="{{ path('app_logout') }}">Se déconnecter</a></li>
+            <li><a href="{{ path('afficherProfil',{'id' : app.user.id }) }}">Mon Profil</a></li>
             {% if is_granted('ROLE_ADMIN') %}
                 <li><a href="{{ path('importer') }}">Importer un fichier</a></li>
                 <li><a href="{{ path('inscrireAdmin') }}">Inscrire un utilisateur</a></li>
@@ -11,3 +11,26 @@
         {% endif %}
     </ul>
 </nav>
+
+{#----------------------------------------responsive-----------------------------------------------------------#}
+
+    <nav class="responsive">
+        <ul id="menu-inscrit">
+            <li class="taille-1">
+                <div>
+                    Menu
+                </div>
+                <ul>
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <li><a href="{{ path('app_logout') }}">Se déconnecter</a></li>
+                        <li><a href="{{ path('afficherProfil',{'id' : app.user.id }) }}">Mon Profil</a></li>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <li><a href="{{ path('importer') }}">Importer un fichier</a></li>
+                            <li><a href="{{ path('inscrireAdmin') }}">Inscrire un utilisateur</a></li>
+                            <li><a href="{{ path('admin') }}">Administrer</a></li>
+                        {% endif %}
+                    {% endif %}
+                </ul>
+            </li>
+        </ul>
+    </nav>

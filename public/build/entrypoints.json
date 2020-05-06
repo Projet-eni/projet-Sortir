@@ -111,6 +111,15 @@
       "css": [
         "/build/ajoutUtil.css"
       ]
+    },
+    "gestion": {
+      "js": [
+        "/build/runtime.js",
+        "/build/gestion.js"
+      ],
+      "css": [
+        "/build/gestion.css"
+      ]
     }
   }
 }

@@ -1,97 +1,302 @@
 /*------------------------------Base.html--------------------------------*/
-body {
-    margin: 0;
-}
+@media screen and (min-width: 1200px) {
 
-.page {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+    body {
+        margin: 0;
+    }
 
-}
+    .page {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
 
-.site-content {
-    flex: 1;
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-}
+    }
 
-.site-header{
-    margin-top: 10px;
-    padding: 5px;
-    background-color: rgba(57,83,161,0.4);
-    font-family: sans-serif;
-    font-weight: bold;
-    width: 80%;
-    margin-right: auto;
-    margin-left: auto;
-    justify-content: space-between;
-    position: relative;
-    height: 40px;
-}
+    .site-content {
+        flex: 1;
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+    }
 
-.logo{
-    float: left;
-    position: absolute;
-    height: 100%;
-}
+    .site-header {
+        margin-top: 10px;
+        padding: 5px;
+        background-color: rgba(57, 83, 161, 0.4);
+        font-family: sans-serif;
+        font-weight: bold;
+        width: 80%;
+        margin-right: auto;
+        margin-left: auto;
+        justify-content: space-between;
+        position: relative;
+        height: 40px;
+    }
 
-.logo img{
-    height: 100%;
-}
+    .logo {
+        float: left;
+        position: absolute;
+        height: 100%;
+    }
 
-.titre-Head{
-    float: right;
-    font-size: 30px;;
-}
+    .logo img {
+        height: 100%;
+    }
 
-nav ul{
-    margin: 0;
-}
+    .titre-Head {
+        float: right;
+        font-size: 30px;;
+    }
 
-nav li{
-    list-style: none;
-    display: inline-block;
-    float: right;
-    border-left: 1px solid black;
-    margin: 10px;
-}
+    .responsive {
+        visibility: hidden;
+    }
 
-nav li a{
-    text-decoration: none;
-    color: black;
-    margin-left: 5px;
-}
+    nav ul {
+        margin: 0;
+    }
 
-.line{
-    border-top: 1px solid gray;
-}
+    nav li {
+        list-style: none;
+        display: inline-block;
+        float: right;
+        border-left: 1px solid black;
+        margin: 10px;
+    }
 
-.site-footer{
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-}
+    nav li a {
+        text-decoration: none;
+        color: black;
+        margin-left: 5px;
+    }
 
-.logo-footer{
-    margin-top: 10px;
-}
+    .line {
+        border-top: 1px solid gray;
+    }
 
-.flash-success{
-    margin-top: 5%;
-    width: 60%;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    background-color: rgba(144,223,85, 0.8);
-    font-family: sans-serif;
+    .site-footer {
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+
+    .logo-footer {
+        margin-top: 10px;
+    }
+
+    .flash-success {
+        margin-top: 5%;
+        width: 60%;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        background-color: rgba(144, 223, 85, 0.8);
+        font-family: sans-serif;
+    }
 }
 
 /*------------------------Responsive Design---------------------------------*/
 
-@media screen and (max-width: 800px){
+@media screen and (max-width: 1200px){
+
+    body {
+        margin: 0;
+    }
+
+    .page {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+
+    }
+
+    .site-content {
+        flex: 1;
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .site-header {
+        margin-top: 10px;
+        padding: 5px;
+        background-color: rgba(57, 83, 161, 0.4);
+        font-family: sans-serif;
+        font-weight: bold;
+        width: 80%;
+        margin-right: auto;
+        margin-left: auto;
+        justify-content: space-between;
+        position: relative;
+        height: 40px;
+    }
+
+    .logo {
+        float: left;
+        position: absolute;
+        height: 100%;
+    }
+
+    .logo img {
+        height: 100%;
+    }
+
+    .titre-Head {
+        float: right;
+        font-size: 30px;;
+    }
+
+    /*--------------------------------Navbar déroulant----------------------------------*/
+
+    .responsive{
+        margin-top: 10px;
+        width: 100.6%;
+        font-size: 20px;
+    }
+
+    #menu-inscrit{
+        float: right;
+
+    }
+
+    #menu-inscrit, #menu-inscrit ul{
+        padding:0;
+        margin:0;
+        list-style:none;
+        text-align:center;
+
+    }
+    #menu-inscrit li{
+        display:inline-block;
+        position:relative;
+    }
+    #menu-inscrit ul li{
+        display:inherit;
+        border-radius:0;
+    }
+    #menu-inscrit ul{
+        position:absolute;
+        z-index: 1000;
+        max-height:0;
+        left: 0;
+        right: 0;
+        overflow:auto;
+        -moz-transition: .8s all .3s;
+        /* -webkit-transition: .8s all .3s;*/
+        /* transition: .8s all .3s;*/
+    }
+    #menu-inscrit li:hover ul{
+        max-height:15em;
+    }
+
+    /* background des liens menus */
+
+    #menu-inscrit li:nth-child(2){
+        background-color: rgba(57,83,161,0.4);
+    }
+
+    /* background des liens sous menus */
+    #menu-inscrit li:first-child li{
+        background:rgb(176,186,217);
+    }
+    #menu-inscrit li:nth-child(2) li{
+        background:rgb(176,186,217);
+    }
+
+    /* les a href */
+    #menu-inscrit a{
+        text-decoration:none;
+        display:block;
+        padding:8px 32px;
+        color: black;
+        font-family:sans-serif;
+    }
+    #menu-inscrit ul a{
+        padding:8px 0;
+    }
+    #menu-inscrit li:hover li a{
+        color: black;
+        text-transform:inherit;
+    }
+
+    .taille-1{
+        width: 200px;
+    }
+
+    /*----------------------------------------------------------------------------------------------*/
+
+    .desktop{
+        width: 0;
+        height: 0;
+        margin: 0;
+        visibility: hidden;
+    }
+
+    .desktop ul{
+        margin: 0;
+        padding: 0;
+        border: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .line {
+        border-top: 1px solid gray;
+    }
+
+    .site-footer {
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+
+    .logo-footer {
+        margin-top: 10px;
+    }
+
+    .flash-success {
+        margin-top: 5%;
+        width: 60%;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        background-color: rgba(144, 223, 85, 0.8);
+        font-family: sans-serif;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }

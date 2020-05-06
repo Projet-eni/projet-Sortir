@@ -19,6 +19,9 @@ label{
 
 input, select{
     width: 180px;
+    border: 1px solid;
+    border-color: #8959A8;
+    background-color: #FFFFFF;
 }
 
 [for=dateDebut]{

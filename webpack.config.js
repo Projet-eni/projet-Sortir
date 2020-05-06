@@ -37,6 +37,7 @@ Encore
     .addEntry('importer','./assets/css/importer.css')
     .addEntry('ajoutLieu','./assets/css/ajoutLieu.css')
     .addEntry('ajoutUtil','./assets/css/ajoutUtilisateur.css')
+    .addEntry('gestion','./assets/css/gestionUtilisateur.css')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
