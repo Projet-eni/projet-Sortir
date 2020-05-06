@@ -77,6 +77,7 @@ class AdminController extends AbstractController
             ]);
             $participant->setSite($site);
             $participant->setRole(["ROLE_USER"]);
+            $participant->setActif(true);
             //encode le password
             $password = $encoder->encodePassword($participant, $inscriptionForm->get('plainPassword')->getData());
             $participant->setMotDePasse($password);

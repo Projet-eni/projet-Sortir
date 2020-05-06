@@ -98,6 +98,7 @@ class CsvImportCommand extends Command
                     ->setTelephone($row['telephone'])
                     ->setMail($row['mail'])
                     ->setRole(['ROLE_USER'])
+                    ->setActif(true)
                 ;
 
                 $errors = $this->validator->validate($participant);

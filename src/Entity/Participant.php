@@ -3,6 +3,7 @@
     namespace App\Entity;
 
     use Doctrine\Common\Collections\ArrayCollection;
+    use Doctrine\Common\Collections\Collection;
     use Doctrine\ORM\Mapping as ORM;
     use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
     use Symfony\Component\Security\Core\User\UserInterface;
@@ -114,6 +115,7 @@
         public function __construct()
         {
             $this->inscrits = new ArrayCollection();
+            $this->groupes = new ArrayCollection();
         }
         //-------------------méthodes---------------------//
 
@@ -163,9 +165,11 @@
         /**
          * @param mixed $actif
          */
-        public function setActif($actif): void
+        public function setActif($actif): self
         {
             $this->actif = $actif;
+
+            return $this;
         }
 
         /**
@@ -461,4 +465,5 @@
             $this->token = $token;
             return $this;
         }
+
     }
