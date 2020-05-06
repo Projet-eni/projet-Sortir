@@ -43,12 +43,13 @@ input, select{
     font-family: sans-serif;
 }
 .scroll{
-    margin-top: 70px;
+    margin-top: 2%;
     width: 1080px;
     height: 168px;
     overflow: auto;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 5%;
 }
 
 .ligne-titre{
