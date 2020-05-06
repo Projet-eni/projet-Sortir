@@ -44,7 +44,7 @@ input, select{
 }
 .scroll{
     margin-top: 70px;
-    width: 990px;
+    width: 1080px;
     height: 168px;
     overflow: auto;
     margin-left: auto;
@@ -64,7 +64,11 @@ tbody{
     text-align: center;
 }
 
-.ligne-nom, .ligne-inscrits, .ligne-organisateur{
+.ligne-nom{
+    width: 200px;
+}
+
+.ligne-inscrits, .ligne-organisateur{
     width: 110px;
 }
 
@@ -104,10 +108,11 @@ tbody{
     background-color: rgba(57,83,161,0.4);
     text-decoration: none;
     font-family: sans-serif;
-    margin-top: 3%;
+    margin-top: 1%;
     width: 150px;
     color: black;
     font-weight: bold;
+    margin-bottom: 1%;
 }
 
 button{
