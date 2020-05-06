@@ -27,6 +27,6 @@ function afficher(value){
             document.getElementById("longitude").innerText = lieu.longitude;
         }
     };
-    xhr.open("GET", "/liste-lieux/" + value, true);
+    xhr.open("GET", "/user/liste-lieux/" + value, true);
     xhr.send();
 }
