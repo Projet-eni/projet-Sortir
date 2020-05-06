@@ -50,6 +50,7 @@ class Sortie
      * @ORM\Column(type="integer")
      * @Assert\NotBlank()
      * @Assert\Type("integer")
+     * @Assert\GreaterThanOrEqual(1)
      */
     private $nbInscriptionsMax;
 
