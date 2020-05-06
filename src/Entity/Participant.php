@@ -65,12 +65,16 @@
          */
         private $role;
         /**
+         * @ORM\Column(type="boolean")
+         */
+        private $actif;
+        /**
          * @ORM\ManyToOne(targetEntity="App\Entity\Site", inversedBy="participants")
          *
          */
         private $site;
         /**
-         * @ORM\OneToMany(targetEntity="App\Entity\Sortie", mappedBy="sorties_organisees")
+         * @ORM\OneToMany(targetEntity="App\Entity\Sortie", mappedBy="sorties_organisees", orphanRemoval=true)
          */
         private $organisateur;
 
@@ -146,6 +150,35 @@
         public function setOrganisateur($organisateur): void
         {
             $this->organisateur = $organisateur;
+        }
+
+        /**
+         * @return mixed
+         */
+        public function getActif()
+        {
+            return $this->actif;
+        }
+
+        /**
+         * @param mixed $actif
+         */
+        public function setActif($actif): void
+        {
+            $this->actif = $actif;
+        }
+
+        /**
+         * @return mixed
+         */
+        public function getNomPrenomActif()
+        {
+            $sb = $this->nom;
+            $sb .= ' ';
+            $sb .= $this->prenom;
+            $sb .= ' ';
+            $sb .= $this->actif;
+            return $sb;
         }
 
 
