@@ -5,6 +5,7 @@
         <li><a href="{{ path('afficherProfil',{'id' : app.user.id }) }}">Mon Profil</a></li>
             {% if is_granted('ROLE_ADMIN') %}
                 <li><a href="{{ path('importer') }}">Importer un fichier</a></li>
+                <li><a href="{{ path('inscrireAdmin') }}">Inscrire un utilisateur</a></li>
             {% endif %}
         {% endif %}
     </ul>

@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+ {% block stylesheets %}
+     {{ encore_entry_link_tags ( 'app' ) }}
+     {{ encore_entry_link_tags ( 'modification' ) }}
+ {% endblock %}
+
+{% block title %}  Sortir | Modifier mon profil{% endblock %}
+
+{% block main %}
+
+    <div class="blockMonProfil">
+
+        <div class="titre"><h1> Inscrire un utilisateur</h1></div>
+
+        {{ form_start(inscriptionForm) }}
+        {{ form_widget(inscriptionForm) }}
+        <div class="placement-button"> <button class="btn" type="submit">Enregistrer</button> </div></div>
+        {{ form_end(inscriptionForm) }}
+    </div>
+
+
+{% endblock %}
