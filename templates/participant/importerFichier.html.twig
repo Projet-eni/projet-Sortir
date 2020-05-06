@@ -6,15 +6,23 @@
 
  {% block stylesheets %}
      {{ encore_entry_link_tags ( 'app' ) }}
+     {{ encore_entry_link_tags ( 'importer' ) }}
  {% endblock %}
 
 {% block main %}
 
-<h1>Importer des utilisateurs</h1>
+    <div class="bloc">
 
-    {{ form_start(importForm) }}
-    {{ form_widget(importForm) }}
-    <div class="placement-button"> <button class="btn" type="submit"> Enregistrer</button> </div></div>
+        <h1 class="titre">importation de nouveaux stagiaires.</h1>
+
+        {{ form_start(importForm) }}
+        {{ form_widget(importForm) }}
+        <div class="placement-button">
+            <button class="btn" type="submit"> Enregistrer</button>
+        </div>
+    </div>
     {{ form_end(importForm) }}
+
+    </div>
 
 {% endblock %}

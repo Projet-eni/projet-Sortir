@@ -25,6 +25,7 @@ Encore
      */
     .addEntry('app', './assets/js/app.js')
     .addEntry('lieuVille','./assets/js/lieuVille.js')
+    .addEntry('listeSortieJs','./assets/js/listeSortie.js')
 
     .addEntry('listeSortie', './assets/css/listeSortie.css')
     .addEntry('connexion','./assets/css/connexion.css')
@@ -33,6 +34,7 @@ Encore
     .addEntry('afficherSortie','./assets/css/afficherSortie.css')
     .addEntry('creerSortie','./assets/css/creerUneSortie.css')
     .addEntry('annuler', './assets/css/annulerSortie.css')
+    .addEntry('importer','./assets/css/importer.css')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()

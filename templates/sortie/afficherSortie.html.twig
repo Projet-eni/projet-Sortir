@@ -49,7 +49,6 @@
                     <li class="taille-2">Inscription
                         <ul>
                             {% if sortie.etat.id == 6 %}
-                                {% if not sortie.sortieOrganisee.contains(app.user) %}
                                     {% if sortie.sortieInscrits.contains(app.user) %}
                                         <li><a href="{{ (path('desistement', {'id': sortie.id} )) }}">
                                                 Se désister
@@ -59,7 +58,6 @@
                                                 S'inscrire
                                             </a></li>
                                     {% endif %}
-                                {% endif %}
                             {% endif %}
                         </ul>
                     </li>
