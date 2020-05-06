@@ -1,0 +1,59 @@
+
+.blockMonProfil {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: sans-serif;
+    width: 55%;
+}
+
+.titre{
+    font-family: sans-serif;
+    margin-bottom: 3%;
+    text-align: center;
+}
+
+label{
+    display: block;
+    width: 210px;
+    float: left;
+}
+
+button{
+    border: 0px solid ;
+    background-color: rgba(57,83,161,0.4);
+    font-family: sans-serif;
+    font-weight: bold;
+    width: 90px;
+    height: 30px;
+}
+
+form div{
+    margin-bottom: 3%;
+}
+
+input, select{
+    border: 1px solid;
+    border-color: #8959A8;
+    background-color: #FFFFFF;
+    width: 200px;
+}
+
+.placement-button{
+    text-align: center;
+    margin-top: 10%;
+}
+
+form ul li{
+    list-style: none;
+    font-family: sans-serif;
+    font-size: small;
+}
+
+form ul{
+    display: inline;
+    padding: 0;
+    margin: 0;
+    float: right;
+}

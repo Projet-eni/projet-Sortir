@@ -102,6 +102,15 @@
       "css": [
         "/build/ajoutLieu.css"
       ]
+    },
+    "ajoutUtil": {
+      "js": [
+        "/build/runtime.js",
+        "/build/ajoutUtil.js"
+      ],
+      "css": [
+        "/build/ajoutUtil.css"
+      ]
     }
   }
 }
