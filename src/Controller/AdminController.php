@@ -75,11 +75,7 @@ class AdminController extends AbstractController
 
         if($inscriptionForm->isSubmitted() && $inscriptionForm->isValid())
         {
-            $nomSite = $inscriptionForm->get('site')->getData();
-            $repo = $repo = $this->getDoctrine()->getRepository(Site::class);
-            $site = $repo->findOneBy([
-                'nom' => $nomSite
-            ]);
+            $site = $inscriptionForm->get('site')->getData();
             $participant->setSite($site);
             $participant->setRole(["ROLE_USER"]);
             $participant->setActif(true);
