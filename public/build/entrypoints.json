@@ -15,6 +15,13 @@
         "/build/lieuVille.js"
       ]
     },
+    "listeSortieJs": {
+      "js": [
+        "/build/runtime.js",
+        "/build/vendors~listeSortieJs.js",
+        "/build/listeSortieJs.js"
+      ]
+    },
     "listeSortie": {
       "js": [
         "/build/runtime.js",
@@ -76,6 +83,15 @@
       ],
       "css": [
         "/build/annuler.css"
+      ]
+    },
+    "importer": {
+      "js": [
+        "/build/runtime.js",
+        "/build/importer.js"
+      ],
+      "css": [
+        "/build/importer.css"
       ]
     }
   }
