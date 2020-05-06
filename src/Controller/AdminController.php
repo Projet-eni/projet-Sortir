@@ -4,6 +4,7 @@ namespace App\Controller;
 
 
 use App\Entity\Participant;
+use App\Entity\Site;
 use App\Entity\Sortie;
 use App\Form\InscriptionType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -44,7 +45,7 @@ class AdminController extends AbstractController
         if($inscriptionForm->isSubmitted() && $inscriptionForm->isValid())
         {
             $nomSite = $inscriptionForm->get('site')->getData();
-            $repo = $repo = $this->getDoctrine()->getRepository(Sortie::class);
+            $repo = $repo = $this->getDoctrine()->getRepository(Site::class);
             $site = $repo->findOneBy([
                 'nom' => $nomSite
             ]);
