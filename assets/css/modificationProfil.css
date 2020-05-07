@@ -94,7 +94,7 @@ form {
     font-family: sans-serif;
 }
 
-.vich-image a:last-child{
+.vich-image a{
     visibility: hidden;
 }
 
@@ -110,8 +110,4 @@ form {
 
 .site-footer{
     margin-top: -5%;
-}
-
-#{
-    width: 125px;
 }
