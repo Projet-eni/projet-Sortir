@@ -13,6 +13,9 @@
 
     <div class="blockMonProfil">
         <div class="parent">
+            {% if sortie.etat.libelle == 'Annulée' %}
+            <h3>Cette sortie a été annulée. Retrouvez le motif dans la section 'Description et infos'</h3>
+            {% endif %}
             <h1 class="titre">Afficher Une Sortie</h1>
 
 
