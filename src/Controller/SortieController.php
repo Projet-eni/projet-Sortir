@@ -151,7 +151,7 @@ class SortieController extends AbstractController
             $em->flush();
             $this->addFlash('success', 'Vous avez bien été inscrit à cette sortie');
         }
-       return $this->render('sortie/afficherSortie.html.twig', ['sortie' => $sortie]);
+       return $this->render('sortie/afficherSortie.html.twig', ['sortie' => $sortie, 'participant' => $user]);
     }
 
     /**
