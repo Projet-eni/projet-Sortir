@@ -40,7 +40,7 @@ class AdminController extends AbstractController
                 $user->setActif(true);
                 $em->persist($user);
                 $this->addFlash('success', 'L\'utilisateur est bien réactiver');
-            }elseif (isset($_POST['supprime'])) {
+            }elseif (isset($_POST['supprimer'])) {
                 $em->remove($user);
                 $this->addFlash('success', 'L\'utilisateur est bien supprimé');
             }
